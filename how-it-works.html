@@ -4,7 +4,7 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>How It Works — TruthPrism</title>
-  <meta name="description" content="Learn how TruthPrism uses AI to fact-check articles and detect bias in seconds."/>
+  <meta name="description" content="Learn how TruthPrism uses AI to fact-check articles and score factual accuracy and context in seconds."/>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -51,7 +51,7 @@
           <div class="step-full-num">1</div>
           <div class="step-full-body">
             <h3>You share any article or claim</h3>
-            <p>Paste a URL into the TruthPrism web app, use the Chrome extension's side panel while you browse, or share directly from your iPhone using the iOS share sheet. TruthPrism works with virtually any news article, blog post, or text you can copy.</p>
+            <p>Paste a URL into the TruthPrism web app, or share directly from your iPhone using the iOS share sheet. TruthPrism works with virtually any news article, blog post, or text you can copy.</p>
           </div>
         </div>
 
@@ -66,8 +66,8 @@
         <div class="step-full">
           <div class="step-full-num">3</div>
           <div class="step-full-body">
-            <h3>Claims are analyzed for accuracy and bias</h3>
-            <p>Each claim is evaluated for factual accuracy and the overall article is assessed for political or ideological lean. TruthPrism looks at language choice, source selection, framing, and omission — the subtle signals that reveal bias even in technically accurate reporting.</p>
+            <h3>Claims are analyzed for accuracy and context</h3>
+            <p>Each claim is evaluated for factual accuracy and the overall article is assessed for contextual completeness — whether it provides the full picture or omits important information that would change how a reader understands the story.</p>
           </div>
         </div>
 
@@ -75,7 +75,7 @@
           <div class="step-full-num">4</div>
           <div class="step-full-body">
             <h3>You get a clear, structured verdict</h3>
-            <p>TruthPrism returns a confidence score (0–100), a bias rating, a summary of key findings, and a plain-language explanation of what's accurate, what's misleading, and what's missing. No jargon. No black box — just clarity.</p>
+            <p>TruthPrism returns a <strong>Factual Score</strong> and a <strong>Context Score</strong> — each rated out of 10 — along with a plain-language explanation of what's accurate, what's missing, and what you should verify. No jargon. No black box — just clarity.</p>
           </div>
         </div>
 
@@ -84,25 +84,31 @@
       <!-- Score sample UI -->
       <div class="score-demo" style="margin-top:72px">
         <h4>Sample Analysis Output</h4>
-        <div class="score-bar-wrap">
-          <div class="score-label"><span>Factual Accuracy</span><span>82%</span></div>
-          <div class="score-bar"><div class="score-fill fill-green" data-width="82" style="width:0%"></div></div>
+
+        <div style="display:flex; gap:16px; margin-bottom:24px;">
+          <div style="flex:1; background:var(--bg); border-radius:10px; padding:20px; text-align:center; border:1px solid var(--border);">
+            <div style="font-size:0.75rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-muted); margin-bottom:8px;">Factual Score</div>
+            <div style="font-size:2.4rem; font-weight:900; font-family:var(--font-serif); color:#22EE44;">8<span style="font-size:1.2rem; color:var(--text-muted)">/10</span></div>
+            <div style="font-size:0.8rem; color:#22EE44; margin-top:4px;">High Credibility</div>
+          </div>
+          <div style="flex:1; background:var(--bg); border-radius:10px; padding:20px; text-align:center; border:1px solid var(--border);">
+            <div style="font-size:0.75rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-muted); margin-bottom:8px;">Context Score</div>
+            <div style="font-size:2.4rem; font-weight:900; font-family:var(--font-serif); color:#FFB347;">6<span style="font-size:1.2rem; color:var(--text-muted)">/10</span></div>
+            <div style="font-size:0.8rem; color:#FFB347; margin-top:4px;">Partially Contextualized</div>
+          </div>
         </div>
-        <div class="score-bar-wrap">
-          <div class="score-label"><span>Source Quality</span><span>74%</span></div>
-          <div class="score-bar"><div class="score-fill fill-green" data-width="74" style="width:0%"></div></div>
+
+        <div style="font-size:0.78rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--text-muted); margin-bottom:10px;">Analysis</div>
+
+        <div style="display:flex; flex-direction:column; gap:10px; font-size:0.88rem; color:var(--text-muted); line-height:1.65;">
+          <div><strong style="color:var(--text);">Article Overview:</strong> A news report on recent federal budget negotiations. Factual claims are largely accurate and sourced, though significant context around long-term fiscal impacts is absent.</div>
+          <div><strong style="color:var(--text);">Factual Findings:</strong> Core claims verified. Key figures and attributed quotes confirmed against primary sources. One minor statistical error identified in projected savings figure.</div>
+          <div><strong style="color:var(--text);">Contextual Findings:</strong> Article omits historical context on similar prior negotiations and does not address opposing economic perspectives on the proposed measures.</div>
+          <div><strong style="color:var(--text);">Sources:</strong> Multiple sources consulted including government records, congressional testimony, and independent economic analysis.</div>
         </div>
-        <div class="score-bar-wrap">
-          <div class="score-label"><span>Political Lean</span><span>Moderate Left</span></div>
-          <div class="score-bar"><div class="score-fill fill-yellow" data-width="55" style="width:0%"></div></div>
-        </div>
-        <div class="score-bar-wrap">
-          <div class="score-label"><span>Misleading Framing</span><span>Low</span></div>
-          <div class="score-bar"><div class="score-fill fill-green" data-width="18" style="width:0%"></div></div>
-        </div>
-        <div class="score-verdict">
-          <span class="verdict-badge">MOSTLY ACCURATE</span>
-          The article's core claims are supported by available evidence. Bias toward progressive framing detected in word choice and source selection, but no significant factual errors identified.
+
+        <div style="margin-top:16px; padding-top:16px; border-top:1px solid var(--border); font-size:0.78rem; color:var(--text-muted); font-style:italic;">
+          TruthPrism uses Claude AI to assist with fact-checking and context analysis. Results may contain errors — it is wise to verify important claims.
         </div>
       </div>
 
