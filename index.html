@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TruthPrism — See Through the Spin</title>
+  <meta name="description" content="TruthPrism uses AI to fact-check news articles and claims instantly. Available as a Chrome extension and web app."/>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="assets/style.css"/>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">
+      <svg class="prism-nav" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="40,6 74,66 6,66" fill="none" stroke="url(#nav-grad)" stroke-width="3.5" stroke-linejoin="round"/>
+        <defs>
+          <linearGradient id="nav-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#7DF9FF"/>
+            <stop offset="100%" stop-color="#FF6FD8"/>
+          </linearGradient>
+        </defs>
+        <!-- spectrum rays -->
+        <line x1="40" y1="66" x2="6"  y2="76" stroke="#FF4444" stroke-width="1.8" opacity="0.85"/>
+        <line x1="40" y1="66" x2="16" y2="78" stroke="#FF9500" stroke-width="1.8" opacity="0.85"/>
+        <line x1="40" y1="66" x2="27" y2="80" stroke="#FFE000" stroke-width="1.8" opacity="0.85"/>
+        <line x1="40" y1="66" x2="40" y2="80" stroke="#44DD44" stroke-width="1.8" opacity="0.85"/>
+        <line x1="40" y1="66" x2="53" y2="80" stroke="#4488FF" stroke-width="1.8" opacity="0.85"/>
+        <line x1="40" y1="66" x2="64" y2="78" stroke="#9944FF" stroke-width="1.8" opacity="0.85"/>
+        <line x1="40" y1="66" x2="74" y2="76" stroke="#FF44DD" stroke-width="1.8" opacity="0.85"/>
+      </svg>
+      <span>TruthPrism</span>
+    </a>
+    <div class="nav-links">
+      <a href="how-it-works.html">How It Works</a>
+      <a href="about.html">About</a>
+      <a href="get-started.html" class="btn-nav">Get Started</a>
+    </div>
+    <button class="nav-burger" aria-label="Menu">&#9776;</button>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg">
+      <div class="beam beam-r"></div>
+      <div class="beam beam-o"></div>
+      <div class="beam beam-y"></div>
+      <div class="beam beam-g"></div>
+      <div class="beam beam-b"></div>
+      <div class="beam beam-v"></div>
+    </div>
+
+    <div class="hero-content">
+      <div class="hero-badge">AI-Powered Fact Checking</div>
+      <h1 class="hero-title">
+        See Through<br/>
+        <em>the Spin.</em>
+      </h1>
+      <p class="hero-sub">
+        TruthPrism uses advanced AI to analyze news articles and claims —
+        exposing bias, verifying facts, and giving you a clear confidence score
+        in seconds.
+      </p>
+      <div class="hero-ctas">
+        <a href="https://chromewebstore.google.com" target="_blank" class="btn-primary">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
+          Add to Chrome — Free
+        </a>
+        <a href="https://truthlens-laikind.up.railway.app/app" target="_blank" class="btn-secondary">
+          Use the Web App
+        </a>
+      </div>
+      <p class="hero-note">No account required &middot; Works on any article</p>
+    </div>
+
+    <!-- Big Prism SVG -->
+    <div class="hero-prism-wrap">
+      <svg class="hero-prism" viewBox="0 0 500 520" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="faceL" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%"   stop-color="#E8F8FF" stop-opacity="0.92"/>
+            <stop offset="100%" stop-color="#7AB8D8" stop-opacity="0.55"/>
+          </linearGradient>
+          <linearGradient id="faceR" x1="1" y1="0" x2="0" y2="1">
+            <stop offset="0%"   stop-color="#B0D8F0" stop-opacity="0.80"/>
+            <stop offset="100%" stop-color="#204878" stop-opacity="0.90"/>
+          </linearGradient>
+          <linearGradient id="faceB" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%"   stop-color="#D0EEFF" stop-opacity="0.70"/>
+            <stop offset="100%" stop-color="#6898BE" stop-opacity="0.60"/>
+          </linearGradient>
+          <linearGradient id="rimG" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%"   stop-color="#7DF9FF"/>
+            <stop offset="50%"  stop-color="#A0A0FF"/>
+            <stop offset="100%" stop-color="#FF6FD8"/>
+          </linearGradient>
+          <filter id="glow">
+            <feGaussianBlur stdDeviation="6" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+
+        <!-- Prism faces -->
+        <!-- Left face -->
+        <polygon points="250,40 90,360 250,360" fill="url(#faceL)"/>
+        <!-- Right face -->
+        <polygon points="250,40 410,360 250,360" fill="url(#faceR)"/>
+        <!-- Bottom face -->
+        <polygon points="90,360 250,400 410,360" fill="url(#faceB)"/>
+
+        <!-- Rim edges -->
+        <polyline points="250,40 90,360 410,360 250,40" fill="none" stroke="url(#rimG)" stroke-width="2.5" stroke-linejoin="round"/>
+        <line x1="250" y1="40" x2="250" y2="360" stroke="rgba(200,230,255,0.4)" stroke-width="1"/>
+        <line x1="90" y1="360" x2="250" y2="400" stroke="url(#rimG)" stroke-width="2" opacity="0.7"/>
+        <line x1="410" y1="360" x2="250" y2="400" stroke="url(#rimG)" stroke-width="2" opacity="0.7"/>
+
+        <!-- Internal spectrum shimmer -->
+        <polygon points="250,40 158,360 250,360" fill="url(#specInt)" opacity="0.30"/>
+        <defs>
+          <linearGradient id="specInt" x1="0" y1="1" x2="1" y2="0">
+            <stop offset="0%"   stop-color="#FF3300"/>
+            <stop offset="25%"  stop-color="#FFAA00"/>
+            <stop offset="50%"  stop-color="#FFFF00"/>
+            <stop offset="75%"  stop-color="#00FF66"/>
+            <stop offset="100%" stop-color="#0088FF"/>
+          </linearGradient>
+        </defs>
+
+        <!-- Apex starburst -->
+        <circle cx="250" cy="40" r="8" fill="white" opacity="0.95" filter="url(#glow)"/>
+        <circle cx="250" cy="40" r="20" fill="white" opacity="0.18"/>
+
+        <!-- Spectrum rays exiting bottom -->
+        <line x1="250" y1="400" x2="80"  y2="510" stroke="#FF2222" stroke-width="3.5" opacity="0.80"/>
+        <line x1="250" y1="400" x2="130" y2="510" stroke="#FF8800" stroke-width="3.5" opacity="0.80"/>
+        <line x1="250" y1="400" x2="185" y2="510" stroke="#FFEE00" stroke-width="3.5" opacity="0.80"/>
+        <line x1="250" y1="400" x2="250" y2="510" stroke="#22EE44" stroke-width="3.5" opacity="0.80"/>
+        <line x1="250" y1="400" x2="315" y2="510" stroke="#2288FF" stroke-width="3.5" opacity="0.80"/>
+        <line x1="250" y1="400" x2="370" y2="510" stroke="#8844FF" stroke-width="3.5" opacity="0.80"/>
+        <line x1="250" y1="400" x2="420" y2="510" stroke="#FF44CC" stroke-width="3.5" opacity="0.80"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features">
+    <div class="container">
+      <h2 class="section-title">What TruthPrism Does</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon" style="--c:#FF6B6B">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <h3>Instant Fact Checking</h3>
+          <p>Paste any article URL or text and get a detailed analysis of key claims — verified against trusted sources in seconds.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="--c:#FFB347">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"/></svg>
+          </div>
+          <h3>Bias Detection</h3>
+          <p>Understand how an article leans — left, right, or center — so you can read with context and make your own informed judgment.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="--c:#7DF9FF">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+          </div>
+          <h3>Confidence Score</h3>
+          <p>Every analysis produces a clear 0–100 confidence score, so you always know how much to trust what you're reading.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="--c:#A29BFE">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 100 20A10 10 0 0012 2zm0 0v20M2 12h20"/></svg>
+          </div>
+          <h3>Works Everywhere</h3>
+          <p>Use TruthPrism as a Chrome extension while you browse, or use the web app on any device — including iPhone via the share sheet.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS TEASER -->
+  <section class="how-teaser">
+    <div class="container how-teaser-inner">
+      <div class="how-text">
+        <h2>From headline to verdict<br/>in three steps.</h2>
+        <p>TruthPrism's AI reads the article, cross-references the key claims, and gives you a structured verdict — not just a label, but an explanation.</p>
+        <a href="how-it-works.html" class="btn-outline">See How It Works →</a>
+      </div>
+      <div class="how-steps">
+        <div class="step"><span class="step-num">1</span><p>Share or paste any article</p></div>
+        <div class="step-arrow">↓</div>
+        <div class="step"><span class="step-num">2</span><p>AI analyzes claims &amp; bias</p></div>
+        <div class="step-arrow">↓</div>
+        <div class="step"><span class="step-num">3</span><p>Get a clear, sourced verdict</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GET STARTED CTA -->
+  <section class="cta-band">
+    <div class="container cta-inner">
+      <h2>Start reading smarter today.</h2>
+      <p>Free to use. No account needed. Works on the news sources you already read.</p>
+      <div class="cta-buttons">
+        <a href="https://chromewebstore.google.com" target="_blank" class="btn-primary">Add to Chrome</a>
+        <a href="https://truthlens-laikind.up.railway.app/app" target="_blank" class="btn-secondary">Use Web App</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <a href="index.html" class="footer-logo">TruthPrism</a>
+      <nav class="footer-nav">
+        <a href="how-it-works.html">How It Works</a>
+        <a href="about.html">About</a>
+        <a href="get-started.html">Get Started</a>
+      </nav>
+      <p class="footer-copy">&copy; 2026 TruthPrism. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="assets/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>How It Works — TruthPrism</title>
+  <meta name="description" content="Learn how TruthPrism uses AI to fact-check articles and detect bias in seconds."/>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="assets/style.css"/>
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="index.html" class="nav-logo">
+      <svg class="prism-nav" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="40,6 74,66 6,66" fill="none" stroke="url(#nav-grad2)" stroke-width="3.5" stroke-linejoin="round"/>
+        <defs><linearGradient id="nav-grad2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#7DF9FF"/><stop offset="100%" stop-color="#FF6FD8"/></linearGradient></defs>
+        <line x1="40" y1="66" x2="6"  y2="76" stroke="#FF4444" stroke-width="1.8" opacity="0.85"/>
+        <line x1="40" y1="66" x2="16" y2="78" stroke="#FF9500" stroke-width="1.8" opacity="0.85"/>
+        <line x1="40" y1="66" x2="27" y2="80" stroke="#FFE000" stroke-width="1.8" opacity="0.85"/>
+        <line x1="40" y1="66" x2="40" y2="80" stroke="#44DD44" stroke-width="1.8" opacity="0.85"/>
+        <line x1="40" y1="66" x2="53" y2="80" stroke="#4488FF" stroke-width="1.8" opacity="0.85"/>
+        <line x1="40" y1="66" x2="64" y2="78" stroke="#9944FF" stroke-width="1.8" opacity="0.85"/>
+        <line x1="40" y1="66" x2="74" y2="76" stroke="#FF44DD" stroke-width="1.8" opacity="0.85"/>
+      </svg>
+      <span>TruthPrism</span>
+    </a>
+    <div class="nav-links">
+      <a href="how-it-works.html" style="color:var(--text)">How It Works</a>
+      <a href="about.html">About</a>
+      <a href="get-started.html" class="btn-nav">Get Started</a>
+    </div>
+    <button class="nav-burger" aria-label="Menu">&#9776;</button>
+  </nav>
+
+  <div class="page-hero">
+    <div class="container">
+      <h1>How TruthPrism Works</h1>
+      <p>From raw article to verified verdict — in seconds. Here's what happens under the hood.</p>
+    </div>
+  </div>
+
+  <section class="page-content">
+    <div class="container">
+      <div class="steps-full">
+
+        <div class="step-full">
+          <div class="step-full-num">1</div>
+          <div class="step-full-body">
+            <h3>You share any article or claim</h3>
+            <p>Paste a URL into the TruthPrism web app, use the Chrome extension's side panel while you browse, or share directly from your iPhone using the iOS share sheet. TruthPrism works with virtually any news article, blog post, or text you can copy.</p>
+          </div>
+        </div>
+
+        <div class="step-full">
+          <div class="step-full-num">2</div>
+          <div class="step-full-body">
+            <h3>AI reads and extracts the key claims</h3>
+            <p>TruthPrism's AI (powered by Claude from Anthropic) reads the full article and identifies the specific factual claims being made — separating opinion from assertion, and flagging statements that can be fact-checked against known information.</p>
+          </div>
+        </div>
+
+        <div class="step-full">
+          <div class="step-full-num">3</div>
+          <div class="step-full-body">
+            <h3>Claims are analyzed for accuracy and bias</h3>
+            <p>Each claim is evaluated for factual accuracy and the overall article is assessed for political or ideological lean. TruthPrism looks at language choice, source selection, framing, and omission — the subtle signals that reveal bias even in technically accurate reporting.</p>
+          </div>
+        </div>
+
+        <div class="step-full">
+          <div class="step-full-num">4</div>
+          <div class="step-full-body">
+            <h3>You get a clear, structured verdict</h3>
+            <p>TruthPrism returns a confidence score (0–100), a bias rating, a summary of key findings, and a plain-language explanation of what's accurate, what's misleading, and what's missing. No jargon. No black box — just clarity.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Score sample UI -->
+      <div class="score-demo" style="margin-top:72px">
+        <h4>Sample Analysis Output</h4>
+        <div class="score-bar-wrap">
+          <div class="score-label"><span>Factual Accuracy</span><span>82%</span></div>
+          <div class="score-bar"><div class="score-fill fill-green" data-width="82" style="width:0%"></div></div>
+        </div>
+        <div class="score-bar-wrap">
+          <div class="score-label"><span>Source Quality</span><span>74%</span></div>
+          <div class="score-bar"><div class="score-fill fill-green" data-width="74" style="width:0%"></div></div>
+        </div>
+        <div class="score-bar-wrap">
+          <div class="score-label"><span>Political Lean</span><span>Moderate Left</span></div>
+          <div class="score-bar"><div class="score-fill fill-yellow" data-width="55" style="width:0%"></div></div>
+        </div>
+        <div class="score-bar-wrap">
+          <div class="score-label"><span>Misleading Framing</span><span>Low</span></div>
+          <div class="score-bar"><div class="score-fill fill-green" data-width="18" style="width:0%"></div></div>
+        </div>
+        <div class="score-verdict">
+          <span class="verdict-badge">MOSTLY ACCURATE</span>
+          The article's core claims are supported by available evidence. Bias toward progressive framing detected in word choice and source selection, but no significant factual errors identified.
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="container cta-inner">
+      <h2>Ready to try it?</h2>
+      <p>Start fact-checking in seconds — no account or credit card required.</p>
+      <div class="cta-buttons">
+        <a href="https://chromewebstore.google.com" target="_blank" class="btn-primary">Add to Chrome</a>
+        <a href="https://truthlens-laikind.up.railway.app/app" target="_blank" class="btn-secondary">Use Web App</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <a href="index.html" class="footer-logo">TruthPrism</a>
+      <nav class="footer-nav">
+        <a href="how-it-works.html">How It Works</a>
+        <a href="about.html">About</a>
+        <a href="get-started.html">Get Started</a>
+      </nav>
+      <p class="footer-copy">&copy; 2026 TruthPrism. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="assets/main.js"></script>
+</body>
+</html>
