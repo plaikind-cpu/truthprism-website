@@ -44,28 +44,20 @@
   </nav>
 
   <!-- HERO -->
-  <section class="hero">
-    <div class="hero-bg">
-      <div class="beam beam-r"></div>
-      <div class="beam beam-o"></div>
-      <div class="beam beam-y"></div>
-      <div class="beam beam-g"></div>
-      <div class="beam beam-b"></div>
-      <div class="beam beam-v"></div>
+  <section class="hero hero-stacked">
+    <!-- Splash image -->
+    <div class="hero-splash-wrap">
+      <img src="assets/TruthPrism_Splash.png" alt="TruthPrism — AI-Powered Fact and Context Checker" class="hero-splash"/>
     </div>
 
-    <div class="hero-content">
-      <div class="hero-badge">AI-Powered Fact Checking</div>
-      <h1 class="hero-title">
-        See Through<br/>
-        <em>the Spin.</em>
-      </h1>
+    <!-- CTAs below the image -->
+    <div class="hero-content hero-content-centered">
       <p class="hero-sub">
         TruthPrism uses advanced AI to analyze news articles and claims —
         exposing bias, verifying facts, and giving you a clear confidence score
         in seconds.
       </p>
-      <div class="hero-ctas">
+      <div class="hero-ctas hero-ctas-centered">
         <a href="https://chromewebstore.google.com" target="_blank" class="btn-primary">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
           Add to Chrome — Free
@@ -75,74 +67,6 @@
         </a>
       </div>
       <p class="hero-note">No account required &middot; Works on any article</p>
-    </div>
-
-    <!-- Big Prism SVG -->
-    <div class="hero-prism-wrap">
-      <svg class="hero-prism" viewBox="0 0 500 520" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="faceL" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%"   stop-color="#E8F8FF" stop-opacity="0.92"/>
-            <stop offset="100%" stop-color="#7AB8D8" stop-opacity="0.55"/>
-          </linearGradient>
-          <linearGradient id="faceR" x1="1" y1="0" x2="0" y2="1">
-            <stop offset="0%"   stop-color="#B0D8F0" stop-opacity="0.80"/>
-            <stop offset="100%" stop-color="#204878" stop-opacity="0.90"/>
-          </linearGradient>
-          <linearGradient id="faceB" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%"   stop-color="#D0EEFF" stop-opacity="0.70"/>
-            <stop offset="100%" stop-color="#6898BE" stop-opacity="0.60"/>
-          </linearGradient>
-          <linearGradient id="rimG" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%"   stop-color="#7DF9FF"/>
-            <stop offset="50%"  stop-color="#A0A0FF"/>
-            <stop offset="100%" stop-color="#FF6FD8"/>
-          </linearGradient>
-          <filter id="glow">
-            <feGaussianBlur stdDeviation="6" result="blur"/>
-            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-          </filter>
-        </defs>
-
-        <!-- Prism faces -->
-        <!-- Left face -->
-        <polygon points="250,40 90,360 250,360" fill="url(#faceL)"/>
-        <!-- Right face -->
-        <polygon points="250,40 410,360 250,360" fill="url(#faceR)"/>
-        <!-- Bottom face -->
-        <polygon points="90,360 250,400 410,360" fill="url(#faceB)"/>
-
-        <!-- Rim edges -->
-        <polyline points="250,40 90,360 410,360 250,40" fill="none" stroke="url(#rimG)" stroke-width="2.5" stroke-linejoin="round"/>
-        <line x1="250" y1="40" x2="250" y2="360" stroke="rgba(200,230,255,0.4)" stroke-width="1"/>
-        <line x1="90" y1="360" x2="250" y2="400" stroke="url(#rimG)" stroke-width="2" opacity="0.7"/>
-        <line x1="410" y1="360" x2="250" y2="400" stroke="url(#rimG)" stroke-width="2" opacity="0.7"/>
-
-        <!-- Internal spectrum shimmer -->
-        <polygon points="250,40 158,360 250,360" fill="url(#specInt)" opacity="0.30"/>
-        <defs>
-          <linearGradient id="specInt" x1="0" y1="1" x2="1" y2="0">
-            <stop offset="0%"   stop-color="#FF3300"/>
-            <stop offset="25%"  stop-color="#FFAA00"/>
-            <stop offset="50%"  stop-color="#FFFF00"/>
-            <stop offset="75%"  stop-color="#00FF66"/>
-            <stop offset="100%" stop-color="#0088FF"/>
-          </linearGradient>
-        </defs>
-
-        <!-- Apex starburst -->
-        <circle cx="250" cy="40" r="8" fill="white" opacity="0.95" filter="url(#glow)"/>
-        <circle cx="250" cy="40" r="20" fill="white" opacity="0.18"/>
-
-        <!-- Spectrum rays exiting bottom -->
-        <line x1="250" y1="400" x2="80"  y2="510" stroke="#FF2222" stroke-width="3.5" opacity="0.80"/>
-        <line x1="250" y1="400" x2="130" y2="510" stroke="#FF8800" stroke-width="3.5" opacity="0.80"/>
-        <line x1="250" y1="400" x2="185" y2="510" stroke="#FFEE00" stroke-width="3.5" opacity="0.80"/>
-        <line x1="250" y1="400" x2="250" y2="510" stroke="#22EE44" stroke-width="3.5" opacity="0.80"/>
-        <line x1="250" y1="400" x2="315" y2="510" stroke="#2288FF" stroke-width="3.5" opacity="0.80"/>
-        <line x1="250" y1="400" x2="370" y2="510" stroke="#8844FF" stroke-width="3.5" opacity="0.80"/>
-        <line x1="250" y1="400" x2="420" y2="510" stroke="#FF44CC" stroke-width="3.5" opacity="0.80"/>
-      </svg>
     </div>
   </section>
 
