@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="TruthPrism">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>TruthPrism</title>
+  <link rel="apple-touch-icon" sizes="128x128" href="truthprism-icon.png">
+  <link rel="apple-touch-icon" href="truthprism-icon.png">
+  <link rel="icon" type="image/png" sizes="128x128" href="truthprism-icon.png">
+  <link rel="shortcut icon" href="truthprism-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --purple-1: #667eea;
+      --purple-2: #764ba2;
+      --purple-3: #4c1d95;
+      --dark-1: #0a0a1a;
+      --dark-2: #111128;
+      --dark-3: #1a1a3e;
+      --dark-4: #1e293b;
+      --text-1: #ffffff;
+      --text-2: #ffffff;
+      --text-3: #ffe066;
+      --green: #22c55e;
+      --amber: #f59e0b;
+      --red: #ef4444;
+      --border: rgba(102,126,234,0.2);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    html { height: 100%; }
+    body {
+      min-height: 100%;
+      background: var(--dark-1);
+      font-family: 'DM Sans', sans-serif;
+      color: var(--text-1);
+      overflow-x: hidden;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background: radial-gradient(ellipse at 30% 20%, rgba(102,126,234,0.08) 0%, transparent 50%),
+                  radial-gradient(ellipse at 70% 80%, rgba(118,75,162,0.08) 0%, transparent 50%);
+      pointer-events: none; z-index: 0;
+    }
+    .app { position: relative; z-index: 1; max-width: 600px; margin: 0 auto; padding: 0 16px 40px; }
+    .header { padding: 48px 0 32px; text-align: center; }
+    .logo { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 8px; }
+    .logo-icon { width: 36px; height: 36px; }
+    .logo-text {
+      font-family: 'DM Serif Display', serif; font-size: 28px;
+      background: linear-gradient(135deg, var(--purple-1), var(--purple-2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .tagline { font-size: 13px; color: var(--text-3); letter-spacing: 0.5px; }
+    .card {
+      background: var(--dark-2); border: 1px solid var(--border);
+      border-radius: 16px; padding: 20px; margin-bottom: 12px;
+    }
+    .card-title {
+      font-size: 11px; font-weight: 600; letter-spacing: 1px;
+      text-transform: uppercase; color: var(--text-3); margin-bottom: 12px;
+    }
+    .card-title-row {
+      display: flex; align-items: center; gap: 6px; margin-bottom: 12px;
+    }
+    .card-title-row .card-title { margin-bottom: 0; }
+    .info-bubble {
+      position: relative; display: inline-flex; align-items: center;
+      justify-content: center; width: 26px; height: 26px;
+      background: var(--dark-3); border: 1px solid var(--border);
+      border-radius: 50%; font-size: 14px; color: var(--text-2);
+      cursor: pointer; flex-shrink: 0; font-weight: 600;
+    }
+    .info-bubble:hover .info-tooltip,
+    .info-bubble.active .info-tooltip { display: block; }
+    .info-tooltip {
+      display: none; position: absolute; bottom: calc(100% + 8px); left: 50%;
+      transform: translateX(-50%); background: var(--dark-1);
+      border: 1px solid var(--border); border-radius: 10px;
+      padding: 10px 12px; font-size: 12px; color: var(--text-2);
+      width: 230px; line-height: 1.5; z-index: 10;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+      pointer-events: none; text-transform: none; letter-spacing: 0; font-weight: 400;
+    }
+    .info-tooltip::after {
+      content: ''; position: absolute; top: 100%; left: 50%;
+      transform: translateX(-50%); border: 6px solid transparent;
+      border-top-color: var(--border);
+    }
+    .mode-row { display: flex; gap: 8px; margin-bottom: 12px; }
+    .mode-btn {
+      flex: 1; padding: 8px; border-radius: 8px; font-family: 'DM Sans', sans-serif;
+      font-size: 12px; font-weight: 500; cursor: pointer; transition: all 0.2s;
+      border: 1px solid var(--border); background: var(--dark-3); color: var(--text-2);
+    }
+    .mode-active { background: var(--purple-1); color: white; border-color: var(--purple-1); }
+    .api-row { display: flex; gap: 8px; }
+    .api-input {
+      flex: 1; background: var(--dark-3); border: 1px solid var(--border);
+      border-radius: 10px; padding: 12px 14px; color: var(--text-1);
+      font-family: 'DM Sans', sans-serif; font-size: 14px; outline: none; transition: border-color 0.2s;
+    }
+    .api-input:focus { border-color: var(--purple-1); }
+    .api-input::placeholder { color: #7070a0; }
+    .btn-small {
+      padding: 12px 16px; border: none; border-radius: 10px;
+      font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500;
+      cursor: pointer; transition: opacity 0.2s; white-space: nowrap;
+    }
+    .btn-small:hover { opacity: 0.85; }
+    .btn-save { background: var(--purple-1); color: white; }
+    .btn-test { background: var(--green); color: white; }
+    .auth-status { font-size: 12px; margin-top: 8px; min-height: 16px; color: var(--text-3); }
+    .auth-status.ok { color: var(--green); }
+    .auth-status.error { color: var(--red); }
+    .auth-status a { color: #a78bfa; }
+    .url-input {
+      width: 100%; background: var(--dark-3); border: 1px solid var(--border);
+      border-radius: 10px; padding: 12px 14px; color: var(--text-1);
+      font-family: 'DM Sans', sans-serif; font-size: 14px; outline: none;
+      transition: border-color 0.2s; margin-bottom: 10px;
+    }
+    .url-input:focus { border-color: var(--purple-1); }
+    .url-input::placeholder { color: #7070a0; }
+    .btn-check {
+      width: 100%; padding: 16px;
+      background: linear-gradient(135deg, var(--purple-1), var(--purple-2));
+      color: white; border: none; border-radius: 12px;
+      font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 600;
+      cursor: pointer; transition: opacity 0.2s, transform 0.1s; margin-bottom: 12px;
+    }
+    .btn-check:hover { opacity: 0.9; }
+    .btn-check:active { transform: scale(0.99); }
+    .text-area {
+      width: 100%; min-height: 120px; background: var(--dark-3);
+      border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px;
+      color: var(--text-1); font-family: 'DM Sans', sans-serif; font-size: 14px;
+      outline: none; resize: vertical; margin-bottom: 10px; transition: border-color 0.2s;
+    }
+    .text-area:focus { border-color: var(--purple-1); }
+    .text-area::placeholder { color: #7070a0; }
+    .divider {
+      text-align: center; color: var(--text-3); font-size: 12px;
+      letter-spacing: 1px; margin: 16px 0; position: relative;
+    }
+    .divider::before, .divider::after {
+      content: ''; position: absolute; top: 50%;
+      width: 40%; height: 1px; background: var(--border);
+    }
+    .divider::before { left: 0; }
+    .divider::after { right: 0; }
+    .loading { display: none; text-align: center; padding: 32px 20px; }
+    .spinner {
+      width: 40px; height: 40px; border: 3px solid var(--dark-3);
+      border-top: 3px solid var(--purple-1); border-radius: 50%;
+      animation: spin 0.8s linear infinite; margin: 0 auto 16px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .loading p { color: #ffffff; font-size: 14px; }
+    .error-msg {
+      display: none; background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3);
+      border-radius: 10px; padding: 12px 16px; font-size: 13px; color: #fca5a5; margin-bottom: 12px;
+    }
+    .error-msg.limit-reached {
+      background: rgba(251,191,36,0.1); border-color: rgba(251,191,36,0.3);
+      color: #fde68a; font-size: 14px; padding: 16px 20px; line-height: 1.6;
+    }
+    .error-msg.limit-reached a {
+      color: #fbbf24; font-weight: 600; text-decoration: underline;
+    }
+    .results { display: none; animation: fadeIn 0.3s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    .scores-card {
+      background: var(--dark-4); border: 1px solid var(--border);
+      border-radius: 16px; padding: 20px; margin-bottom: 12px;
+    }
+    .scores-row { display: flex; gap: 12px; margin-bottom: 8px; }
+    .score-box {
+      flex: 1; background: var(--dark-2); border-radius: 12px;
+      padding: 16px 12px; text-align: center;
+    }
+    .score-label {
+      font-size: 10px; font-weight: 600; letter-spacing: 0.8px;
+      text-transform: uppercase; color: var(--text-3); margin-bottom: 6px;
+      cursor: help; border-bottom: 1px dotted var(--text-3); display: inline-block;
+    }
+    .score-number { font-family: 'DM Serif Display', serif; font-size: 32px; line-height: 1; margin-bottom: 4px; }
+    .score-desc { font-size: 11px; color: #ffffff; }
+    .score-hint { font-size: 11px; color: var(--text-3); text-align: center; font-style: italic; margin-top: 4px; }
+    .analysis-card {
+      background: var(--dark-2); border: 1px solid var(--border);
+      border-radius: 16px; padding: 20px; margin-bottom: 12px;
+    }
+    .analysis-text {
+      font-size: 13px; color: #ffffff; line-height: 1.7;
+      white-space: pre-wrap; max-height: 500px; overflow-y: auto;
+    }
+    .action-row { display: flex; gap: 10px; }
+    .btn-action {
+      flex: 1; padding: 14px; border: none; border-radius: 12px;
+      font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500;
+      cursor: pointer; transition: opacity 0.2s;
+    }
+    .btn-action:hover { opacity: 0.85; }
+    .btn-full-report { background: #1e3a5f; color: #60a5fa; border: 1px solid #1e40af; }
+    .btn-save-report { background: #1e4d2b; color: #4ade80; border: 1px solid #166534; }
+    .btn-new { background: var(--dark-3); color: var(--text-2); border: 1px solid var(--border); }
+    .install-banner {
+      background: linear-gradient(135deg, rgba(102,126,234,0.15), rgba(118,75,162,0.15));
+      border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px;
+      margin-bottom: 12px; font-size: 12px; color: var(--text-2); text-align: center; display: none;
+    }
+    .install-banner strong { color: var(--purple-1); }
+    .collapsible-header {
+      cursor: pointer; display: flex; align-items: center;
+      justify-content: space-between; user-select: none;
+    }
+    .collapsible-header .toggle { font-size: 12px; color: var(--text-3); }
+    .collapsible-content { margin-top: 12px; }
+    .collapsible-content.hidden { display: none; }
+    .footer { text-align: center; padding: 24px 0 8px; font-size: 11px; color: var(--text-3); }
+    .disclaimer { text-align: center; padding: 8px 16px; font-size: 11px; color: var(--text-3); line-height: 1.5; border-top: 1px solid var(--border); margin-top: 8px; }
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--dark-3); border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div class="header">
+      <div class="logo">
+        <img src="truthprism-icon.png" class="logo-icon" alt="TruthPrism"/>
+        <span class="logo-text">TruthPrism</span>
+      </div>
+      <div class="tagline">by Paul Laikind, PhD &nbsp;|&nbsp; AI-powered fact checker &amp; context scorer</div>
+    </div>
+
+    <div id="installBanner" class="install-banner">
+      Add to home screen: tap <strong>Share</strong> then <strong>Add to Home Screen</strong>
+    </div>
+
+    <!-- Auth Card -->
+    <div class="card">
+      <div class="collapsible-header" id="apiHeader">
+        <div class="card-title" style="margin-bottom:0;">Authentication</div>
+        <span class="toggle" id="apiToggle">&#9660;</span>
+      </div>
+      <div class="collapsible-content" id="apiContent">
+        <div id="accessCodeSection">
+          <div class="api-row">
+            <input type="text" class="api-input" id="accessCodeInput"
+              placeholder="Enter access code..."
+              autocomplete="off" autocorrect="off"
+              autocapitalize="none" spellcheck="false">
+            <button class="btn-small btn-save" id="saveAccessBtn">Save</button>
+            <button class="btn-small btn-test" id="testAccessBtn">Test</button>
+          </div>
+          <div class="auth-status" id="accessStatus">
+            Enter your TruthPrism access code
+          </div>
+        </div>
+
+        <!-- Trial signup -->
+        <div id="trialSection" style="margin-top:12px; border-top:1px solid var(--border); padding-top:12px;">
+          <div style="font-size:12px; color:var(--text-3); margin-bottom:8px; text-align:center;">
+            No code yet? Start with <strong>5 free checks</strong> — no credit card required.
+          </div>
+          <div class="api-row">
+            <input type="email" class="api-input" id="trialEmailInput"
+              placeholder="Enter your email..."
+              autocomplete="email" spellcheck="false">
+            <button class="btn-small btn-save" id="requestTrialBtn">Send Code</button>
+          </div>
+          <div class="auth-status" id="trialStatus"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Article length notice -->
+    <div class="card" style="text-align:center; padding: 10px 16px;">
+      <span style="font-size:12px; color:var(--text-3); opacity:0.85;">
+        ℹ️ &nbsp;Articles are analyzed up to ~7,500 characters (~1,000 words). Larger articles will be truncated.
+      </span>
+    </div>
+
+    <!-- Check page by URL -->
+    <div class="card">
+
+      <div class="card-title-row">
+        <div class="card-title">Check a URL</div>
+        <div class="info-bubble">ℹ
+          <div class="info-tooltip">Paywalled or login-required sites (e.g. Substack, NYT) may not load correctly. For those, copy the article text and paste it into the Check Custom Text field below.</div>
+        </div>
+      </div>
+      <input type="url" class="url-input" id="urlInput" placeholder="https://...">
+      <button class="btn-check" id="checkUrlBtn">Check This URL</button>
+    </div>
+
+    <div class="divider">OR</div>
+
+    <!-- Check custom text -->
+    <div class="card">
+      <div class="card-title">Check Custom Text</div>
+      <textarea class="text-area" id="customText" placeholder="Paste article text here..."></textarea>
+      <button class="btn-check" id="checkTextBtn">Check This Text</button>
+    </div>
+
+    <div class="loading" id="loading">
+      <div class="spinner"></div>
+      <p>Analyzing content...</p>
+    </div>
+
+    <div class="error-msg" id="errorMsg"></div>
+    <div id="remainingBanner" style="display:none; margin:8px 0; padding:10px 14px; border-radius:8px; background:#2a2a1a; border:1px solid #a0800a; font-size:13px; color:#f0d060; text-align:center;"></div>
+
+    <div class="results" id="results">
+      <div class="scores-card">
+        <div class="scores-row">
+          <div class="score-box">
+            <div class="score-label" title="Rates the accuracy of verifiable factual claims: dates, statistics, quotes, and attributions.">Factual Score</div>
+            <div class="score-number" id="factualScore">--</div>
+            <div class="score-desc" id="factualDesc"></div>
+          </div>
+          <div class="score-box">
+            <div class="score-label" title="Rates how fairly the piece presents the broader picture: omitted context, one-sided framing, cherry-picked data, and undisclosed conflicts of interest.">Context Score</div>
+            <div class="score-number" id="contextScore">--</div>
+            <div class="score-desc" id="contextDesc"></div>
+          </div>
+        </div>
+        <div class="score-hint">Tap score labels for descriptions</div>
+      </div>
+      <div class="analysis-card">
+        <div class="card-title" style="margin-bottom:12px;">Analysis</div>
+        <div class="analysis-text" id="analysisText"></div>
+      </div>
+      <div class="action-row">
+        <button class="btn-action btn-full-report" id="fullReportBtn">Click Here for Details</button>
+        <button class="btn-action btn-save-report" id="saveBtn">Save Summary</button>
+        <button class="btn-action btn-new" id="newCheckBtn">New Check</button>
+      </div>
+    </div>
+
+    <div class="disclaimer">TruthPrism uses Claude AI to assist with fact-checking and context analysis. Results may contain errors — it is wise to verify important claims.</div>
+    <div class="footer">TruthPrism &mdash; Powered by Claude AI</div>
+  </div>
+
+  <script>
+    const SERVER_URL = 'https://truthlens-laikind.up.railway.app';
+
+    // Cookie helpers for persistent storage on iOS
+    function setCookie(name, value, days) {
+      const expires = new Date(Date.now() + days * 864e5).toUTCString();
+      document.cookie = name + '=' + encodeURIComponent(value) + '; expires=' + expires + '; path=/';
+    }
+    function getCookie(name) {
+      return decodeURIComponent(document.cookie.split('; ').find(r => r.startsWith(name + '='))?.split('=')[1] || '');
+    }
+
+    // Read ?url= parameter and pre-fill URL field
+    // Try multiple ways to extract the URL parameter since iOS shortcuts may not encode it
+    let sharedUrl = null;
+    try {
+      const urlParams = new URLSearchParams(window.location.search);
+      sharedUrl = urlParams.get('url');
+    } catch(e) {}
+    
+    // Fallback: manually parse the URL after ?url=
+    if (!sharedUrl) {
+      const match = window.location.href.match(/[?&]url=(.+?)(?:&|$)/);
+      if (match) sharedUrl = decodeURIComponent(match[1]);
+    }
+    
+    if (sharedUrl) {
+      document.getElementById('urlInput').value = sharedUrl;
+      document.getElementById('urlInput').scrollIntoView({behavior: 'smooth', block: 'center'});
+      setTimeout(() => document.getElementById('checkUrlBtn').click(), 800);
+    }
+
+    // Show install banner on iOS
+    const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+    const isStandalone = window.navigator.standalone;
+    if (isIOS && !isStandalone) {
+      document.getElementById('installBanner').style.display = 'block';
+    }
+
+    // Auth mode — access code only
+
+    function collapseAuth() {
+      document.getElementById('apiContent').classList.add('hidden');
+      document.getElementById('apiToggle').textContent = '>';
+    }
+
+    function showStatus(id, msg, type) {
+      const el = document.getElementById(id);
+      el.textContent = msg;
+      el.className = 'auth-status ' + (type || '');
+    }
+
+    // Load saved credentials on startup
+    window.addEventListener('load', () => {
+      const savedCode = getCookie('tl_access_code') || '';
+      if (savedCode) {
+        document.getElementById('accessCodeInput').value = savedCode;
+        showStatus('accessStatus', 'Access code configured', 'ok');
+        collapseAuth();
+        // Check remaining uses for trial codes
+        fetch(`${SERVER_URL}/api/check-access`, {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({access_code: savedCode})
+        }).then(r => r.json()).then(d => {
+          if (d.remaining !== undefined && d.remaining !== null) showRemaining(d.remaining);
+        }).catch(() => {});
+      }
+    });
+
+    // Collapsible
+    document.getElementById('apiHeader').addEventListener('click', () => {
+      const c = document.getElementById('apiContent');
+      const t = document.getElementById('apiToggle');
+      c.classList.toggle('hidden');
+      t.textContent = c.classList.contains('hidden') ? '>' : 'v';
+    });
+
+    // Show remaining checks banner
+    function showRemaining(remaining) {
+      const banner = document.getElementById('remainingBanner');
+      if (remaining === null || remaining === undefined) { banner.style.display = 'none'; return; }
+      if (remaining <= 0) {
+        banner.style.display = 'block';
+        banner.style.background = '#2a1a1a';
+        banner.style.borderColor = '#a05050';
+        banner.style.color = '#f08080';
+        banner.innerHTML = '⚠️ Your free trial is used up. <strong>Purchase an access code</strong> to continue checking articles.';
+      } else if (remaining === 1) {
+        banner.style.display = 'block';
+        banner.innerHTML = `⚠️ You have <strong>1 free check remaining</strong>. Purchase an access code to continue after your trial.`;
+      } else {
+        banner.style.display = 'block';
+        banner.innerHTML = `✓ You have <strong>${remaining} free check${remaining !== 1 ? 's' : ''} remaining</strong> in your trial.`;
+      }
+    }
+
+    // Request trial code
+    document.getElementById('requestTrialBtn').addEventListener('click', async () => {
+      const email = document.getElementById('trialEmailInput').value.trim();
+      if (!email) { showStatus('trialStatus', 'Please enter your email', 'error'); return; }
+      showStatus('trialStatus', 'Sending...', '');
+      try {
+        const r = await fetch(`${SERVER_URL}/api/request-trial`, {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({email})
+        });
+        const d = await r.json();
+        if (d.success) {
+          showStatus('trialStatus', '✓ Trial code sent! Check your email, then enter it above.', 'ok');
+          document.getElementById('trialEmailInput').value = '';
+        } else {
+          showStatus('trialStatus', d.error || 'Something went wrong', 'error');
+        }
+      } catch(e) {
+        showStatus('trialStatus', 'Cannot connect to server', 'error');
+      }
+    });
+
+    // Save access code
+    document.getElementById('saveAccessBtn').addEventListener('click', () => {
+      const key = document.getElementById('accessCodeInput').value.trim();
+      if (!key) { showStatus('accessStatus', 'Please enter the access code', 'error'); return; }
+      setCookie('tl_access_code', key, 30);
+      showStatus('accessStatus', 'Access code saved!', 'ok');
+      setTimeout(collapseAuth, 800);
+    });
+
+    // Test access code
+    document.getElementById('testAccessBtn').addEventListener('click', async () => {
+      const key = document.getElementById('accessCodeInput').value.trim();
+      if (!key) { showStatus('accessStatus', 'Enter the access code first', 'error'); return; }
+      showStatus('accessStatus', 'Testing...', '');
+      try {
+        const r = await fetch(`${SERVER_URL}/api/check-access`, {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({access_code: key})
+        });
+        const d = await r.json().catch(() => ({}));
+        if (d.success) {
+          showStatus('accessStatus', 'Access code verified!', 'ok');
+        } else if (d.error && d.error.includes('usage limit')) {
+          showStatus('accessStatus', 'Usage limit reached', 'error');
+          showError(d.error);
+        } else {
+          showStatus('accessStatus', 'Invalid access code', 'error');
+        }
+      } catch(e) {
+        showStatus('accessStatus', 'Cannot connect to server', 'error');
+      }
+    });
+
+
+
+    // Get auth credentials for API calls
+    function getAuth() {
+      const code = getCookie('tl_access_code') || '';
+      if (!code) { showError('Please save your access code first'); return null; }
+      return {type: 'access', value: code};
+    }
+
+    // Check URL
+    document.getElementById('checkUrlBtn').addEventListener('click', async () => {
+      const url = document.getElementById('urlInput').value.trim();
+      if (!url) { showError('Please enter a URL'); return; }
+      const auth = getAuth();
+      if (!auth) return;
+
+      showLoading(true);
+      try {
+        const endpoint = '/api/fetch-url-family';
+        const body = {url, access_code: auth.value};
+        const r = await fetch(`${SERVER_URL}${endpoint}`, {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify(body)
+        });
+        if (!r.ok) {
+          const ed = await r.json().catch(() => ({}));
+          throw new Error(ed.error || `Server error: ${r.status}`);
+        }
+        const d = await r.json();
+        if (d.error) throw new Error(d.error);
+        const analysis = d.analysis || d.result || 'No analysis available';
+        displayResults(d.score || 5, d.context_score || null, analysis, d.full_analysis || analysis);
+        showRemaining(d.remaining !== undefined ? d.remaining : null);
+        if (d.truncated) {
+          showError('⚠️ Note: This article exceeded the 7,500 character limit and was truncated. The analysis covers only the first portion of the article.');
+        }
+      } catch(e) {
+        showError(e.message);
+      } finally {
+        showLoading(false);
+      }
+    });
+
+    // Check text
+    document.getElementById('checkTextBtn').addEventListener('click', async () => {
+      const text = document.getElementById('customText').value.trim();
+      if (!text) { showError('Please enter some text'); return; }
+      const auth = getAuth();
+      if (!auth) return;
+
+      const textTruncated = text.length > 7500;
+      showLoading(true);
+      try {
+        const endpoint = '/api/check-facts-family';
+        const body = {claim_text: text.substring(0, 7500), access_code: auth.value};
+        const r = await fetch(`${SERVER_URL}${endpoint}`, {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify(body)
+        });
+        if (!r.ok) {
+          const ed = await r.json().catch(() => ({}));
+          throw new Error(ed.error || `Server error: ${r.status}`);
+        }
+        const d = await r.json();
+        if (d.error) throw new Error(d.error);
+        const analysis = d.analysis || d.result || 'No analysis available';
+        displayResults(d.score || 5, d.context_score || null, analysis, d.full_analysis || analysis);
+        showRemaining(d.remaining !== undefined ? d.remaining : null);
+        if (d.truncated || textTruncated) {
+          showError('⚠️ Note: This article exceeded the 7,500 character limit and was truncated. The analysis covers only the first portion of the article.');
+        }
+      } catch(e) {
+        showError(e.message);
+      } finally {
+        showLoading(false);
+      }
+    });
+
+    // Save report
+    document.getElementById('saveBtn').addEventListener('click', () => {
+      const factual = document.getElementById('factualScore').textContent;
+      const context = document.getElementById('contextScore').textContent;
+      const analysis = document.getElementById('analysisText').textContent;
+      const timestamp = new Date().toLocaleString();
+      const output = `TRUTHLENS SUMMARY REPORT\nGenerated: ${timestamp}\n\nFACTUAL SCORE: ${factual}\nCONTEXT SCORE: ${context}\n\nCONDENSED ANALYSIS:\n${analysis}\n\n---\nGenerated by TruthPrism`;
+      const blob = new Blob([output], {type: 'text/plain'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = `truthprism-summary-${Date.now()}.txt`; a.click();
+    });
+
+    document.getElementById('fullReportBtn').addEventListener('click', () => {
+      const factual = document.getElementById('factualScore').textContent;
+      const context = document.getElementById('contextScore').textContent;
+      const factualDesc = document.getElementById('factualDesc').textContent;
+      const contextDesc = document.getElementById('contextDesc').textContent;
+      const timestamp = new Date().toLocaleString();
+      const fColor = factual.startsWith('8') || factual.startsWith('9') || factual.startsWith('10') ? '#22c55e' : factual.startsWith('6') || factual.startsWith('7') ? '#f59e0b' : '#ef4444';
+      const cColor = context.startsWith('8') || context.startsWith('9') || context.startsWith('10') ? '#22c55e' : context.startsWith('6') || context.startsWith('7') ? '#f59e0b' : '#ef4444';
+      const safeAnalysis = _fullAnalysis.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');
+      const html = `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TruthPrism Full Report</title>
+<style>
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0f172a;color:#e2e8f0;max-width:800px;margin:0 auto;padding:24px 16px;}
+.header{background:linear-gradient(135deg,#667eea,#764ba2);border-radius:12px;padding:20px;margin-bottom:20px;}
+.header h1{color:white;font-size:20px;margin:0 0 4px;}
+.header p{color:rgba(255,255,255,0.7);font-size:12px;margin:0;word-break:break-all;}
+.scores{display:flex;gap:12px;margin-bottom:20px;}
+.score-card{flex:1;background:#1e293b;border-radius:10px;padding:14px;text-align:center;}
+.score-label{font-size:10px;color:#94a3b8;margin-bottom:6px;}
+.score-value{font-size:28px;font-weight:700;margin-bottom:4px;}
+.score-desc{font-size:11px;color:#94a3b8;}
+.analysis{background:#1e293b;border-radius:10px;padding:20px;margin-bottom:20px;font-size:13px;line-height:1.8;}
+.save-link{display:block;text-align:center;padding:14px;background:linear-gradient(135deg,#667eea,#764ba2);color:white;border-radius:8px;font-size:15px;font-weight:600;text-decoration:none;margin-bottom:12px;}
+.meta{font-size:11px;color:#475569;text-align:center;}
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>TruthPrism Full Analysis Report</h1>
+  <p>${window.location.href}</p>
+</div>
+<div class="scores">
+  <div class="score-card">
+    <div class="score-label">Factual Score</div>
+    <div class="score-value" style="color:${fColor}">${factual}</div>
+    <div class="score-desc">${factualDesc}</div>
+  </div>
+  <div class="score-card">
+    <div class="score-label">Context Score</div>
+    <div class="score-value" style="color:${cColor}">${context}</div>
+    <div class="score-desc">${contextDesc}</div>
+  </div>
+</div>
+<div class="analysis">${safeAnalysis}</div>
+<a href="data:text/plain;charset=utf-8,${encodeURIComponent('TRUTHLENS FULL REPORT\nGenerated: ${timestamp}\n\nFACTUAL SCORE: ${factual}\nCONTEXT SCORE: ${context}\n\nFULL ANALYSIS:\n${_fullAnalysis}\n\n---\nGenerated by TruthPrism')}" download="truthprism-full-${Date.now()}.txt" class="save-link">Save Full Report as Text File</a>
+<div class="meta">Generated by TruthPrism &mdash; Powered by Claude AI &mdash; ${timestamp}</div>
+</body>
+</html>`;
+      const blob = new Blob([html], {type: 'text/html'});
+      const url = URL.createObjectURL(blob);
+      window.open(url, '_blank');
+    });
+
+    // New check
+    document.getElementById('newCheckBtn').addEventListener('click', () => {
+      document.getElementById('results').style.display = 'none';
+      document.getElementById('errorMsg').style.display = 'none';
+      document.getElementById('urlInput').value = '';
+      document.getElementById('customText').value = '';
+    });
+
+    // Info bubble tap toggle for mobile
+    document.querySelectorAll('.info-bubble').forEach(bubble => {
+      bubble.addEventListener('click', (e) => {
+        e.stopPropagation();
+        bubble.classList.toggle('active');
+      });
+    });
+    document.addEventListener('click', () => {
+      document.querySelectorAll('.info-bubble').forEach(b => b.classList.remove('active'));
+    });
+
+    let _fullAnalysis = '';
+    function displayResults(factual, context, analysis, fullAnalysis) {
+      _fullAnalysis = fullAnalysis || analysis;
+      const fColor = factual >= 8 ? 'var(--green)' : factual >= 6 ? 'var(--amber)' : 'var(--red)';
+      const cColor = context ? (context >= 8 ? 'var(--green)' : context >= 6 ? 'var(--amber)' : 'var(--red)') : '#6060a0';
+      document.getElementById('factualScore').textContent = factual + '/10';
+      document.getElementById('factualScore').style.color = fColor;
+      document.getElementById('factualDesc').textContent = factual >= 8 ? 'Highly Accurate' : factual >= 6 ? 'Generally Credible' : factual >= 4 ? 'Mixed Accuracy' : 'Low Credibility';
+      document.getElementById('contextScore').textContent = context ? context + '/10' : 'N/A';
+      document.getElementById('contextScore').style.color = cColor;
+      document.getElementById('contextDesc').textContent = context ? (context >= 8 ? 'Well Contextualized' : context >= 6 ? 'Some Omissions' : 'Poorly Contextualized') : '';
+      const clean = analysis.replace(/###\s*/g, '').replace(/\*\*([^*]+)\*\*/g, '$1');
+      document.getElementById('analysisText').textContent = clean;
+      document.getElementById('results').style.display = 'block';
+      document.getElementById('results').scrollIntoView({behavior: 'smooth', block: 'start'});
+    }
+
+    function showLoading(show) {
+      document.getElementById('loading').style.display = show ? 'block' : 'none';
+      if (show) {
+        document.getElementById('results').style.display = 'none';
+        document.getElementById('errorMsg').style.display = 'none';
+      }
+    }
+
+    function showError(msg) {
+      const el = document.getElementById('errorMsg');
+      if (msg && msg.includes('usage limit')) {
+        el.className = 'error-msg limit-reached';
+        el.innerHTML = '⚠️ ' + msg.replace(
+          'console.anthropic.com',
+          '<a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a>'
+        );
+      } else {
+        el.className = 'error-msg';
+        el.textContent = msg;
+      }
+      el.style.display = 'block';
+    }
+
+    function showSkipped(msg) {
+      const el = document.getElementById('errorMsg');
+      el.textContent = '✓ ' + (msg || 'No fact-check needed for this content.');
+      el.style.background = 'rgba(34,197,94,0.1)';
+      el.style.borderColor = 'rgba(34,197,94,0.3)';
+      el.style.color = '#86efac';
+      el.style.display = 'block';
+    }
+  </script>
+</body>
+</html>
