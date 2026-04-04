@@ -73,40 +73,9 @@
       </div>
 
       <!-- Score sample UI -->
-      <div class="score-demo" style="margin-top:72px">
-        <h4>Sample Analysis Output</h4>
-
-        <div style="display:flex; gap:16px; margin-bottom:24px;">
-          <div style="flex:1; background:var(--bg); border-radius:10px; padding:20px; text-align:center; border:1px solid var(--border);">
-            <div style="font-size:0.75rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-muted); margin-bottom:8px;">Factual Score</div>
-            <div style="font-size:2.4rem; font-weight:900; font-family:var(--font-serif); color:#22EE44;">8<span style="font-size:1.2rem; color:var(--text-muted)">/10</span></div>
-            <div style="font-size:0.8rem; color:#22EE44; margin-top:4px;">High Credibility</div>
-          </div>
-          <div style="flex:1; background:var(--bg); border-radius:10px; padding:20px; text-align:center; border:1px solid var(--border);">
-            <div style="font-size:0.75rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-muted); margin-bottom:8px;">Context Score</div>
-            <div style="font-size:2.4rem; font-weight:900; font-family:var(--font-serif); color:#FFB347;">6<span style="font-size:1.2rem; color:var(--text-muted)">/10</span></div>
-            <div style="font-size:0.8rem; color:#FFB347; margin-top:4px;">Partially Contextualized</div>
-          </div>
-        </div>
-
-        <div style="font-size:0.78rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--text-muted); margin-bottom:10px;">Analysis</div>
-
-        <div style="display:flex; flex-direction:column; gap:10px; font-size:0.88rem; color:var(--text-muted); line-height:1.65;">
-          <div><strong style="color:var(--text);">Article Overview:</strong> A news report on recent federal budget negotiations. Factual claims are largely accurate and sourced, though significant context around long-term fiscal impacts is absent.</div>
-          <div><strong style="color:var(--text);">Factual Findings:</strong> Core claims verified. Key figures and attributed quotes confirmed against primary sources. One minor statistical error identified in projected savings figure.</div>
-          <div><strong style="color:var(--text);">Contextual Findings:</strong> Article omits historical context on similar prior negotiations and does not address opposing economic perspectives on the proposed measures.</div>
-          <div><strong style="color:var(--text);">Sources:</strong> Multiple sources consulted including government records, congressional testimony, and independent economic analysis.</div>
-        </div>
-
-        <div style="margin-top:16px; padding-top:16px; border-top:1px solid var(--border); font-size:0.78rem; color:var(--text-muted); font-style:italic;">
-          TruthPrism uses Claude AI to assist with fact-checking and context analysis. Results may contain errors — it is wise to verify important claims.
-        </div>
-
-        <div style="display:flex; gap:10px; margin-top:20px; flex-wrap:wrap;">
-          <div style="padding:9px 16px; background:rgba(125,249,255,0.12); border:1px solid rgba(125,249,255,0.3); border-radius:6px; font-size:0.82rem; font-weight:600; color:var(--accent-c); cursor:default;">Click Here for Details</div>
-          <div style="padding:9px 16px; background:rgba(34,238,68,0.12); border:1px solid rgba(34,238,68,0.3); border-radius:6px; font-size:0.82rem; font-weight:600; color:#22EE44; cursor:default;">Save Summary</div>
-          <div style="padding:9px 16px; background:var(--bg); border:1px solid var(--border); border-radius:6px; font-size:0.82rem; font-weight:600; color:var(--text-muted); cursor:default;">New Check</div>
-        </div>
+      <div style="margin-top:72px; max-width:440px; margin-left:auto; margin-right:auto;">
+        <h4 style="font-family:var(--font-serif); font-size:1rem; color:var(--text-muted); margin-bottom:20px; text-align:center;">Sample Analysis Output</h4>
+        <img src="assets/TruthPrism_Example.png" alt="TruthPrism sample analysis output showing Factual Score 1/10 and Context Score 1/10 for the claim 'The earth is flat'" style="width:100%; border-radius:12px; border:1px solid var(--border); box-shadow:0 8px 40px rgba(0,0,0,0.4);"/>
       </div>
 
     </div>
