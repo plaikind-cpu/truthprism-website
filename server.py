@@ -276,6 +276,10 @@ def webapp():
     response.headers['Expires'] = '0'
     return response
 
+@app.route('/privacy')
+def privacy():
+    return send_from_directory('.', 'privacy.html')
+
 
 def condense_analysis(full_text):
     """Extract a 4-section condensed summary from full analysis text."""

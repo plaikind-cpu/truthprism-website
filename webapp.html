@@ -267,10 +267,13 @@
           <div class="auth-status" id="accessStatus">
             Enter your TruthPrism access code
           </div>
+          <div id="clearCodeRow" style="display:none; text-align:right; margin-top:4px;">
+            <a href="#" id="clearCodeBtn" style="font-size:11px; color:var(--text-3); opacity:0.7; text-decoration:underline;">Change code</a>
+          </div>
         </div>
 
-        <!-- Trial signup -->
-        <div id="trialSection" style="margin-top:12px; border-top:1px solid var(--border); padding-top:12px;">
+        <!-- Trial signup — hidden when access code already configured -->
+        <div id="trialSection" style="display:none; margin-top:12px; border-top:1px solid var(--border); padding-top:12px;">
           <div style="font-size:12px; color:var(--text-3); margin-bottom:8px; text-align:center;">
             No code yet? Start with <strong>5 free checks</strong> — no credit card required.
           </div>
@@ -279,6 +282,12 @@
               placeholder="Enter your email..."
               autocomplete="email" spellcheck="false">
             <button class="btn-small btn-save" id="requestTrialBtn">Send Code</button>
+          </div>
+          <div style="margin-top:8px; font-size:11px; color:var(--text-3);">
+            <label style="display:flex; align-items:flex-start; gap:6px; cursor:pointer;">
+              <input type="checkbox" id="privacyConsent" style="margin-top:2px; flex-shrink:0;">
+              <span>I agree to the <a href="/privacy" target="_blank" style="color:#a78bfa;">Privacy Policy</a> and consent to receiving my trial code by email.</span>
+            </label>
           </div>
           <div class="auth-status" id="trialStatus"></div>
         </div>
@@ -350,7 +359,7 @@
     </div>
 
     <div class="disclaimer">TruthPrism uses Claude AI to assist with fact-checking and context analysis. Results may contain errors — it is wise to verify important claims.</div>
-    <div class="footer">TruthPrism &mdash; Powered by Claude AI</div>
+    <div class="footer">TruthPrism &mdash; Powered by Claude AI &mdash; <a href="/privacy" style="color:var(--text-3); text-decoration:underline;">Privacy Policy</a></div>
   </div>
 
   <script>
@@ -363,6 +372,9 @@
     }
     function getCookie(name) {
       return decodeURIComponent(document.cookie.split('; ').find(r => r.startsWith(name + '='))?.split('=')[1] || '');
+    }
+    function deleteCookie(name) {
+      document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/';
     }
 
     // Read ?url= parameter and pre-fill URL field
@@ -411,6 +423,7 @@
       if (savedCode) {
         document.getElementById('accessCodeInput').value = savedCode;
         showStatus('accessStatus', 'Access code configured', 'ok');
+        document.getElementById('clearCodeRow').style.display = 'block';
         collapseAuth();
         // Check remaining uses for trial codes
         fetch(`${SERVER_URL}/api/check-access`, {
@@ -420,6 +433,9 @@
         }).then(r => r.json()).then(d => {
           if (d.remaining !== undefined && d.remaining !== null) showRemaining(d.remaining);
         }).catch(() => {});
+      } else {
+        // No code saved — show trial signup
+        document.getElementById('trialSection').style.display = 'block';
       }
     });
 
@@ -454,6 +470,10 @@
     document.getElementById('requestTrialBtn').addEventListener('click', async () => {
       const email = document.getElementById('trialEmailInput').value.trim();
       if (!email) { showStatus('trialStatus', 'Please enter your email', 'error'); return; }
+      if (!document.getElementById('privacyConsent').checked) {
+        showStatus('trialStatus', 'Please agree to the Privacy Policy to continue', 'error');
+        return;
+      }
       showStatus('trialStatus', 'Sending...', '');
       try {
         const r = await fetch(`${SERVER_URL}/api/request-trial`, {
@@ -473,12 +493,28 @@
       }
     });
 
+    // Clear access code
+    document.getElementById('clearCodeBtn').addEventListener('click', (e) => {
+      e.preventDefault();
+      deleteCookie('tl_access_code');
+      document.getElementById('accessCodeInput').value = '';
+      showStatus('accessStatus', 'Enter your TruthPrism access code', '');
+      document.getElementById('clearCodeRow').style.display = 'none';
+      document.getElementById('trialSection').style.display = 'block';
+      document.getElementById('remainingBanner').style.display = 'none';
+      // Expand auth card
+      document.getElementById('apiContent').classList.remove('hidden');
+      document.getElementById('apiToggle').textContent = 'v';
+    });
+
     // Save access code
     document.getElementById('saveAccessBtn').addEventListener('click', () => {
       const key = document.getElementById('accessCodeInput').value.trim();
       if (!key) { showStatus('accessStatus', 'Please enter the access code', 'error'); return; }
       setCookie('tl_access_code', key, 30);
       showStatus('accessStatus', 'Access code saved!', 'ok');
+      document.getElementById('clearCodeRow').style.display = 'block';
+      document.getElementById('trialSection').style.display = 'none';
       setTimeout(collapseAuth, 800);
     });
 
