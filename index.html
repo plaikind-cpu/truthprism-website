@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>TruthPrism — See Through the Spin</title>
-  <meta name="description" content="TruthPrism uses AI to fact-check news articles and claims instantly. Available as a web app and on iPhone via the iOS share sheet."/>
+  <title>TruthPrism — AI-Powered Fact &amp; Context Checker</title>
+  <meta name="description" content="TruthPrism uses AI to score news articles for factual accuracy and contextual fairness. Currently available for personal use."/>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -13,7 +13,6 @@
 </head>
 <body>
 
-  <!-- NAV -->
   <nav class="nav">
     <a href="index.html" class="nav-logo">
       <img src="assets/icon128.png" alt="TruthPrism" class="prism-nav"/>
@@ -22,7 +21,6 @@
     <div class="nav-links">
       <a href="how-it-works.html">How It Works</a>
       <a href="about.html">About</a>
-      <a href="https://app.truthprism.app/checkout">Pricing</a>
       <a href="get-started.html" class="btn-nav">Get Started</a>
     </div>
     <button class="nav-burger" aria-label="Menu">&#9776;</button>
@@ -30,30 +28,31 @@
 
   <!-- HERO -->
   <section class="hero hero-stacked">
-    <!-- Splash image -->
     <div class="hero-splash-wrap">
       <img src="assets/TruthPrism_Splash.png" alt="TruthPrism — AI-Powered Fact and Context Checker" class="hero-splash"/>
     </div>
-
-    <!-- CTAs below the image -->
     <div class="hero-content hero-content-centered">
+
+      <!-- Status banner -->
+      <div style="background:rgba(255,211,102,0.1); border:1px solid rgba(255,211,102,0.35); border-radius:12px; padding:20px 28px; margin-bottom:32px; max-width:640px; text-align:left;">
+        <p style="font-size:0.95rem; color:var(--text); line-height:1.75;">
+          <strong style="color:var(--gold);">A note on TruthPrism's current status:</strong> After extensive testing, I've stepped back from wider distribution for now. The Factual Score works well, but the Context Score showed run-to-run variability that doesn't meet the standard I'd want for a trust-based product. The app is still running — existing users can continue using it, and the technology remains genuinely useful as <em>one informed perspective</em>. I'll be watching AI developments closely and expect to relaunch when the consistency issue is solved.
+        </p>
+        <p style="font-size:0.85rem; color:var(--text-muted); margin-top:10px;">— Paul Laikind, PhD</p>
+      </div>
+
       <p class="hero-sub">
-        TruthPrism uses advanced AI to analyze news articles and claims —
-        exposing bias, verifying facts, and giving you a clear confidence score
-        in seconds.
+        TruthPrism uses AI to analyze news articles and claims — scoring them for factual accuracy and contextual fairness, with a plain-language explanation of its findings.
       </p>
       <div class="hero-ctas hero-ctas-centered">
         <a href="https://app.truthprism.app" target="_blank" class="btn-primary">
-          Launch Web App
+          Open the App
         </a>
-        <a href="https://chromewebstore.google.com/detail/truthprism/mifmgcimcfidnbadhkcgcafcclbhlkkd" target="_blank" class="btn-secondary">
-          Add to Chrome — Free
-        </a>
-        <a href="get-started.html" class="btn-secondary">
-          Get Started Guide
+        <a href="how-it-works.html" class="btn-secondary">
+          How It Works
         </a>
       </div>
-      <p class="hero-note">2 free checks included &middot; Chrome &amp; Edge extensions available &middot; Works on any article</p>
+      <p class="hero-note">Existing access codes still work &middot; Use your own Anthropic API key for unlimited access</p>
     </div>
   </section>
 
@@ -88,7 +87,7 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 100 20A10 10 0 0012 2zm0 0v20M2 12h20"/></svg>
           </div>
           <h3>Works Everywhere</h3>
-          <p>Use TruthPrism as a <strong>Chrome or Edge browser extension</strong> while you browse, as a <strong>web app</strong> on any device, or on iPhone via the <strong>iOS share sheet</strong>.</p>
+          <p>Use TruthPrism as a web app on any device — desktop, tablet, or iPhone via the iOS share sheet.</p>
         </div>
       </div>
     </div>
@@ -112,30 +111,24 @@
     </div>
   </section>
 
-  <!-- GET STARTED CTA -->
+  <!-- CTA -->
   <section class="cta-band">
     <div class="container cta-inner">
-      <h2>Start reading smarter today.</h2>
-      <p>Enter your email in the app to receive a free trial code — 2 checks, no credit card required. Prism Packs available for continued use.</p>
+      <h2>Try it for yourself.</h2>
+      <p>TruthPrism is still running. Use an existing access code, or bring your own Anthropic API key for unlimited use.</p>
       <div class="cta-buttons">
-        <a href="https://app.truthprism.app" target="_blank" class="btn-primary">Launch Web App</a>
-        <a href="https://chromewebstore.google.com/detail/truthprism/mifmgcimcfidnbadhkcgcafcclbhlkkd" target="_blank" class="btn-secondary">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
-          Add to Chrome — Free
-        </a>
+        <a href="https://app.truthprism.app" target="_blank" class="btn-primary">Open the App</a>
         <a href="get-started.html" class="btn-secondary">Get Started Guide</a>
       </div>
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer class="footer">
     <div class="container footer-inner">
       <a href="index.html" class="footer-logo">TruthPrism</a>
       <nav class="footer-nav">
         <a href="how-it-works.html">How It Works</a>
         <a href="about.html">About</a>
-        <a href="https://app.truthprism.app/checkout">Pricing</a>
         <a href="get-started.html">Get Started</a>
         <a href="https://app.truthprism.app/privacy">Privacy Policy</a>
       </nav>

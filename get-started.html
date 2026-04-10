@@ -4,7 +4,7 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Get Started — TruthPrism</title>
-  <meta name="description" content="Start using TruthPrism today — web app on any device, or set up the iOS share sheet for one-tap fact checking."/>
+  <meta name="description" content="How to access and use TruthPrism — existing access codes, API key option, iOS share sheet, and more."/>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -21,7 +21,6 @@
     <div class="nav-links">
       <a href="how-it-works.html">How It Works</a>
       <a href="about.html">About</a>
-      <a href="https://app.truthprism.app/checkout">Pricing</a>
       <a href="get-started.html" class="btn-nav">Get Started</a>
     </div>
     <button class="nav-burger" aria-label="Menu">&#9776;</button>
@@ -30,42 +29,41 @@
   <div class="page-hero">
     <div class="container">
       <h1>Get Started</h1>
-      <p>TruthPrism works on any device with a browser. Here's everything you need to know.</p>
+      <p>TruthPrism is still running. Here's how to access and use it.</p>
     </div>
   </div>
 
   <section class="page-content">
     <div class="container">
 
-      <!-- ACCESS & PRICING -->
+      <!-- STATUS NOTE -->
       <div class="gs-section">
-        <h2 class="gs-section-title">Access &amp; Pricing</h2>
-        <div class="gs-box">
-          <p>Getting started is free and takes 30 seconds. Enter your email address in the app and a <strong>free trial access code</strong> will be sent to you, giving you <strong>2 free fact checks</strong> — no credit card required. Your email is used only to send your trial code and is never shared with third parties (<a href="https://app.truthprism.app/privacy" style="color:var(--accent-c)">Privacy Policy</a>).</p>
-          <p style="margin-top:12px;">After your free checks are used, purchase a Prism Pack to continue. Each pack gives you a fixed number of checks — once used, simply purchase another. <a href="https://app.truthprism.app/checkout" style="color:var(--accent-c)">View Prism Packs →</a></p>
-
-          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(130px,1fr)); gap:12px; margin-top:24px;">
-            <div class="access-tier">
-              <span class="tier-num" style="font-size:1.4rem;">$4.99</span>
-              <span class="tier-label">Starter<br/>25 checks/mo</span>
-            </div>
-            <div class="access-tier" style="border-color:rgba(125,249,255,0.35);">
-              <span class="tier-num" style="font-size:1.4rem;">$8.99</span>
-              <span class="tier-label">Standard<br/>50 checks/mo</span>
-            </div>
-            <div class="access-tier">
-              <span class="tier-num" style="font-size:1.4rem;">$14.99</span>
-              <span class="tier-label">Plus<br/>100 checks/mo</span>
-            </div>
-            <div class="access-tier">
-              <span class="tier-num" style="font-size:1.4rem;">$29.99</span>
-              <span class="tier-label">Pro<br/>200 checks/mo</span>
-            </div>
-          </div>
+        <div class="disclaimer-box" style="border-color:rgba(255,211,102,0.3);">
+          <h3 style="color:var(--gold);">Current Status</h3>
+          <p>TruthPrism has been stepped back from wider public distribution while consistency issues with the Context Score are being worked on. The app remains fully functional — existing users can continue using it, and anyone can access it using their own Anthropic API key. A relaunch is planned when the technology is ready.</p>
         </div>
       </div>
 
-      <!-- USING THE WEB APP -->
+      <!-- ACCESS OPTIONS -->
+      <div class="gs-section">
+        <h2 class="gs-section-title">Access Options</h2>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:16px;" class="two-col-grid">
+
+          <div class="gs-box">
+            <h3 style="font-family:var(--font-serif); margin-bottom:12px;">🔑 Existing Access Code</h3>
+            <p style="color:var(--text-muted); font-size:0.95rem; line-height:1.75;">If you received a personal access code, it still works. Enter it in the Authentication section of the app and tap <strong>Save Code</strong>.</p>
+          </div>
+
+          <div class="gs-box">
+            <h3 style="font-family:var(--font-serif); margin-bottom:12px;">🔧 Your Own API Key</h3>
+            <p style="color:var(--text-muted); font-size:0.95rem; line-height:1.75;">Anyone can use TruthPrism with their own Anthropic API key — unlimited use at roughly $0.01–0.05 per article check. Instructions are available at <a href="https://app.truthprism.app/help" target="_blank" style="color:var(--accent-c)">app.truthprism.app/help</a>.</p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- USING THE APP -->
       <div class="gs-section">
         <h2 class="gs-section-title">Using the Web App</h2>
         <p class="gs-intro">TruthPrism works in any modern browser on any device — desktop, laptop, tablet, or phone.</p>
@@ -82,80 +80,22 @@
             <div class="step-full-num">2</div>
             <div class="step-full-body">
               <h3>Paste an article URL or text</h3>
-              <p>Copy the URL of any news article and paste it into the URL field, then tap <strong>Check This URL</strong>. Alternatively, copy and paste article text directly into the text field and tap <strong>Check This Text</strong>.<br/><br/><strong>⚠️ Paywalled or login-required sites</strong> (e.g. Substack, NYT, WSJ) may not load via URL. For those, copy the article text and paste it into the <strong>Check Custom Text</strong> field instead — this always works.</p>
+              <p>Copy the URL of any news article and paste it into the URL field, then tap <strong>Check This URL</strong>. Alternatively, copy and paste article text directly into the text field and tap <strong>Check This Text</strong>.</p>
+              <p style="margin-top:10px; font-size:0.88rem; color:var(--text-muted);"><strong>⚠️ Paywalled or login-required sites</strong> (e.g. Substack, NYT, WSJ) may not load via URL. For those, copy the article text and paste it into the <strong>Check Custom Text</strong> field — this always works.</p>
             </div>
           </div>
           <div class="step-full">
             <div class="step-full-num">3</div>
             <div class="step-full-body">
               <h3>Read your analysis</h3>
-              <p>TruthPrism returns a <strong>Factual Score</strong> and <strong>Context Score</strong> (each out of 10), along with a plain-language summary of its findings. You can also tap <strong>Click Here for Details</strong> to view a full in-depth report. Both the summary and the detailed report can be saved for future reference. Analysis typically takes 10–20 seconds depending on article length.</p>
-            </div>
-          </div>
-          <div class="step-full">
-            <div class="step-full-num">4</div>
-            <div class="step-full-body">
-              <h3>After your 2 free checks</h3>
-              <p>Once your free checks are used, you'll be prompted to purchase a Prism Pack. Visit our <a href="https://app.truthprism.app/checkout" style="color:var(--accent-c)">pricing page</a> to choose the pack that fits your usage. Enter your Prism Pack code in the app and tap <strong>Save Code</strong>. Your code works across all platforms — the same code can be used in the web app, Chrome extension, and Edge extension. When your checks run out, simply purchase a new pack.</p>
+              <p>TruthPrism returns a <strong>Factual Score</strong> and <strong>Context Score</strong> (each out of 10), along with a plain-language summary. Tap <strong>Click Here for Details</strong> for the full in-depth report. Both can be saved. Analysis typically takes 20–30 seconds.</p>
             </div>
           </div>
         </div>
-      </div>
 
-      <!-- CHROME / EDGE EXTENSION -->
-      <div class="gs-section">
-        <h2 class="gs-section-title">Browser Extensions</h2>
-        <p class="gs-intro">The easiest way to use TruthPrism on your PC — fact-check any article with one click without leaving your browser.</p>
-
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:28px;" class="two-col-grid">
-
-          <div class="gs-box">
-            <h3 style="font-family:var(--font-serif); margin-bottom:6px;">🟢 Chrome Extension</h3>
-            <p style="font-size:0.82rem; color:var(--accent-c); margin-bottom:16px;">Available now</p>
-            <p style="color:var(--text-muted); font-size:0.9rem; margin-bottom:20px;">Install the TruthPrism extension from the Chrome Web Store and fact-check any article with one click directly from your browser toolbar.</p>
-            <a href="https://chromewebstore.google.com/detail/truthprism/mifmgcimcfidnbadhkcgcafcclbhlkkd" target="_blank" class="btn-primary" style="display:block; text-align:center; justify-content:center;">
-              Add to Chrome — Free
-            </a>
-          </div>
-
-          <div class="gs-box">
-            <h3 style="font-family:var(--font-serif); margin-bottom:6px;">🔵 Edge Extension</h3>
-            <p style="font-size:0.82rem; color:var(--gold); margin-bottom:16px;">Coming soon — submitted to Microsoft Store</p>
-            <p style="color:var(--text-muted); font-size:0.9rem; margin-bottom:20px;">A Microsoft Edge extension has been submitted and is pending approval. Edge users can use the web app in the meantime.</p>
-            <a href="https://app.truthprism.app" target="_blank" class="btn-secondary" style="display:block; text-align:center; justify-content:center;">
-              Use Web App
-            </a>
-          </div>
-
-        </div>
-
-        <!-- Chrome extension instructions -->
-        <div class="gs-box" style="margin-top:24px;">
-          <h3 style="font-family:var(--font-serif); margin-bottom:20px;">Setting Up the Chrome Extension</h3>
-          <ol class="gs-ol">
-            <li>Click <strong>Add to Chrome — Free</strong> above and confirm the installation in the Chrome dialog</li>
-            <li>Once installed, look for the <strong>puzzle piece icon 🧩</strong> in the top-right corner of your Chrome toolbar</li>
-            <li>Click the puzzle piece and find <strong>TruthPrism</strong> in the dropdown list</li>
-            <li>Click the <strong>pin icon 📌</strong> next to TruthPrism — the extension icon will now appear permanently in your toolbar</li>
-            <li>Click the <strong>TruthPrism icon</strong> in your toolbar to open the extension panel</li>
-            <li>Enter your <strong>access code</strong> (from your Prism Pack or free trial) and click <strong>Save</strong></li>
-          </ol>
-          <p style="margin-top:16px; font-size:0.85rem; color:var(--text-muted);">Your access code works across all TruthPrism platforms — the same code can be used in the web app, Chrome extension, and Edge extension. Checks are drawn from your single Prism Pack balance regardless of which platform you use.</p>
-        </div>
-
-        <!-- Chrome extension usage -->
-        <div class="gs-box" style="margin-top:16px;">
-          <h3 style="font-family:var(--font-serif); margin-bottom:16px;">Using the Extension</h3>
-          <ol class="gs-ol">
-            <li>Navigate to any news article in Chrome</li>
-            <li>Click the <strong>TruthPrism icon</strong> in your toolbar</li>
-            <li>Click <strong>Check This Page</strong> — TruthPrism reads the article automatically</li>
-            <li>Wait about 20–30 seconds for your Factual Score, Context Score, and full analysis</li>
-            <li>Use <strong>Click Here for Details</strong> to expand the in-depth report, or <strong>Save Summary</strong> to keep a copy</li>
-          </ol>
-          <p style="margin-top:16px; font-size:0.85rem; color:var(--text-muted);">
-            <strong>⚠️ Note:</strong> Paywalled articles (e.g. NYT, WSJ, Substack) may not load via the extension. For those, copy the article text and paste it into the <strong>Check Custom Text</strong> field in the web app.
-          </p>
+        <div style="margin-top:24px;" class="disclaimer-box">
+          <h3>A note on results</h3>
+          <p>Treat TruthPrism's analysis as one informed perspective, not a definitive verdict. The Factual Score is reliable and consistent. The Context Score findings may vary between runs — each analysis is valid, but different runs may surface different issues with the same article. Always verify important claims through independent sources.</p>
         </div>
       </div>
 
@@ -189,34 +129,23 @@
       <!-- iOS SHARE SHEET -->
       <div class="gs-section" style="margin-top:24px;">
         <h2 class="gs-section-title">Optional: iPhone Share Sheet</h2>
-        <p class="gs-intro">Set up TruthPrism in your iOS Share Sheet for one-tap fact-checking from any app. When reading an article, just tap <strong>Share → TruthPrism</strong> and the analysis starts automatically. Setup takes about 5 minutes.</p>
-        <p class="gs-intro" style="margin-top:12px;"><strong>⚠️ Note on paywalled sites:</strong> Articles behind paywalls or login walls (e.g. Substack, NYT, WSJ) may not load correctly when shared via URL. If TruthPrism can't retrieve the article, copy the article text and paste it into the <strong>Check Custom Text</strong> field instead.</p>
+        <p class="gs-intro">Set up TruthPrism in your iOS Share Sheet for one-tap fact-checking from any app. Setup takes about 5 minutes.</p>
+        <p class="gs-intro" style="margin-top:12px;"><strong>⚠️ Note:</strong> Some articles behind paywalls or login walls (e.g. Substack, NYT, WSJ) may not load correctly when shared via URL. If TruthPrism can't retrieve the article, copy the article text and paste it into the <strong>Check Custom Text</strong> field instead.</p>
 
         <div class="gs-box" style="margin-top:28px;">
           <h3 style="font-family:var(--font-serif); margin-bottom:20px;">Create the Shortcut</h3>
           <ol class="gs-ol">
-            <li>Open the <strong>Shortcuts</strong> app on your iPhone (built into iOS)</li>
+            <li>Open the <strong>Shortcuts</strong> app on your iPhone</li>
             <li>Tap <strong>"+"</strong> in the top right to create a new shortcut</li>
             <li>Tap the shortcut name at the top and rename it <strong>"TruthPrism"</strong></li>
             <li>Tap <strong>"Add Action"</strong>, search for <strong>"URL"</strong>, and select it</li>
             <li>In the URL field, type:<br/>
               <code style="background:var(--bg); padding:6px 10px; border-radius:6px; font-size:0.82rem; display:inline-block; margin-top:8px; word-break:break-all;">https://app.truthprism.app?url=</code>
             </li>
-            <li>After that URL, tap the <strong>variable icon</strong> and select <strong>"Shortcut Input"</strong> to append the shared article URL</li>
+            <li>After that URL, tap the <strong>variable icon</strong> and select <strong>"Shortcut Input"</strong></li>
             <li>Tap <strong>"+"</strong> to add another action, search for <strong>"Open URLs"</strong>, and select it</li>
-            <li>Tap the <strong>ⓘ button</strong> in the bottom toolbar → turn on <strong>"Show in Share Sheet"</strong> → confirm <strong>URLs</strong> is checked under input types</li>
+            <li>Tap the <strong>ⓘ button</strong> in the bottom toolbar → turn on <strong>"Show in Share Sheet"</strong> → confirm <strong>URLs</strong> is checked</li>
             <li>Tap <strong>Done</strong></li>
-          </ol>
-        </div>
-
-        <div class="gs-box" style="margin-top:16px;">
-          <h3 style="font-family:var(--font-serif); margin-bottom:16px;">Using It</h3>
-          <ol class="gs-ol">
-            <li>Open any article in Safari or another app</li>
-            <li>Tap the <strong>Share button</strong></li>
-            <li>Scroll and tap <strong>"TruthPrism"</strong></li>
-            <li>TruthPrism opens with the article URL ready</li>
-            <li>Tap <strong>Check This URL</strong> to run the analysis</li>
           </ol>
         </div>
       </div>
@@ -234,10 +163,10 @@
 
   <section class="cta-band">
     <div class="container cta-inner">
-      <h2>Ready to start?</h2>
-      <p>Your first 2 checks are free — no code needed.</p>
+      <h2>Ready to try it?</h2>
+      <p>Open the app with an existing access code, or use your own Anthropic API key.</p>
       <div class="cta-buttons">
-        <a href="https://app.truthprism.app" target="_blank" class="btn-primary">Launch TruthPrism</a>
+        <a href="https://app.truthprism.app" target="_blank" class="btn-primary">Open TruthPrism</a>
       </div>
     </div>
   </section>
@@ -248,7 +177,6 @@
       <nav class="footer-nav">
         <a href="how-it-works.html">How It Works</a>
         <a href="about.html">About</a>
-        <a href="https://app.truthprism.app/checkout">Pricing</a>
         <a href="get-started.html">Get Started</a>
         <a href="https://app.truthprism.app/privacy">Privacy Policy</a>
       </nav>
