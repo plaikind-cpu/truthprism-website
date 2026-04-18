@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI Tools for Smarter News Reading — TruthPrism &amp; News-Distiller</title>
+  <meta name="description" content="A suite of AI-powered apps to help you read, understand, and evaluate the news. TruthPrism fact-checks. News-Distiller summarizes. Both by Paul Laikind, PhD."/>
+  <link rel="icon" href="assets/icon128.png" type="image/png"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --tp-primary: #667eea;
+      --tp-end: #764ba2;
+      --nd-primary: #11998e;
+      --nd-end: #38ef7d;
+      --bg: #0f0f1a;
+      --bg2: #13131f;
+      --card: rgba(255,255,255,0.04);
+      --card-border: rgba(255,255,255,0.08);
+      --text: #e8eaf6;
+      --text-muted: rgba(160,170,200,0.65);
+      --radius: 16px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; min-height: 100vh; }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(15,15,26,0.92); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--card-border); padding: 0 24px;
+    }
+    .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .nav-brand { font-family: 'Sora', sans-serif; font-weight: 700; font-size: 1rem; color: var(--text); text-decoration: none; }
+    .nav-brand span { opacity: 0.5; }
+    .nav-links { display: flex; align-items: center; gap: 8px; list-style: none; }
+    .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.88rem; font-weight: 500; padding: 6px 12px; border-radius: 8px; transition: color 0.2s, background 0.2s; }
+    .nav-links a:hover { color: var(--text); background: var(--card); }
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+    .nav-hamburger span { display: block; width: 22px; height: 2px; background: var(--text); border-radius: 2px; }
+    @media (max-width: 700px) {
+      .nav-hamburger { display: flex; }
+      .nav-links { display: none; }
+      .nav-links.open { display: flex; flex-direction: column; align-items: flex-start; position: absolute; top: 64px; left: 0; right: 0; background: rgba(15,15,26,0.97); border-bottom: 1px solid var(--card-border); padding: 16px 24px; }
+    }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 80px 24px 64px;
+      text-align: center;
+      background:
+        radial-gradient(ellipse at 25% 50%, rgba(102,126,234,0.12) 0%, transparent 50%),
+        radial-gradient(ellipse at 75% 50%, rgba(17,153,142,0.12) 0%, transparent 50%);
+    }
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--text-muted); margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-family: 'Sora', sans-serif;
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      font-weight: 800; line-height: 1.15;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #fff 20%, #a8c0ff 60%, #38ef7d 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .hero-sub {
+      font-size: 1.1rem; color: var(--text-muted);
+      max-width: 600px; margin: 0 auto 48px; line-height: 1.8;
+    }
+    .hero-sub strong { color: var(--text); font-weight: 600; }
+
+    /* ── APP CARDS ── */
+    .apps-section { padding: 0 24px 80px; }
+    .apps-grid {
+      max-width: 1060px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 28px;
+    }
+    @media (max-width: 760px) { .apps-grid { grid-template-columns: 1fr; } }
+
+    .app-card {
+      border-radius: 20px; overflow: hidden;
+      border: 1px solid var(--card-border);
+      display: flex; flex-direction: column;
+      transition: transform 0.25s, box-shadow 0.25s;
+      background: var(--bg2);
+    }
+    .app-card:hover { transform: translateY(-4px); box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
+
+    .app-card-splash {
+      width: 100%; line-height: 0; display: block;
+      text-decoration: none; cursor: pointer;
+      position: relative; overflow: hidden;
+    }
+    .app-card-splash img { width: 100%; display: block; transition: transform 0.4s; }
+    .app-card:hover .app-card-splash img { transform: scale(1.02); }
+    .app-card-splash .splash-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, transparent 50%, rgba(15,15,26,0.6) 100%);
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .app-card:hover .splash-overlay { opacity: 1; }
+    .splash-launch {
+      position: absolute; bottom: 16px; right: 16px;
+      background: rgba(255,255,255,0.15); backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.2); border-radius: 8px;
+      color: #fff; font-size: 0.8rem; font-weight: 600;
+      padding: 6px 14px; opacity: 0; transition: opacity 0.3s;
+      text-decoration: none;
+    }
+    .app-card:hover .splash-launch { opacity: 1; }
+
+    .app-card-body { padding: 28px 28px 32px; flex: 1; display: flex; flex-direction: column; }
+
+    .app-badge {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase;
+      padding: 4px 12px; border-radius: 20px; margin-bottom: 14px; width: fit-content;
+    }
+    .badge-tp { background: rgba(102,126,234,0.12); border: 1px solid rgba(102,126,234,0.3); color: #a8b8ff; }
+    .badge-nd { background: rgba(17,153,142,0.12); border: 1px solid rgba(17,153,142,0.3); color: #38ef7d; }
+    .badge-dot { width: 6px; height: 6px; border-radius: 50%; }
+    .badge-dot-tp { background: #667eea; }
+    .badge-dot-nd { background: #38ef7d; }
+
+    .app-card-body h2 { font-family: 'Sora', sans-serif; font-size: 1.4rem; font-weight: 700; margin-bottom: 10px; }
+    .app-card-body p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.75; flex: 1; }
+
+    .app-features { margin: 18px 0; list-style: none; display: flex; flex-direction: column; gap: 7px; }
+    .app-features li { display: flex; align-items: flex-start; gap: 9px; font-size: 0.85rem; color: var(--text-muted); }
+    .app-features li::before { content: '✓'; font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+    .feat-tp li::before { color: #667eea; }
+    .feat-nd li::before { color: #38ef7d; }
+
+    .app-actions { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; }
+    .btn-tp {
+      display: inline-block; padding: 11px 22px;
+      background: linear-gradient(135deg, var(--tp-primary), var(--tp-end));
+      color: #fff; text-decoration: none; font-weight: 700; font-size: 0.88rem;
+      border-radius: 9px; transition: opacity 0.2s;
+    }
+    .btn-tp:hover { opacity: 0.88; }
+    .btn-nd {
+      display: inline-block; padding: 11px 22px;
+      background: linear-gradient(135deg, var(--nd-primary), var(--nd-end));
+      color: #fff; text-decoration: none; font-weight: 700; font-size: 0.88rem;
+      border-radius: 9px; transition: opacity 0.2s;
+    }
+    .btn-nd:hover { opacity: 0.88; }
+    .btn-outline {
+      display: inline-block; padding: 11px 20px;
+      background: transparent; border: 1px solid var(--card-border);
+      color: var(--text-muted); text-decoration: none; font-weight: 600; font-size: 0.88rem;
+      border-radius: 9px; transition: background 0.2s, color 0.2s;
+    }
+    .btn-outline:hover { background: var(--card); color: var(--text); }
+
+    /* ── SHARED FEATURES ── */
+    .shared-section { padding: 60px 24px 70px; background: var(--bg2); border-top: 1px solid var(--card-border); }
+    .shared-inner { max-width: 900px; margin: 0 auto; text-align: center; }
+    .shared-inner h2 { font-family: 'Sora', sans-serif; font-size: 1.5rem; font-weight: 700; margin-bottom: 10px; }
+    .shared-inner p { color: var(--text-muted); font-size: 0.92rem; max-width: 560px; margin: 0 auto 36px; line-height: 1.75; }
+    .shared-pills { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--card); border: 1px solid var(--card-border);
+      border-radius: 30px; padding: 8px 18px; font-size: 0.85rem; font-weight: 500;
+    }
+    .pill-icon { font-size: 1rem; }
+
+    /* ── ABOUT STRIP ── */
+    .about-strip { padding: 60px 24px 70px; }
+    .about-inner { max-width: 700px; margin: 0 auto; text-align: center; }
+    .about-inner h2 { font-family: 'Sora', sans-serif; font-size: 1.5rem; font-weight: 700; margin-bottom: 14px; }
+    .about-inner p { color: var(--text-muted); font-size: 0.92rem; line-height: 1.8; }
+    .about-inner p + p { margin-top: 12px; }
+
+    /* ── FOOTER ── */
+    footer { border-top: 1px solid var(--card-border); padding: 32px 24px; background: var(--bg2); }
+    .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; align-items: center; }
+    .footer-col-group { display: flex; gap: 32px; flex-wrap: wrap; }
+    .footer-col h4 { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 10px; }
+    .footer-col a { display: block; color: var(--text-muted); text-decoration: none; font-size: 0.83rem; margin-bottom: 6px; transition: color 0.2s; }
+    .footer-col a:hover { color: var(--text); }
+    .footer-bottom { max-width: 1100px; margin: 20px auto 0; border-top: 1px solid var(--card-border); padding-top: 16px; }
+    .footer-bottom p { color: var(--text-muted); font-size: 0.76rem; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a class="nav-brand" href="home.html">AI News Tools <span>by Paul Laikind, PhD</span></a>
+    <button class="nav-hamburger" onclick="this.nextElementSibling.classList.toggle('open')" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links">
+      <li><a href="index.html">TruthPrism</a></li>
+      <li><a href="nd-index.html">News-Distiller</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">AI-Powered Tools for News Readers</div>
+  <h1>Read News<br/>More Intelligently.</h1>
+  <p class="hero-sub">
+    Two AI-powered apps to help you cut through the noise —
+    <strong>distill</strong> what you read, and <strong>fact-check</strong> what matters.
+    Built on Claude AI. Works on any device.
+  </p>
+</section>
+
+<!-- APP CARDS -->
+<section class="apps-section">
+  <div class="apps-grid">
+
+    <!-- TruthPrism -->
+    <div class="app-card">
+      <a class="app-card-splash" href="index.html">
+        <img src="assets/TruthPrism_Splash.png" alt="TruthPrism — AI Fact Checker"/>
+        <div class="splash-overlay"></div>
+        <span class="splash-launch">Explore →</span>
+      </a>
+      <div class="app-card-body">
+        <div class="app-badge badge-tp"><span class="badge-dot badge-dot-tp"></span>Fact Checker</div>
+        <h2>TruthPrism</h2>
+        <p>Paste any news article URL or text and get a structured analysis of its factual accuracy and contextual completeness — with a plain-language explanation of every finding.</p>
+        <ul class="app-features feat-tp">
+          <li>Factual Score out of 10 — verifies key claims</li>
+          <li>Context Score — flags missing context &amp; framing</li>
+          <li>Full sourced report with every claim reviewed</li>
+          <li>Web app + iOS Share Sheet</li>
+        </ul>
+        <div class="app-actions">
+          <a href="https://app.truthprism.app" target="_blank" class="btn-tp">Open App</a>
+          <a href="index.html" class="btn-outline">Learn More</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- News-Distiller -->
+    <div class="app-card">
+      <a class="app-card-splash" href="nd-index.html">
+        <img src="assets/News-Distiller_Splash.png" alt="News-Distiller — AI News Summarizer"/>
+        <div class="splash-overlay"></div>
+        <span class="splash-launch">Explore →</span>
+      </a>
+      <div class="app-card-body">
+        <div class="app-badge badge-nd"><span class="badge-dot badge-dot-nd"></span>News Summarizer</div>
+        <h2>News-Distiller</h2>
+        <p>Paste any article and get a concise, structured summary in seconds — plus political lean analysis with a high bar for attribution. Read smarter without reading everything.</p>
+        <ul class="app-features feat-nd">
+          <li>Executive Summary — the key points, fast</li>
+          <li>Full Report — every detail when you want it</li>
+          <li>Political lean analysis with direct evidence required</li>
+          <li>Web app + Chrome extension + iOS Share Sheet</li>
+        </ul>
+        <div class="app-actions">
+          <a href="https://app.news-distiller.com" target="_blank" class="btn-nd">Open App</a>
+          <a href="nd-index.html" class="btn-outline">Learn More</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SHARED FEATURES -->
+<section class="shared-section">
+  <div class="shared-inner">
+    <h2>Both apps share the same foundation</h2>
+    <p>Powered by Claude AI. Works on any device. One Prism Pack access code covers both apps.</p>
+    <div class="shared-pills">
+      <div class="pill"><span class="pill-icon">🤖</span> Powered by Claude AI</div>
+      <div class="pill"><span class="pill-icon">🌐</span> Any browser, any device</div>
+      <div class="pill"><span class="pill-icon">📱</span> iOS Share Sheet</div>
+      <div class="pill"><span class="pill-icon">🔑</span> One access code, both apps</div>
+      <div class="pill"><span class="pill-icon">💾</span> Save reports as text files</div>
+      <div class="pill"><span class="pill-icon">⚡</span> Live streaming output</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about-strip">
+  <div class="about-inner">
+    <h2>Built by Paul Laikind, PhD</h2>
+    <p>These apps were created by an independent developer and retired biotech entrepreneur with a passion for media literacy — and the belief that good tools to evaluate information should be accessible to everyone.</p>
+    <p style="margin-top:16px;">
+      <a href="about.html" style="color:#667eea;text-decoration:none;font-weight:600;">Read more about TruthPrism →</a>
+    </p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-col-group">
+      <div class="footer-col">
+        <h4>TruthPrism</h4>
+        <a href="index.html">Home</a>
+        <a href="how-it-works.html">How It Works</a>
+        <a href="about.html">About</a>
+        <a href="get-started.html">Get Started</a>
+        <a href="https://app.truthprism.app" target="_blank">Open App</a>
+      </div>
+      <div class="footer-col">
+        <h4>News-Distiller</h4>
+        <a href="nd-index.html">Home</a>
+        <a href="nd-how-it-works.html">How It Works</a>
+        <a href="nd-get-started.html">Get Started</a>
+        <a href="https://app.news-distiller.com" target="_blank">Open App</a>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="https://app.truthprism.app/privacy" target="_blank">Privacy Policy</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Paul Laikind, PhD. AI analysis may contain errors — always verify important claims independently.</p>
+  </div>
+</footer>
+
+</body>
+</html>
