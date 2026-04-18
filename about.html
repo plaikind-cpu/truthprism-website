@@ -3,90 +3,165 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>About — TruthPrism</title>
-  <meta name="description" content="TruthPrism was built to help people navigate a world of information overload and spin."/>
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml"/>
+  <title>About TruthPrism</title>
+  <meta name="description" content="TruthPrism was built on a simple premise: everyone deserves access to a fast, unbiased second opinion on what they're reading."/>
+  <link rel="icon" href="assets/icon128.png" type="image/png"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="assets/style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --primary: #667eea;
+      --primary-end: #764ba2;
+      --nd-primary: #11998e;
+      --nd-primary-end: #38ef7d;
+      --bg: #0f0f1a;
+      --bg2: #13131f;
+      --card: rgba(255,255,255,0.04);
+      --card-border: rgba(255,255,255,0.08);
+      --text: #e8eaf6;
+      --text-muted: rgba(160,170,200,0.65);
+      --radius: 14px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+
+    nav { position: sticky; top: 0; z-index: 100; background: rgba(15,15,26,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--card-border); padding: 0 24px; }
+    .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text); font-family: 'Sora', sans-serif; font-weight: 700; font-size: 1.1rem; }
+    .nav-logo img { width: 32px; height: 32px; border-radius: 8px; }
+    .nav-links { display: flex; align-items: center; gap: 8px; list-style: none; }
+    .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.88rem; font-weight: 500; padding: 6px 12px; border-radius: 8px; transition: color 0.2s, background 0.2s; }
+    .nav-links a:hover { color: var(--text); background: var(--card); }
+    .nav-links a.active { color: var(--text); }
+    .nav-divider { width: 1px; height: 20px; background: var(--card-border); margin: 0 4px; }
+    .nav-nd-link { color: #38ef7d !important; border: 1px solid rgba(17,153,142,0.3) !important; }
+    .nav-nd-link:hover { background: rgba(17,153,142,0.08) !important; }
+    .nav-cta { background: linear-gradient(135deg, var(--primary), var(--primary-end)); color: #fff !important; padding: 7px 16px !important; border-radius: 8px !important; font-weight: 600 !important; }
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+    .nav-hamburger span { display: block; width: 22px; height: 2px; background: var(--text); border-radius: 2px; }
+    @media (max-width: 768px) {
+      .nav-hamburger { display: flex; }
+      .nav-links { display: none; }
+      .nav-links.open { display: flex; flex-direction: column; align-items: flex-start; position: absolute; top: 64px; left: 0; right: 0; background: rgba(15,15,26,0.97); border-bottom: 1px solid var(--card-border); padding: 16px 24px; }
+      .nav-divider { display: none; }
+    }
+
+    .page-hero { padding: 64px 24px 48px; text-align: center; background: radial-gradient(ellipse at 50% 0%, rgba(102,126,234,0.12) 0%, transparent 60%); }
+    .page-hero h1 { font-family: 'Sora', sans-serif; font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 800; margin-bottom: 14px; }
+    .page-hero p { color: var(--text-muted); font-size: 1.05rem; max-width: 560px; margin: 0 auto; font-style: italic; }
+
+    .content { max-width: 760px; margin: 0 auto; padding: 60px 24px 40px; }
+    .content h2 { font-family: 'Sora', sans-serif; font-size: 1.4rem; font-weight: 700; margin: 48px 0 16px; }
+    .content h2:first-child { margin-top: 0; }
+    .content p { color: var(--text-muted); font-size: 0.92rem; line-height: 1.8; margin-bottom: 16px; }
+    .content p strong { color: var(--text); }
+    .content p em { color: var(--text); font-style: normal; font-weight: 500; }
+
+    /* Companion card */
+    .companion-card {
+      margin: 48px 0;
+      background: rgba(17,153,142,0.06); border: 1px solid rgba(17,153,142,0.2);
+      border-radius: var(--radius); padding: 28px;
+      display: flex; gap: 20px; align-items: flex-start; flex-wrap: wrap;
+    }
+    .companion-card img { width: 60px; height: 60px; border-radius: 14px; flex-shrink: 0; }
+    .companion-card-text { flex: 1; min-width: 200px; }
+    .companion-card-text .eyebrow { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #38ef7d; margin-bottom: 6px; }
+    .companion-card-text h3 { font-family: 'Sora', sans-serif; font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; }
+    .companion-card-text p { color: var(--text-muted); font-size: 0.87rem; line-height: 1.65; margin-bottom: 14px; }
+    .companion-card-text a { display: inline-block; padding: 8px 18px; background: linear-gradient(135deg, #11998e, #38ef7d); color: #fff; text-decoration: none; font-weight: 700; font-size: 0.85rem; border-radius: 8px; }
+
+    .cta-section { text-align: center; padding: 48px 24px 80px; }
+    .cta-section h2 { font-family: 'Sora', sans-serif; font-size: 1.6rem; font-weight: 700; margin-bottom: 12px; }
+    .cta-section p { color: var(--text-muted); margin-bottom: 28px; }
+    .btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary { display: inline-block; padding: 13px 28px; background: linear-gradient(135deg, var(--primary), var(--primary-end)); color: #fff; text-decoration: none; font-weight: 700; font-size: 0.95rem; border-radius: 10px; transition: opacity 0.2s; }
+    .btn-primary:hover { opacity: 0.88; }
+    .btn-secondary { display: inline-block; padding: 13px 28px; background: var(--card); border: 1px solid var(--card-border); color: var(--text); text-decoration: none; font-weight: 600; font-size: 0.95rem; border-radius: 10px; transition: background 0.2s; }
+    .btn-secondary:hover { background: rgba(255,255,255,0.08); }
+
+    footer { border-top: 1px solid var(--card-border); padding: 28px 24px; background: var(--bg2); }
+    .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; align-items: center; }
+    .footer-inner a { color: var(--text-muted); text-decoration: none; font-size: 0.83rem; transition: color 0.2s; }
+    .footer-inner a:hover { color: var(--text); }
+    .footer-inner p { color: var(--text-muted); font-size: 0.83rem; }
+  </style>
 </head>
 <body>
 
-  <nav class="nav">
-    <a href="index.html" class="nav-logo">
-      <img src="assets/icon128.png" alt="TruthPrism" class="prism-nav"/>
-      <span>TruthPrism</span>
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html">
+      <img src="assets/icon128.png" alt="TruthPrism"/>
+      TruthPrism
     </a>
-    <div class="nav-links">
-      <a href="how-it-works.html">How It Works</a>
-      <a href="about.html" style="color:var(--text)">About</a>
-      <a href="https://app.truthprism.app/checkout">Pricing</a>
-      <a href="get-started.html" class="btn-nav">Get Started</a>
-    </div>
-    <button class="nav-burger" aria-label="Menu">&#9776;</button>
-  </nav>
+    <button class="nav-hamburger" onclick="this.nextElementSibling.classList.toggle('open')" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links">
+      <li><a href="how-it-works.html">How It Works</a></li>
+      <li><a href="about.html" class="active">About</a></li>
+      <li><a href="get-started.html">Get Started</a></li>
+      <li class="nav-divider"></li>
+      <li><a href="nd-index.html" class="nav-nd-link">● News-Distiller</a></li>
+      <li><a href="https://app.truthprism.app" target="_blank" class="nav-cta">Open App →</a></li>
+    </ul>
+  </div>
+</nav>
 
-  <div class="page-hero">
-    <div class="container">
-      <h1>About TruthPrism</h1>
-      <p>Built for a world where every headline competes for your attention — and not all of them deserve it.</p>
+<div class="page-hero">
+  <h1>About TruthPrism</h1>
+  <p>Built for a world where every headline competes for your attention — and not all of them deserve it.</p>
+</div>
+
+<div class="content">
+
+  <h2>Why TruthPrism?</h2>
+  <p>We live in an era of information overload. Every day, millions of articles compete for attention — and the incentives of modern media too often reward speed, outrage, and confirmation bias over accuracy and nuance.</p>
+  <p>TruthPrism was built on a simple premise: everyone deserves access to a fast, unbiased second opinion on what they're reading. Not a politically-motivated fact-checker with its own agenda — but an AI tool that applies consistent, transparent standards to every article it evaluates.</p>
+  <p>The name comes from the physics of light: a prism doesn't distort — it reveals. It separates what looks like a single beam into its true components. That's exactly what TruthPrism does with news.</p>
+
+  <h2>How It's Built</h2>
+  <p>TruthPrism is powered by Claude, Anthropic's state-of-the-art AI model, known for its exceptional reasoning, nuance, and commitment to honesty. Claude evaluates each article without a political agenda — applying the same standards to every source, every perspective.</p>
+  <p>TruthPrism is available as a web app on any device, and supports an iOS share sheet integration on iPhone — so fact-checking is always one tap away, wherever you're reading.</p>
+  <p>TruthPrism was created by <strong>Paul Laikind, PhD</strong> — an independent developer and retired biotech entrepreneur passionate about media literacy and the belief that good information — and the tools to evaluate it — should be accessible to everyone.</p>
+  <p><strong>A note on AI:</strong> TruthPrism is a tool to help you think — not to think for you. AI analysis is powerful but not infallible. We always encourage you to read critically, consult multiple sources, and form your own conclusions. TruthPrism gives you better information to make better judgments. The judgment is always yours.</p>
+
+  <!-- News-Distiller companion card -->
+  <div class="companion-card">
+    <img src="assets/nd-icon128.png" alt="News-Distiller" onerror="this.style.display='none'"/>
+    <div class="companion-card-text">
+      <div class="eyebrow">Also from Paul Laikind, PhD</div>
+      <h3>News-Distiller</h3>
+      <p>Looking for a concise summary of an article rather than a fact-check? News-Distiller is a companion app that distills any news article into a clear Executive Summary or full in-depth report — with political lean analysis. Available as a web app and Chrome extension at <strong style="color:var(--text);">app.news-distiller.com</strong>.</p>
+      <a href="nd-index.html">Explore News-Distiller →</a>
     </div>
   </div>
 
-  <section class="page-content">
-    <div class="container">
-      <div class="about-grid">
+</div>
 
-        <div>
-          <h2>Why TruthPrism?</h2>
-          <p>We live in an era of information overload. Every day, millions of articles compete for attention — and the incentives of modern media too often reward speed, outrage, and confirmation bias over accuracy and nuance.</p>
-          <p>TruthPrism was built on a simple premise: everyone deserves access to a fast, unbiased second opinion on what they're reading. Not a politically-motivated fact-checker with its own agenda — but an AI tool that applies consistent, transparent standards to every article it evaluates.</p>
-          <p>The name comes from the physics of light: a prism doesn't distort — it reveals. It separates what looks like a single beam into its true components. That's exactly what TruthPrism does with news.</p>
-        </div>
+<div class="cta-section">
+  <h2>Judge for yourself.</h2>
+  <p>TruthPrism is still running. Use an existing access code or your own Anthropic API key.</p>
+  <div class="btns">
+    <a href="https://app.truthprism.app" target="_blank" class="btn-primary">Open the App</a>
+    <a href="get-started.html" class="btn-secondary">Get Started Guide</a>
+  </div>
+</div>
 
-        <div>
-          <h2>How It's Built</h2>
-          <p>TruthPrism is powered by Claude, Anthropic's state-of-the-art AI model, known for its exceptional reasoning, nuance, and commitment to honesty. Claude evaluates each article without a political agenda — applying the same standards to every source, every perspective.</p>
-          <p>TruthPrism is available as a web app on any device, and supports an iOS share sheet integration on iPhone — so fact-checking is always one tap away, wherever you're reading.</p>
-          <p>TruthPrism was created by an independent developer passionate about media literacy and the belief that good information — and the tools to evaluate it — should be accessible to everyone.</p>
+<footer>
+  <div class="footer-inner">
+    <a href="index.html">TruthPrism</a>
+    <a href="how-it-works.html">How It Works</a>
+    <a href="about.html">About</a>
+    <a href="get-started.html">Get Started</a>
+    <a href="https://app.truthprism.app/checkout" target="_blank">Pricing</a>
+    <a href="nd-index.html" style="color:#38ef7d;">● News-Distiller</a>
+    <a href="https://app.truthprism.app/privacy" target="_blank">Privacy Policy</a>
+    <p>© 2026 TruthPrism. All rights reserved.</p>
+  </div>
+</footer>
 
-          <div style="margin-top:32px; padding:24px; background:var(--surface); border-radius:12px; border:1px solid var(--border);">
-            <p style="font-size:0.9rem; color:var(--text-muted); line-height:1.75;">
-              <strong style="color:var(--text)">A note on AI:</strong> TruthPrism is a tool to help you think — not to think for you. AI analysis is powerful but not infallible. We always encourage you to read critically, consult multiple sources, and form your own conclusions. TruthPrism gives you better information to make better judgments. The judgment is always yours.
-            </p>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <section class="cta-band">
-    <div class="container cta-inner">
-      <h2>Judge for yourself.</h2>
-      <p>TruthPrism is still running. Use an existing access code or your own Anthropic API key.</p>
-      <div class="cta-buttons">
-        <a href="https://app.truthprism.app" target="_blank" class="btn-primary">Open the App</a>
-        <a href="get-started.html" class="btn-secondary">Get Started Guide</a>
-      </div>
-    </div>
-  </section>
-
-  <footer class="footer">
-    <div class="container footer-inner">
-      <a href="index.html" class="footer-logo">TruthPrism</a>
-      <nav class="footer-nav">
-        <a href="how-it-works.html">How It Works</a>
-        <a href="about.html">About</a>
-        <a href="https://app.truthprism.app/checkout">Pricing</a>
-        <a href="get-started.html">Get Started</a>
-        <a href="https://app.truthprism.app/privacy">Privacy Policy</a>
-      </nav>
-      <p class="footer-copy">&copy; 2026 TruthPrism. All rights reserved.</p>
-    </div>
-  </footer>
-
-  <script src="assets/main.js"></script>
 </body>
 </html>

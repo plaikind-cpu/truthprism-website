@@ -4,189 +4,274 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Get Started — TruthPrism</title>
-  <meta name="description" content="How to access and use TruthPrism — existing access codes, API key option, iOS share sheet, and more."/>
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml"/>
+  <meta name="description" content="Get started with TruthPrism — web app, iOS share sheet, and access code setup."/>
+  <link rel="icon" href="assets/icon128.png" type="image/png"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="assets/style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --primary: #667eea;
+      --primary-end: #764ba2;
+      --nd-primary: #11998e;
+      --nd-primary-end: #38ef7d;
+      --bg: #0f0f1a;
+      --bg2: #13131f;
+      --card: rgba(255,255,255,0.04);
+      --card-border: rgba(255,255,255,0.08);
+      --text: #e8eaf6;
+      --text-muted: rgba(160,170,200,0.65);
+      --radius: 14px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+
+    nav { position: sticky; top: 0; z-index: 100; background: rgba(15,15,26,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--card-border); padding: 0 24px; }
+    .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text); font-family: 'Sora', sans-serif; font-weight: 700; font-size: 1.1rem; }
+    .nav-logo img { width: 32px; height: 32px; border-radius: 8px; }
+    .nav-links { display: flex; align-items: center; gap: 8px; list-style: none; }
+    .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.88rem; font-weight: 500; padding: 6px 12px; border-radius: 8px; transition: color 0.2s, background 0.2s; }
+    .nav-links a:hover { color: var(--text); background: var(--card); }
+    .nav-links a.active { color: var(--text); }
+    .nav-divider { width: 1px; height: 20px; background: var(--card-border); margin: 0 4px; }
+    .nav-nd-link { color: #38ef7d !important; border: 1px solid rgba(17,153,142,0.3) !important; }
+    .nav-nd-link:hover { background: rgba(17,153,142,0.08) !important; }
+    .nav-cta { background: linear-gradient(135deg, var(--primary), var(--primary-end)); color: #fff !important; padding: 7px 16px !important; border-radius: 8px !important; font-weight: 600 !important; }
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+    .nav-hamburger span { display: block; width: 22px; height: 2px; background: var(--text); border-radius: 2px; }
+    @media (max-width: 768px) {
+      .nav-hamburger { display: flex; }
+      .nav-links { display: none; }
+      .nav-links.open { display: flex; flex-direction: column; align-items: flex-start; position: absolute; top: 64px; left: 0; right: 0; background: rgba(15,15,26,0.97); border-bottom: 1px solid var(--card-border); padding: 16px 24px; }
+      .nav-divider { display: none; }
+    }
+
+    .page-hero { padding: 64px 24px 48px; text-align: center; background: radial-gradient(ellipse at 50% 0%, rgba(102,126,234,0.12) 0%, transparent 60%); }
+    .page-hero h1 { font-family: 'Sora', sans-serif; font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 800; margin-bottom: 14px; }
+    .page-hero p { color: var(--text-muted); font-size: 1rem; max-width: 540px; margin: 0 auto; }
+
+    .content { max-width: 800px; margin: 0 auto; padding: 60px 24px 80px; }
+
+    /* Pricing */
+    .pricing-intro { color: var(--text-muted); font-size: 0.9rem; line-height: 1.75; margin-bottom: 24px; }
+    .pricing-intro a { color: #667eea; }
+    .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin: 20px 0 32px; }
+    .price-card { background: var(--card); border: 1px solid var(--card-border); border-radius: 12px; padding: 18px 14px; text-align: center; }
+    .price-card .price { font-family: 'Sora', sans-serif; font-size: 1.3rem; font-weight: 700; color: #667eea; }
+    .price-card .tier { font-size: 0.78rem; font-weight: 600; color: var(--text); margin: 4px 0 2px; }
+    .price-card .checks { font-size: 0.76rem; color: var(--text-muted); }
+
+    /* Sections */
+    .gs-section { margin-bottom: 56px; }
+    .gs-header { display: flex; align-items: center; gap: 14px; padding-bottom: 18px; border-bottom: 1px solid var(--card-border); margin-bottom: 24px; }
+    .gs-icon { font-size: 1.6rem; }
+    .gs-header h2 { font-family: 'Sora', sans-serif; font-size: 1.25rem; font-weight: 700; }
+
+    /* Steps */
+    .steps { list-style: none; }
+    .steps li { display: flex; gap: 16px; align-items: flex-start; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+    .steps li:last-child { border-bottom: none; }
+    .step-dot { flex-shrink: 0; width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--primary-end)); color: #fff; font-weight: 700; font-size: 0.78rem; display: flex; align-items: center; justify-content: center; margin-top: 2px; }
+    .step-text h4 { font-weight: 600; font-size: 0.95rem; margin-bottom: 4px; }
+    .step-text p { color: var(--text-muted); font-size: 0.87rem; line-height: 1.65; }
+    .step-text a { color: #667eea; }
+    .step-text code { background: rgba(255,255,255,0.07); border: 1px solid var(--card-border); border-radius: 5px; padding: 2px 7px; font-size: 0.82rem; font-family: 'Courier New', monospace; color: #a8d8ea; word-break: break-all; }
+    .note-yellow { background: rgba(204,136,0,0.1); border: 1px solid rgba(204,136,0,0.25); color: #cc8800; border-radius: 8px; padding: 9px 13px; font-size: 0.82rem; margin-top: 10px; line-height: 1.6; }
+
+    .sub-heading { font-size: 1rem; font-weight: 600; margin: 24px 0 14px; }
+
+    /* CTA */
+    .cta-section { text-align: center; padding: 60px 24px 80px; background: var(--bg2); }
+    .cta-section h2 { font-family: 'Sora', sans-serif; font-size: 1.6rem; font-weight: 700; margin-bottom: 12px; }
+    .cta-section p { color: var(--text-muted); margin-bottom: 28px; }
+    .btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary { display: inline-block; padding: 13px 28px; background: linear-gradient(135deg, var(--primary), var(--primary-end)); color: #fff; text-decoration: none; font-weight: 700; font-size: 0.95rem; border-radius: 10px; transition: opacity 0.2s; }
+    .btn-primary:hover { opacity: 0.88; }
+
+    footer { border-top: 1px solid var(--card-border); padding: 28px 24px; background: var(--bg2); }
+    .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; align-items: center; }
+    .footer-inner a { color: var(--text-muted); text-decoration: none; font-size: 0.83rem; transition: color 0.2s; }
+    .footer-inner a:hover { color: var(--text); }
+    .footer-inner p { color: var(--text-muted); font-size: 0.83rem; }
+    .footer-disclaimer { max-width: 1100px; margin: 12px auto 0; color: var(--text-muted); font-size: 0.74rem; line-height: 1.6; padding: 0 24px; }
+  </style>
 </head>
 <body>
 
-  <nav class="nav">
-    <a href="index.html" class="nav-logo">
-      <img src="assets/icon128.png" alt="TruthPrism" class="prism-nav"/>
-      <span>TruthPrism</span>
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html">
+      <img src="assets/icon128.png" alt="TruthPrism"/>
+      TruthPrism
     </a>
-    <div class="nav-links">
-      <a href="how-it-works.html">How It Works</a>
-      <a href="about.html">About</a>
-      <a href="get-started.html" class="btn-nav">Get Started</a>
-    </div>
-    <button class="nav-burger" aria-label="Menu">&#9776;</button>
-  </nav>
+    <button class="nav-hamburger" onclick="this.nextElementSibling.classList.toggle('open')" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links">
+      <li><a href="how-it-works.html">How It Works</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="get-started.html" class="active">Get Started</a></li>
+      <li class="nav-divider"></li>
+      <li><a href="nd-index.html" class="nav-nd-link">● News-Distiller</a></li>
+      <li><a href="https://app.truthprism.app" target="_blank" class="nav-cta">Open App →</a></li>
+    </ul>
+  </div>
+</nav>
 
-  <div class="page-hero">
-    <div class="container">
-      <h1>Get Started</h1>
-      <p>TruthPrism is still running. Here's how to access and use it.</p>
+<div class="page-hero">
+  <h1>Get Started</h1>
+  <p>TruthPrism works on any device with a browser. Here's everything you need to know.</p>
+</div>
+
+<div class="content">
+
+  <!-- ACCESS & PRICING -->
+  <div class="gs-section">
+    <div class="gs-header">
+      <div class="gs-icon">🔑</div>
+      <h2>Access &amp; Pricing</h2>
+    </div>
+    <p class="pricing-intro">Getting started is free and takes 30 seconds. Enter your email address in the app and a <strong>free trial access code</strong> will be sent to you, giving you <strong>2 free fact checks</strong> — no credit card required. Your email is used only to send your trial code and is never shared with third parties (<a href="https://app.truthprism.app/privacy" target="_blank">Privacy Policy</a>).</p>
+    <p class="pricing-intro">After your free checks are used, continued access requires a one-time purchase. Codes never expire — use your checks at your own pace. <a href="https://app.truthprism.app/checkout" target="_blank">Purchase a Prism Pack →</a></p>
+    <div class="pricing-grid">
+      <div class="price-card"><div class="price">$4.99</div><div class="tier">Starter</div><div class="checks">25 checks</div></div>
+      <div class="price-card"><div class="price">$8.99</div><div class="tier">Standard</div><div class="checks">50 checks</div></div>
+      <div class="price-card"><div class="price">$14.99</div><div class="tier">Plus</div><div class="checks">100 checks</div></div>
+      <div class="price-card"><div class="price">$29.99</div><div class="tier">Pro</div><div class="checks">200 checks</div></div>
+    </div>
+    <p class="pricing-intro" style="margin-bottom:0;">💡 <strong style="color:var(--text);">Prism Pack codes also work in News-Distiller</strong> — one purchase covers both apps.</p>
+  </div>
+
+  <!-- WEB APP -->
+  <div class="gs-section">
+    <div class="gs-header">
+      <div class="gs-icon">🌐</div>
+      <h2>Using the Web App</h2>
+    </div>
+    <ul class="steps">
+      <li>
+        <div class="step-dot">1</div>
+        <div class="step-text">
+          <h4>Open TruthPrism</h4>
+          <p>Go to <a href="https://app.truthprism.app" target="_blank">app.truthprism.app</a> in your browser, or tap the TruthPrism icon on your home screen if you've added it.</p>
+        </div>
+      </li>
+      <li>
+        <div class="step-dot">2</div>
+        <div class="step-text">
+          <h4>Paste an article URL or text</h4>
+          <p>Copy the URL of any news article and paste it into the URL field, then tap <strong>Check This URL</strong>. Alternatively, copy and paste article text directly into the text field and tap <strong>Check This Text</strong>. For paywalled articles, pasting the text directly always works.</p>
+          <div class="note-yellow">⚠️ Paywalled articles (NYT, WSJ, Washington Post, etc.) and sites requiring login cannot be retrieved by URL. Paste the article text directly instead.</div>
+        </div>
+      </li>
+      <li>
+        <div class="step-dot">3</div>
+        <div class="step-text">
+          <h4>Read your analysis</h4>
+          <p>TruthPrism returns a <strong>Factual Score</strong> and <strong>Context Score</strong> (each out of 10), along with a plain-language summary of its findings. Tap <strong>Click Here for Details</strong> to view a full in-depth report. Both can be saved for future reference. Analysis typically takes 10–20 seconds.</p>
+        </div>
+      </li>
+      <li>
+        <div class="step-dot">4</div>
+        <div class="step-text">
+          <h4>After your 2 free checks</h4>
+          <p>Once your free checks are used, you'll be prompted to enter a Prism Pack. Visit the <a href="https://app.truthprism.app/checkout" target="_blank">pricing page</a> to purchase. Enter your code in the app and tap <strong>Save Code</strong> — it's remembered on your device.</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- HOME SCREEN -->
+  <div class="gs-section">
+    <div class="gs-header">
+      <div class="gs-icon">📲</div>
+      <h2>Add to Your Home Screen</h2>
+    </div>
+    <ul class="steps">
+      <li>
+        <div class="step-dot" style="font-size:0.7rem;">iOS</div>
+        <div class="step-text">
+          <h4>📱 iPhone &amp; iPad</h4>
+          <p>Open <strong>Safari</strong> → go to <strong>app.truthprism.app</strong> → tap the <strong>Share button</strong> (box with arrow pointing up) → tap <strong>"Add to Home Screen"</strong> → tap <strong>Add</strong>. TruthPrism now appears on your home screen. Must use Safari.</p>
+        </div>
+      </li>
+      <li>
+        <div class="step-dot" style="font-size:0.65rem;">Mac</div>
+        <div class="step-text">
+          <h4>💻 Desktop (Chrome)</h4>
+          <p>Open <strong>Chrome</strong> → go to <strong>app.truthprism.app</strong> → click the <strong>install icon</strong> in the address bar (screen with down arrow) → click <strong>Install</strong>. TruthPrism opens as its own window and appears in your applications.</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- IOS SHARE SHEET -->
+  <div class="gs-section">
+    <div class="gs-header">
+      <div class="gs-icon">📱</div>
+      <h2>Optional: iPhone Share Sheet</h2>
+    </div>
+    <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:20px;">Set up TruthPrism in your iOS Share Sheet for one-tap fact-checking from any app. Setup takes about 5 minutes.</p>
+    <div class="note-yellow" style="margin-bottom:20px;">⚠️ Some articles behind paywalls may not be accessible via the share sheet — the URL will open in TruthPrism but the article content may not be retrievable. Copy and paste the article text directly as an alternative.</div>
+
+    <h3 class="sub-heading">Create the Shortcut</h3>
+    <ul class="steps">
+      <li><div class="step-dot">1</div><div class="step-text"><h4>Open the Shortcuts app</h4><p>Open the <strong>Shortcuts</strong> app on your iPhone (built into iOS) and tap <strong>"+"</strong> in the top right to create a new shortcut.</p></div></li>
+      <li><div class="step-dot">2</div><div class="step-text"><h4>Name it "TruthPrism"</h4><p>Tap the shortcut name at the top and rename it <strong>"TruthPrism"</strong>.</p></div></li>
+      <li><div class="step-dot">3</div><div class="step-text"><h4>Add a URL action</h4><p>Tap <strong>"Add Action"</strong>, search for <strong>"URL"</strong>, and select it. In the URL field, type: <code>https://app.truthprism.app?url=</code></p></div></li>
+      <li><div class="step-dot">4</div><div class="step-text"><h4>Append the shared URL</h4><p>After the URL you typed, tap the <strong>variable icon</strong> and select <strong>"Shortcut Input"</strong> to append the shared article URL.</p></div></li>
+      <li><div class="step-dot">5</div><div class="step-text"><h4>Add Open URLs action</h4><p>Tap <strong>"+"</strong> to add another action, search for <strong>"Open URLs"</strong>, and select it.</p></div></li>
+      <li><div class="step-dot">6</div><div class="step-text"><h4>Enable Share Sheet</h4><p>Tap the <strong>ⓘ button</strong> in the bottom toolbar → turn on <strong>"Show in Share Sheet"</strong> → confirm <strong>URLs</strong> is checked under input types → tap <strong>Done</strong>.</p></div></li>
+    </ul>
+
+    <h3 class="sub-heading">Using It</h3>
+    <ul class="steps">
+      <li><div class="step-dot">1</div><div class="step-text"><h4>Open any article in Safari or another app</h4><p>Tap the <strong>Share button</strong>, scroll and tap <strong>"TruthPrism"</strong>. TruthPrism opens with the article URL and the analysis starts automatically.</p></div></li>
+    </ul>
+
+    <div style="background:rgba(102,126,234,0.08);border:1px solid rgba(102,126,234,0.2);border-radius:10px;padding:16px 18px;margin-top:20px;">
+      <p style="font-size:0.85rem;color:var(--text-muted);line-height:1.7;margin:0;">
+        <strong style="color:var(--text);">Also try News-Distiller</strong> — a companion app for news summaries rather than fact-checking. It has its own iOS Shortcut that works the same way.
+        <a href="nd-get-started.html#ios" style="color:#38ef7d;font-weight:600;">Set up News-Distiller shortcut →</a>
+      </p>
     </div>
   </div>
 
-  <section class="page-content">
-    <div class="container">
-
-      <!-- STATUS NOTE -->
-      <div class="gs-section">
-        <div class="disclaimer-box" style="border-color:rgba(255,211,102,0.3);">
-          <h3 style="color:var(--gold);">Current Status</h3>
-          <p>TruthPrism has been stepped back from wider public distribution while consistency issues with the Context Score are being worked on. The app remains fully functional — existing users can continue using it, and anyone can access it using their own Anthropic API key. A relaunch is planned when the technology is ready.</p>
-        </div>
-      </div>
-
-      <!-- ACCESS OPTIONS -->
-      <div class="gs-section">
-        <h2 class="gs-section-title">Access Options</h2>
-
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:16px;" class="two-col-grid">
-
-          <div class="gs-box">
-            <h3 style="font-family:var(--font-serif); margin-bottom:12px;">🔑 Existing Access Code</h3>
-            <p style="color:var(--text-muted); font-size:0.95rem; line-height:1.75;">If you received a personal access code, it still works. Enter it in the Authentication section of the app and tap <strong>Save Code</strong>.</p>
-          </div>
-
-          <div class="gs-box">
-            <h3 style="font-family:var(--font-serif); margin-bottom:12px;">🔧 Your Own API Key</h3>
-            <p style="color:var(--text-muted); font-size:0.95rem; line-height:1.75;">Anyone can use TruthPrism with their own Anthropic API key — unlimited use at roughly $0.01–0.05 per article check. Instructions are available at <a href="https://app.truthprism.app/help" target="_blank" style="color:var(--accent-c)">app.truthprism.app/help</a>.</p>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- USING THE APP -->
-      <div class="gs-section">
-        <h2 class="gs-section-title">Using the Web App</h2>
-        <p class="gs-intro">TruthPrism works in any modern browser on any device — desktop, laptop, tablet, or phone.</p>
-
-        <div class="steps-full" style="margin-top:32px;">
-          <div class="step-full">
-            <div class="step-full-num">1</div>
-            <div class="step-full-body">
-              <h3>Open TruthPrism</h3>
-              <p>Go to <a href="https://app.truthprism.app" target="_blank" style="color:var(--accent-c)">app.truthprism.app</a> in your browser, or tap the TruthPrism icon on your home screen if you've added it.</p>
-            </div>
-          </div>
-          <div class="step-full">
-            <div class="step-full-num">2</div>
-            <div class="step-full-body">
-              <h3>Paste an article URL or text</h3>
-              <p>Copy the URL of any news article and paste it into the URL field, then tap <strong>Check This URL</strong>. Alternatively, copy and paste article text directly into the text field and tap <strong>Check This Text</strong>.</p>
-              <p style="margin-top:10px; font-size:0.88rem; color:var(--text-muted);"><strong>⚠️ Paywalled or login-required sites</strong> (e.g. Substack, NYT, WSJ) may not load via URL. For those, copy the article text and paste it into the <strong>Check Custom Text</strong> field — this always works.</p>
-            </div>
-          </div>
-          <div class="step-full">
-            <div class="step-full-num">3</div>
-            <div class="step-full-body">
-              <h3>Read your analysis</h3>
-              <p>TruthPrism returns a <strong>Factual Score</strong> and <strong>Context Score</strong> (each out of 10), along with a plain-language summary. Tap <strong>Click Here for Details</strong> for the full in-depth report. Both can be saved. Analysis typically takes 20–30 seconds.</p>
-            </div>
-          </div>
-        </div>
-
-        <div style="margin-top:24px;" class="disclaimer-box">
-          <h3>A note on results</h3>
-          <p>Treat TruthPrism's analysis as one informed perspective, not a definitive verdict. The Factual Score is reliable and consistent. The Context Score findings may vary between runs — each analysis is valid, but different runs may surface different issues with the same article. Always verify important claims through independent sources.</p>
-        </div>
-      </div>
-
-      <!-- ADD TO HOME SCREEN -->
-      <div class="gs-section">
-        <h2 class="gs-section-title">Add to Your Home Screen</h2>
-        <p class="gs-intro">For the fastest access, add TruthPrism to your home screen so it opens like a native app.</p>
-
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:28px;" class="two-col-grid">
-          <div class="gs-box">
-            <h3 style="font-family:var(--font-serif); margin-bottom:12px;">📱 iPhone &amp; iPad</h3>
-            <ol class="gs-ol">
-              <li>Open <strong>Safari</strong> and go to <strong>app.truthprism.app</strong></li>
-              <li>Tap the <strong>Share button</strong> (box with arrow pointing up)</li>
-              <li>Scroll down and tap <strong>"Add to Home Screen"</strong></li>
-              <li>Tap <strong>Add</strong> — TruthPrism now appears on your home screen</li>
-            </ol>
-          </div>
-          <div class="gs-box">
-            <h3 style="font-family:var(--font-serif); margin-bottom:12px;">💻 Desktop (Chrome)</h3>
-            <ol class="gs-ol">
-              <li>Open <strong>Chrome</strong> and go to <strong>app.truthprism.app</strong></li>
-              <li>Click the <strong>install icon</strong> in the address bar (screen with down arrow)</li>
-              <li>Click <strong>Install</strong> — TruthPrism opens as its own window</li>
-              <li>Find it in your applications or taskbar going forward</li>
-            </ol>
-          </div>
-        </div>
-      </div>
-
-      <!-- iOS SHARE SHEET -->
-      <div class="gs-section" style="margin-top:24px;">
-        <h2 class="gs-section-title">Optional: iPhone Share Sheet</h2>
-        <p class="gs-intro">Set up TruthPrism in your iOS Share Sheet for one-tap fact-checking from any app. Setup takes about 5 minutes.</p>
-        <p class="gs-intro" style="margin-top:12px;"><strong>⚠️ Note:</strong> Some articles behind paywalls or login walls (e.g. Substack, NYT, WSJ) may not load correctly when shared via URL. If TruthPrism can't retrieve the article, copy the article text and paste it into the <strong>Check Custom Text</strong> field instead.</p>
-
-        <div class="gs-box" style="margin-top:28px;">
-          <h3 style="font-family:var(--font-serif); margin-bottom:20px;">Create the Shortcut</h3>
-          <ol class="gs-ol">
-            <li>Open the <strong>Shortcuts</strong> app on your iPhone</li>
-            <li>Tap <strong>"+"</strong> in the top right to create a new shortcut</li>
-            <li>Tap the shortcut name at the top and rename it <strong>"TruthPrism"</strong></li>
-            <li>Tap <strong>"Add Action"</strong>, search for <strong>"URL"</strong>, and select it</li>
-            <li>In the URL field, type:<br/>
-              <code style="background:var(--bg); padding:6px 10px; border-radius:6px; font-size:0.82rem; display:inline-block; margin-top:8px; word-break:break-all;">https://app.truthprism.app?url=</code>
-            </li>
-            <li>After that URL, tap the <strong>variable icon</strong> and select <strong>"Shortcut Input"</strong></li>
-            <li>Tap <strong>"+"</strong> to add another action, search for <strong>"Open URLs"</strong>, and select it</li>
-            <li>Tap the <strong>ⓘ button</strong> in the bottom toolbar → turn on <strong>"Show in Share Sheet"</strong> → confirm <strong>URLs</strong> is checked</li>
-            <li>Tap <strong>Done</strong></li>
-          </ol>
-        </div>
-      </div>
-
-      <!-- DISCLAIMER -->
-      <div class="gs-section">
-        <div class="disclaimer-box">
-          <h3>Important Note on AI Analysis</h3>
-          <p>TruthPrism is an AI-powered tool designed to assist with fact-checking and media analysis. AI analysis may contain errors or omissions, and should be used as a starting point for further research — not as a definitive determination of truth. Always verify important claims through multiple independent sources before drawing conclusions or sharing information.</p>
-        </div>
-      </div>
-
+  <!-- AI DISCLAIMER -->
+  <div class="gs-section" style="margin-bottom:0;">
+    <div class="gs-header">
+      <div class="gs-icon">⚠️</div>
+      <h2>Important Note on AI Analysis</h2>
     </div>
-  </section>
+    <p style="color:var(--text-muted);font-size:0.9rem;line-height:1.75;">TruthPrism is an AI-powered tool designed to assist with fact-checking and media analysis. AI analysis may contain errors or omissions, and should be used as a starting point for further research — not as a definitive determination of truth. Always verify important claims through multiple independent sources before drawing conclusions or sharing information.</p>
+  </div>
 
-  <section class="cta-band">
-    <div class="container cta-inner">
-      <h2>Ready to try it?</h2>
-      <p>Open the app with an existing access code, or use your own Anthropic API key.</p>
-      <div class="cta-buttons">
-        <a href="https://app.truthprism.app" target="_blank" class="btn-primary">Open TruthPrism</a>
-      </div>
-    </div>
-  </section>
+</div>
 
-  <footer class="footer">
-    <div class="container footer-inner">
-      <a href="index.html" class="footer-logo">TruthPrism</a>
-      <nav class="footer-nav">
-        <a href="how-it-works.html">How It Works</a>
-        <a href="about.html">About</a>
-        <a href="get-started.html">Get Started</a>
-        <a href="https://app.truthprism.app/privacy">Privacy Policy</a>
-      </nav>
-      <p class="footer-copy">&copy; 2026 TruthPrism. All rights reserved.</p>
-    </div>
-    <div class="container">
-      <p class="footer-disclaimer">TruthPrism is an AI-powered tool designed to assist with fact-checking and media analysis. AI analysis may contain errors or omissions. Results should be used as a starting point for further research, not as a definitive determination of truth. Always verify important claims through multiple independent sources.</p>
-    </div>
-  </footer>
+<div class="cta-section">
+  <h2>Ready to start?</h2>
+  <p>Your first 2 checks are free — no code needed.</p>
+  <div class="btns">
+    <a href="https://app.truthprism.app" target="_blank" class="btn-primary">Launch TruthPrism</a>
+  </div>
+</div>
 
-  <script src="assets/main.js"></script>
+<footer>
+  <div class="footer-inner">
+    <a href="index.html">TruthPrism</a>
+    <a href="how-it-works.html">How It Works</a>
+    <a href="about.html">About</a>
+    <a href="get-started.html">Get Started</a>
+    <a href="https://app.truthprism.app/checkout" target="_blank">Pricing</a>
+    <a href="nd-index.html" style="color:#38ef7d;">● News-Distiller</a>
+    <a href="https://app.truthprism.app/privacy" target="_blank">Privacy Policy</a>
+    <p>© 2026 TruthPrism. All rights reserved.</p>
+  </div>
+  <div class="footer-disclaimer">
+    TruthPrism is an AI-powered tool designed to assist with fact-checking and media analysis. AI analysis may contain errors or omissions. Results should be used as a starting point for further research, not as a definitive determination of truth. Always verify important claims through multiple independent sources.
+  </div>
+</footer>
+
 </body>
 </html>
