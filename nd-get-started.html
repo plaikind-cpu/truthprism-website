@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Get Started — News-Distiller</title>
+  <meta name="description" content="Set up News-Distiller on any device — web app, Chrome extension, or iPhone share sheet."/>
+  <link rel="icon" href="assets/nd-icon128.png" type="image/png"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --nd-primary: #11998e;
+      --nd-primary-end: #38ef7d;
+      --bg: #0f0f1a;
+      --bg2: #13131f;
+      --card: rgba(255,255,255,0.04);
+      --card-border: rgba(255,255,255,0.08);
+      --text: #e8eaf6;
+      --text-muted: rgba(160,170,200,0.65);
+      --radius: 14px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+
+    /* NAV */
+    nav { position: sticky; top: 0; z-index: 100; background: rgba(15,15,26,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--card-border); padding: 0 24px; }
+    .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text); font-family: 'Sora', sans-serif; font-weight: 700; font-size: 1.1rem; }
+    .nav-logo img { width: 32px; height: 32px; border-radius: 8px; }
+    .nav-links { display: flex; align-items: center; gap: 8px; list-style: none; }
+    .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.88rem; font-weight: 500; padding: 6px 12px; border-radius: 8px; transition: color 0.2s, background 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--text); background: var(--card); }
+    .nav-divider { width: 1px; height: 20px; background: var(--card-border); margin: 0 4px; }
+    .nav-suite-label { font-size: 0.72rem; color: var(--text-muted); letter-spacing: 0.08em; text-transform: uppercase; padding: 0 8px; }
+    .nav-cta { background: linear-gradient(135deg, var(--nd-primary), var(--nd-primary-end)); color: #fff !important; padding: 7px 16px !important; border-radius: 8px !important; font-weight: 600 !important; }
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+    .nav-hamburger span { display: block; width: 22px; height: 2px; background: var(--text); border-radius: 2px; }
+    @media (max-width: 768px) {
+      .nav-hamburger { display: flex; }
+      .nav-links { display: none; }
+      .nav-links.open { display: flex; flex-direction: column; align-items: flex-start; position: absolute; top: 64px; left: 0; right: 0; background: rgba(15,15,26,0.97); border-bottom: 1px solid var(--card-border); padding: 16px 24px; }
+      .nav-divider, .nav-suite-label { display: none; }
+    }
+
+    .page-hero { padding: 64px 24px 48px; text-align: center; background: radial-gradient(ellipse at 50% 0%, rgba(17,153,142,0.12) 0%, transparent 60%); }
+    .page-hero h1 { font-family: 'Sora', sans-serif; font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 800; margin-bottom: 14px; }
+    .page-hero p { color: var(--text-muted); font-size: 1rem; max-width: 560px; margin: 0 auto; }
+
+    .content { max-width: 800px; margin: 0 auto; padding: 60px 24px 80px; }
+
+    /* Section blocks */
+    .gs-section { margin-bottom: 60px; }
+    .gs-section-anchor { display: block; margin-top: -80px; padding-top: 80px; }
+    .gs-header {
+      display: flex; align-items: center; gap: 16px;
+      padding-bottom: 18px; border-bottom: 1px solid var(--card-border); margin-bottom: 28px;
+    }
+    .gs-header .gs-icon {
+      width: 46px; height: 46px; border-radius: 12px; font-size: 1.5rem;
+      background: rgba(17,153,142,0.12); display: flex; align-items: center; justify-content: center;
+    }
+    .gs-header h2 { font-family: 'Sora', sans-serif; font-size: 1.3rem; font-weight: 700; }
+    .gs-header .gs-badge {
+      font-size: 0.7rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+      background: rgba(17,153,142,0.15); border: 1px solid rgba(17,153,142,0.3); color: #38ef7d;
+      padding: 2px 8px; border-radius: 20px;
+    }
+
+    /* Steps */
+    .steps { list-style: none; }
+    .steps li { display: flex; gap: 16px; align-items: flex-start; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+    .steps li:last-child { border-bottom: none; }
+    .step-dot { flex-shrink: 0; width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg, var(--nd-primary), var(--nd-primary-end)); color: #fff; font-weight: 700; font-size: 0.78rem; display: flex; align-items: center; justify-content: center; margin-top: 2px; }
+    .step-text h4 { font-weight: 600; font-size: 0.95rem; margin-bottom: 4px; }
+    .step-text p { color: var(--text-muted); font-size: 0.87rem; line-height: 1.65; }
+    .step-text a { color: #38ef7d; }
+    .step-text code { background: rgba(255,255,255,0.07); border: 1px solid var(--card-border); border-radius: 5px; padding: 2px 7px; font-size: 0.82rem; font-family: 'Courier New', monospace; color: #a8d8ea; word-break: break-all; }
+
+    /* Note boxes */
+    .note-yellow { background: rgba(204,136,0,0.1); border: 1px solid rgba(204,136,0,0.25); color: #cc8800; border-radius: 8px; padding: 9px 13px; font-size: 0.82rem; margin-top: 10px; line-height: 1.6; }
+    .note-teal { background: rgba(17,153,142,0.08); border: 1px solid rgba(17,153,142,0.2); color: #38ef7d; border-radius: 8px; padding: 9px 13px; font-size: 0.82rem; margin-top: 10px; line-height: 1.6; }
+
+    /* CTA */
+    .cta-section { text-align: center; padding: 60px 24px 80px; background: var(--bg2); }
+    .cta-section h2 { font-family: 'Sora', sans-serif; font-size: 1.6rem; font-weight: 700; margin-bottom: 12px; }
+    .cta-section p { color: var(--text-muted); margin-bottom: 28px; }
+    .btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary { display: inline-block; padding: 13px 28px; background: linear-gradient(135deg, var(--nd-primary), var(--nd-primary-end)); color: #fff; text-decoration: none; font-weight: 700; font-size: 0.95rem; border-radius: 10px; transition: opacity 0.2s; }
+    .btn-primary:hover { opacity: 0.88; }
+    .btn-secondary { display: inline-block; padding: 13px 28px; background: var(--card); border: 1px solid var(--card-border); color: var(--text); text-decoration: none; font-weight: 600; font-size: 0.95rem; border-radius: 10px; transition: background 0.2s; }
+    .btn-secondary:hover { background: rgba(255,255,255,0.08); }
+
+    footer { border-top: 1px solid var(--card-border); padding: 28px 24px; background: var(--bg2); }
+    .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; align-items: center; }
+    .footer-inner a { color: var(--text-muted); text-decoration: none; font-size: 0.83rem; transition: color 0.2s; }
+    .footer-inner a:hover { color: var(--text); }
+    .footer-inner p { color: var(--text-muted); font-size: 0.83rem; }
+    .footer-disclaimer { max-width: 1100px; margin: 12px auto 0; color: var(--text-muted); font-size: 0.74rem; line-height: 1.6; padding: 0 24px; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="nd-index.html">
+      <img src="assets/nd-icon128.png" alt="News-Distiller"/>
+      News-Distiller
+    </a>
+    <button class="nav-hamburger" onclick="this.nextElementSibling.classList.toggle('open')" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links">
+      <li><a href="nd-how-it-works.html">How It Works</a></li>
+      <li><a href="nd-get-started.html" class="active">Get Started</a></li>
+      <li class="nav-divider"></li>
+      <li><span class="nav-suite-label">Also:</span></li>
+      <li><a href="index.html">TruthPrism</a></li>
+      <li><a href="https://app.news-distiller.com" target="_blank" class="nav-cta">Open App →</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <h1>Get Started with News-Distiller</h1>
+  <p>Use News-Distiller on any device — browser, Chrome extension, or iPhone Share menu. Setup takes about 2 minutes.</p>
+</div>
+
+<div class="content">
+
+  <!-- ── WEB APP ── -->
+  <span class="gs-section-anchor" id="webapp"></span>
+  <div class="gs-section">
+    <div class="gs-header">
+      <div class="gs-icon">🌐</div>
+      <h2>Web App</h2>
+      <span class="gs-badge">Any Browser</span>
+    </div>
+    <ul class="steps">
+      <li>
+        <div class="step-dot">1</div>
+        <div class="step-text">
+          <h4>Open News-Distiller</h4>
+          <p>Go to <a href="https://app.news-distiller.com" target="_blank">app.news-distiller.com</a> in any browser on any device. No installation required.</p>
+        </div>
+      </li>
+      <li>
+        <div class="step-dot">2</div>
+        <div class="step-text">
+          <h4>Enter your access code</h4>
+          <p>News-Distiller uses the same access codes as TruthPrism. Enter your existing Prism Pack code and tap <strong>Save Code</strong> — it's remembered on your device. No code yet? <a href="https://app.truthprism.app/checkout" target="_blank">Get a Prism Pack →</a></p>
+          <div class="note-teal">💡 TruthPrism Prism Pack codes also work in News-Distiller — one purchase covers both apps.</div>
+        </div>
+      </li>
+      <li>
+        <div class="step-dot">3</div>
+        <div class="step-text">
+          <h4>Paste an article URL or text</h4>
+          <p>Copy the URL of any news article and paste it into the URL field, then tap <strong>Distill</strong>. Or paste the article text directly into the text field. The summary streams in real time as it's generated.</p>
+          <div class="note-yellow">⚠️ Paywalled articles (NYT, WSJ, Washington Post, etc.) cannot be retrieved by URL. Copy and paste the article text directly instead — this always works.</div>
+        </div>
+      </li>
+      <li>
+        <div class="step-dot">4</div>
+        <div class="step-text">
+          <h4>Read your summary</h4>
+          <p>News-Distiller returns an <strong>Executive Summary</strong> for a quick read, and a <strong>Full Report</strong> with the complete in-depth breakdown. Both can be saved as text files. The political lean indicator is shown with a high bar — Center is the default unless the text provides clear evidence of lean.</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- ── ADD TO HOME SCREEN ── -->
+  <div class="gs-section">
+    <div class="gs-header">
+      <div class="gs-icon">📲</div>
+      <h2>Add to Your Home Screen</h2>
+    </div>
+    <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:20px;">For fastest access, add News-Distiller to your home screen so it opens like a native app.</p>
+    <ul class="steps">
+      <li>
+        <div class="step-dot" style="font-size:0.7rem;">iOS</div>
+        <div class="step-text">
+          <h4>iPhone &amp; iPad (Safari)</h4>
+          <p>Open <strong>Safari</strong> → go to <code>app.news-distiller.com</code> → tap the <strong>Share button</strong> (box with arrow) → tap <strong>"Add to Home Screen"</strong> → tap <strong>Add</strong>. Must use Safari — Chrome on iPhone does not support this.</p>
+        </div>
+      </li>
+      <li>
+        <div class="step-dot" style="font-size:0.65rem;">Mac</div>
+        <div class="step-text">
+          <h4>Desktop (Chrome)</h4>
+          <p>Open <strong>Chrome</strong> → go to <code>app.news-distiller.com</code> → click the <strong>install icon</strong> in the address bar (screen with down arrow) → click <strong>Install</strong>. News-Distiller will open as its own window.</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- ── CHROME EXTENSION ── -->
+  <span class="gs-section-anchor" id="extension"></span>
+  <div class="gs-section">
+    <div class="gs-header">
+      <div class="gs-icon">🧩</div>
+      <h2>Chrome Extension</h2>
+      <span class="gs-badge">Desktop</span>
+    </div>
+    <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:20px;">The News-Distiller Chrome extension adds a side panel to your browser — distill any article without leaving the page.</p>
+    <ul class="steps">
+      <li>
+        <div class="step-dot">1</div>
+        <div class="step-text">
+          <h4>Install the extension</h4>
+          <p>The News-Distiller extension is available in the Chrome Web Store. Search for <strong>"News-Distiller"</strong> or ask for the direct link. Click <strong>Add to Chrome</strong> → <strong>Add Extension</strong>.</p>
+        </div>
+      </li>
+      <li>
+        <div class="step-dot">2</div>
+        <div class="step-text">
+          <h4>Pin it to your toolbar</h4>
+          <p>Click the puzzle piece icon in Chrome's toolbar → find News-Distiller → click the pin icon. The News-Distiller icon will appear in your toolbar for one-click access.</p>
+        </div>
+      </li>
+      <li>
+        <div class="step-dot">3</div>
+        <div class="step-text">
+          <h4>Distill any article</h4>
+          <p>Navigate to any news article, click the News-Distiller icon in your toolbar, and the side panel opens. Your access code carries over from the web app — enter it once and it's saved. Click <strong>Distill</strong> and your summary streams in the panel.</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- ── IOS SHORTCUT ── -->
+  <span class="gs-section-anchor" id="ios"></span>
+  <div class="gs-section">
+    <div class="gs-header">
+      <div class="gs-icon">📱</div>
+      <h2>iPhone &amp; iPad — Share Sheet</h2>
+      <span class="gs-badge">iOS Shortcut</span>
+    </div>
+    <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:20px;">Add News-Distiller to your iOS Share menu so you can distill any article with one tap from Safari or any app. Setup takes about 3 minutes.</p>
+
+    <h3 style="font-size:1rem;font-weight:600;margin-bottom:16px;">Option A — One-tap install</h3>
+    <p style="color:var(--text-muted);font-size:0.88rem;margin-bottom:14px;">Tap the button below on your iPhone or iPad to install the shortcut automatically:</p>
+    <div style="margin-bottom:24px;">
+      <a href="https://www.icloud.com/shortcuts/2c5dad1d356c4067bb92e6247d499da5"
+         style="display:inline-block;background:linear-gradient(135deg,#11998e,#38ef7d);color:#fff;padding:10px 22px;border-radius:9px;text-decoration:none;font-weight:700;font-size:0.9rem;">
+        📲 Add News-Distiller Shortcut
+      </a>
+    </div>
+    <div class="note-teal" style="margin-bottom:28px;">💡 If the iCloud link doesn't open automatically, tap it in Safari on your iPhone — it won't work from a desktop browser.</div>
+
+    <h3 style="font-size:1rem;font-weight:600;margin-bottom:16px;">Option B — Build it yourself (4 steps)</h3>
+    <ul class="steps">
+      <li>
+        <div class="step-dot">1</div>
+        <div class="step-text">
+          <h4>Open Shortcuts and create a new shortcut</h4>
+          <p>Open the <strong>Shortcuts</strong> app on your iPhone → tap <strong>+</strong> in the top right → tap the shortcut name and rename it <strong>"News-Distiller"</strong>.</p>
+        </div>
+      </li>
+      <li>
+        <div class="step-dot">2</div>
+        <div class="step-text">
+          <h4>Add a "Receive" action</h4>
+          <p>Tap <strong>"Add Action"</strong> → search for <strong>"Receive"</strong> → select <strong>"Receive Input from Share Sheet"</strong> → set the input type to <strong>URLs</strong>. This enables the shortcut to appear in your Share menu.</p>
+        </div>
+      </li>
+      <li>
+        <div class="step-dot">3</div>
+        <div class="step-text">
+          <h4>Add a "Get URLs" action</h4>
+          <p>Tap <strong>+</strong> → search for <strong>"Get URLs"</strong> → select it → confirm the input is set to <strong>Shortcut Input</strong>.</p>
+        </div>
+      </li>
+      <li>
+        <div class="step-dot">4</div>
+        <div class="step-text">
+          <h4>Add an "Open URLs" action with the News-Distiller base URL</h4>
+          <p>Tap <strong>+</strong> → search for <strong>"Text"</strong> → select the <strong>Text</strong> action → type: <code>https://app.news-distiller.com?url=</code> then immediately tap the variable icon and select <strong>URLs</strong> (from step 3). Then add one more action: <strong>"Open URLs"</strong> and set it to open the Text variable. Tap <strong>Done</strong>.</p>
+          <div class="note-yellow" style="margin-top:10px;">⚠️ Some paywalled articles (NYT, WSJ, etc.) cannot be retrieved via URL even from the Share sheet. For those, copy and paste the article text directly into the web app.</div>
+        </div>
+      </li>
+    </ul>
+
+    <h3 style="font-size:1rem;font-weight:600;margin:24px 0 12px;">Using It</h3>
+    <ol style="color:var(--text-muted);font-size:0.88rem;line-height:1.9;margin-left:20px;">
+      <li>Open any article in Safari or another app</li>
+      <li>Tap the <strong style="color:var(--text);">Share button</strong> (box with arrow pointing up)</li>
+      <li>Scroll and tap <strong style="color:var(--text);">News-Distiller</strong></li>
+      <li>The app opens with the article URL — distillation starts automatically</li>
+    </ol>
+  </div>
+
+</div><!-- /content -->
+
+<div class="cta-section">
+  <h2>Ready to read smarter?</h2>
+  <p>News-Distiller is live. Open the app or review how it works.</p>
+  <div class="btns">
+    <a href="https://app.news-distiller.com" target="_blank" class="btn-primary">Open News-Distiller</a>
+    <a href="nd-how-it-works.html" class="btn-secondary">How It Works</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <a href="nd-index.html">News-Distiller</a>
+    <a href="nd-how-it-works.html">How It Works</a>
+    <a href="nd-get-started.html">Get Started</a>
+    <a href="index.html">TruthPrism</a>
+    <a href="https://app.news-distiller.com/privacy" target="_blank">Privacy Policy</a>
+    <p>© 2026 News-Distiller. All rights reserved.</p>
+  </div>
+  <div class="footer-disclaimer">
+    News-Distiller uses Claude AI to summarize and analyze articles. Results may contain errors — verify important claims independently.
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>How News-Distiller Works</title>
+  <meta name="description" content="See how News-Distiller uses AI to read, analyze, and summarize any news article in seconds."/>
+  <link rel="icon" href="assets/icon128.png" type="image/png"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --nd-primary: #11998e;
+      --nd-primary-end: #38ef7d;
+      --bg: #0f0f1a;
+      --bg2: #13131f;
+      --card: rgba(255,255,255,0.04);
+      --card-border: rgba(255,255,255,0.08);
+      --text: #e8eaf6;
+      --text-muted: rgba(160,170,200,0.65);
+      --radius: 14px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(15,15,26,0.92); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--card-border); padding: 0 24px;
+    }
+    .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text); font-family: 'Sora', sans-serif; font-weight: 700; font-size: 1.1rem; }
+    .nav-logo img { width: 32px; height: 32px; border-radius: 8px; }
+    .nav-links { display: flex; align-items: center; gap: 8px; list-style: none; }
+    .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.88rem; font-weight: 500; padding: 6px 12px; border-radius: 8px; transition: color 0.2s, background 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--text); background: var(--card); }
+    .nav-divider { width: 1px; height: 20px; background: var(--card-border); margin: 0 4px; }
+    .nav-suite-label { font-size: 0.72rem; color: var(--text-muted); letter-spacing: 0.08em; text-transform: uppercase; padding: 0 8px; }
+    .nav-cta { background: linear-gradient(135deg, var(--nd-primary), var(--nd-primary-end)); color: #fff !important; padding: 7px 16px !important; border-radius: 8px !important; font-weight: 600 !important; }
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+    .nav-hamburger span { display: block; width: 22px; height: 2px; background: var(--text); border-radius: 2px; }
+    @media (max-width: 768px) {
+      .nav-hamburger { display: flex; }
+      .nav-links { display: none; }
+      .nav-links.open { display: flex; flex-direction: column; align-items: flex-start; position: absolute; top: 64px; left: 0; right: 0; background: rgba(15,15,26,0.97); border-bottom: 1px solid var(--card-border); padding: 16px 24px; }
+      .nav-divider, .nav-suite-label { display: none; }
+    }
+
+    .page-hero { padding: 64px 24px 48px; text-align: center; background: radial-gradient(ellipse at 50% 0%, rgba(17,153,142,0.12) 0%, transparent 60%); }
+    .page-hero h1 { font-family: 'Sora', sans-serif; font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 800; margin-bottom: 14px; }
+    .page-hero p { color: var(--text-muted); font-size: 1rem; max-width: 540px; margin: 0 auto; }
+
+    .content { max-width: 760px; margin: 0 auto; padding: 60px 24px; }
+    .step-block { display: flex; gap: 24px; margin-bottom: 48px; align-items: flex-start; }
+    .step-num-lg {
+      flex-shrink: 0; width: 48px; height: 48px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--nd-primary), var(--nd-primary-end));
+      color: #fff; font-family: 'Sora', sans-serif; font-weight: 700; font-size: 1.1rem;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .step-content h3 { font-family: 'Sora', sans-serif; font-size: 1.15rem; font-weight: 700; margin-bottom: 10px; }
+    .step-content p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.75; }
+    .step-content .note {
+      background: rgba(204,136,0,0.12); border: 1px solid rgba(204,136,0,0.25);
+      color: #cc8800; border-radius: 8px; padding: 8px 12px;
+      font-size: 0.82rem; margin-top: 10px; line-height: 1.5;
+    }
+    .divider { border: none; border-top: 1px solid var(--card-border); margin: 12px 0 48px; }
+
+    .output-demo {
+      background: var(--card); border: 1px solid var(--card-border);
+      border-radius: var(--radius); padding: 24px; margin-top: 20px;
+    }
+    .output-demo .demo-label { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 12px; }
+    .output-demo .demo-score {
+      display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 0.8rem; font-weight: 600;
+      background: rgba(17,153,142,0.15); border: 1px solid rgba(17,153,142,0.3); color: #38ef7d;
+      margin-bottom: 10px;
+    }
+    .output-demo p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.7; }
+
+    .cta-section { text-align: center; padding: 60px 24px 80px; background: var(--bg2); }
+    .cta-section h2 { font-family: 'Sora', sans-serif; font-size: 1.6rem; font-weight: 700; margin-bottom: 12px; }
+    .cta-section p { color: var(--text-muted); margin-bottom: 28px; }
+    .btn-primary { display: inline-block; padding: 13px 28px; background: linear-gradient(135deg, var(--nd-primary), var(--nd-primary-end)); color: #fff; text-decoration: none; font-weight: 700; font-size: 0.95rem; border-radius: 10px; transition: opacity 0.2s; }
+    .btn-primary:hover { opacity: 0.88; }
+    .btn-secondary { display: inline-block; padding: 13px 28px; background: var(--card); border: 1px solid var(--card-border); color: var(--text); text-decoration: none; font-weight: 600; font-size: 0.95rem; border-radius: 10px; transition: background 0.2s; }
+    .btn-secondary:hover { background: rgba(255,255,255,0.08); }
+
+    footer { border-top: 1px solid var(--card-border); padding: 28px 24px; background: var(--bg2); }
+    .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; align-items: center; }
+    .footer-inner a { color: var(--text-muted); text-decoration: none; font-size: 0.83rem; transition: color 0.2s; }
+    .footer-inner a:hover { color: var(--text); }
+    .footer-inner p { color: var(--text-muted); font-size: 0.83rem; }
+    .footer-disclaimer { max-width: 1100px; margin: 12px auto 0; color: var(--text-muted); font-size: 0.74rem; line-height: 1.6; padding: 0 24px; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="nd-index.html">
+      <img src="assets/nd-icon128.png" alt="News-Distiller" onerror="this.style.display='none'"/>
+      News-Distiller
+    </a>
+    <button class="nav-hamburger" onclick="this.nextElementSibling.classList.toggle('open')" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links">
+      <li><a href="nd-how-it-works.html" class="active">How It Works</a></li>
+      <li><a href="nd-get-started.html">Get Started</a></li>
+      <li class="nav-divider"></li>
+      <li><span class="nav-suite-label">Also:</span></li>
+      <li><a href="index.html">TruthPrism</a></li>
+      <li><a href="https://app.news-distiller.com" target="_blank" class="nav-cta">Open App →</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <h1>How News-Distiller Works</h1>
+  <p>From raw article to clear, structured summary — in seconds. Here's what happens under the hood.</p>
+</div>
+
+<div class="content">
+
+  <div class="step-block">
+    <div class="step-num-lg">1</div>
+    <div class="step-content">
+      <h3>You share any article or text</h3>
+      <p>Paste a URL into the News-Distiller web app, or share directly from your iPhone using the iOS share sheet, or activate the Chrome extension on any article page. News-Distiller accepts virtually any publicly accessible news article, blog post, or text you can copy.</p>
+      <div class="note">⚠️ Paywalled or login-required sites (e.g. NYT, WSJ, Substack) cannot be retrieved by URL. For those, copy the article text and paste it directly into the text field — this always works.</div>
+    </div>
+  </div>
+  <hr class="divider"/>
+
+  <div class="step-block">
+    <div class="step-num-lg">2</div>
+    <div class="step-content">
+      <h3>AI reads and extracts the key content</h3>
+      <p>News-Distiller's AI (powered by Claude from Anthropic) reads the full article and identifies the core narrative: who, what, when, where, and why. It separates the essential facts from supporting detail, background context, and editorial framing — building a structural understanding of what the piece is actually saying.</p>
+    </div>
+  </div>
+  <hr class="divider"/>
+
+  <div class="step-block">
+    <div class="step-num-lg">3</div>
+    <div class="step-content">
+      <h3>The article is analyzed for framing and lean</h3>
+      <p>Beyond summarizing content, News-Distiller assesses the political and editorial framing of the article. It uses a high bar — "Center" is the default, and lean is only attributed when there is direct evidence in the text (specific word choices, selective sourcing, omitted perspectives). The goal is accuracy, not sensitivity.</p>
+    </div>
+  </div>
+  <hr class="divider"/>
+
+  <div class="step-block">
+    <div class="step-num-lg">4</div>
+    <div class="step-content">
+      <h3>You get a clear, structured summary</h3>
+      <p>News-Distiller returns two views of your analysis:</p>
+      <ul style="margin:10px 0 10px 20px;color:var(--text-muted);font-size:0.9rem;line-height:1.8;">
+        <li><strong style="color:var(--text);">Executive Summary</strong> — a concise distillation of the article's key points, suitable for a quick read</li>
+        <li><strong style="color:var(--text);">Full Report</strong> — an in-depth breakdown covering all claims, context, sourcing, and framing in detail</li>
+      </ul>
+      <p>Results stream in real time — you start reading as the AI generates, rather than waiting for the full output. Both summaries can be saved as text files.</p>
+      <div class="output-demo">
+        <div class="demo-label">Sample Output</div>
+        <div class="demo-score">Political Lean: Center</div>
+        <p><strong style="color:var(--text);">Executive Summary:</strong> The article reports on new federal legislation requiring financial disclosures for AI companies. Three senators introduced the bill following a series of high-profile AI incidents. The article cites both proponents (consumer advocates) and critics (industry groups), presenting the debate without notable editorial lean. Passage timeline is described as uncertain.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="cta-section">
+  <h2>Ready to try it?</h2>
+  <p>News-Distiller is live — open the app or set up the extension.</p>
+  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+    <a href="https://app.news-distiller.com" target="_blank" class="btn-primary">Open News-Distiller</a>
+    <a href="nd-get-started.html" class="btn-secondary">Get Started Guide</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <a href="nd-index.html">News-Distiller</a>
+    <a href="nd-how-it-works.html">How It Works</a>
+    <a href="nd-get-started.html">Get Started</a>
+    <a href="index.html">TruthPrism</a>
+    <a href="https://app.news-distiller.com/privacy" target="_blank">Privacy Policy</a>
+    <p>© 2026 News-Distiller. All rights reserved.</p>
+  </div>
+  <div class="footer-disclaimer">
+    News-Distiller uses Claude AI to summarize and analyze articles. Results may contain errors — verify important claims independently.
+  </div>
+</footer>
+
+</body>
+</html>
