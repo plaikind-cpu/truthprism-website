@@ -4,178 +4,224 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>How TruthPrism Works</title>
-  <meta name="description" content="From raw article to verified verdict — in seconds. Here's what happens under the hood."/>
-  <link rel="icon" href="assets/icon128.png" type="image/png"/>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+  <meta name="description" content="How TruthPrism uses Claude AI and Brave Search to fact-check news articles in three steps."/>
+  <link rel="icon" href="assets/favicon.ico"/>
   <style>
-    :root {
-      --primary: #667eea;
-      --primary-end: #764ba2;
-      --nd-primary: #11998e;
-      --nd-primary-end: #38ef7d;
-      --bg: #0f0f1a;
-      --bg2: #13131f;
-      --card: rgba(255,255,255,0.04);
-      --card-border: rgba(255,255,255,0.08);
-      --text: #e8eaf6;
-      --text-muted: rgba(160,170,200,0.65);
-      --radius: 14px;
-    }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+    :root{--dark:#0D1525;--dark2:#162030;--border:#2a3a50;--purple:#a78bfa;--blue:#60a5fa;--green:#1D9E75;--text:#e0e8f0;--muted:#6688aa;--white:#ffffff;}
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--dark);color:var(--text);line-height:1.7;}
+    nav{background:rgba(13,21,37,0.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);padding:0 24px;position:sticky;top:0;z-index:100;display:flex;align-items:center;height:56px;}
+    .nav-logo{font-weight:800;font-size:15px;color:var(--white);text-decoration:none;margin-right:28px;display:flex;align-items:center;gap:8px;}
+    .nav-logo img{width:22px;height:22px;border-radius:4px;}
+    .nav-links{display:flex;gap:18px;flex:1;}
+    .nav-links a{font-size:13px;color:var(--muted);text-decoration:none;}
+    .nav-links a:hover{color:var(--text);}
+    .nav-links a.active{color:var(--purple);font-weight:600;}
+    .nav-right{display:flex;gap:8px;align-items:center;}
+    .nav-right a{font-size:12px;color:var(--muted);text-decoration:none;padding:5px 12px;border:1px solid var(--border);border-radius:20px;}
+    .nav-right a.cta{background:linear-gradient(135deg,#667eea,#764ba2);color:white;border:none;font-weight:600;}
+    .hero{text-align:center;padding:56px 24px 48px;max-width:680px;margin:0 auto;}
+    .hero h1{font-size:clamp(24px,4vw,38px);font-weight:800;color:var(--white);margin-bottom:12px;}
+    .hero p{font-size:16px;color:var(--muted);}
+    .content{max-width:800px;margin:0 auto;padding:0 24px 64px;}
 
-    /* NAV */
-    nav { position: sticky; top: 0; z-index: 100; background: rgba(15,15,26,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--card-border); padding: 0 24px; }
-    .nav-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 64px; }
-    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text); font-family: 'Sora', sans-serif; font-weight: 700; font-size: 1.1rem; }
-    .nav-logo img { width: 32px; height: 32px; border-radius: 8px; }
-    .nav-links { display: flex; align-items: center; gap: 8px; list-style: none; }
-    .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.88rem; font-weight: 500; padding: 6px 12px; border-radius: 8px; transition: color 0.2s, background 0.2s; }
-    .nav-links a:hover { color: var(--text); background: var(--card); }
-    .nav-links a.active { color: var(--text); }
-    .nav-divider { width: 1px; height: 20px; background: var(--card-border); margin: 0 4px; }
-    .nav-nd-link { color: #38ef7d !important; border: 1px solid rgba(17,153,142,0.3) !important; }
-    .nav-nd-link:hover { background: rgba(17,153,142,0.08) !important; }
-    .nav-cta { background: linear-gradient(135deg, var(--primary), var(--primary-end)); color: #fff !important; padding: 7px 16px !important; border-radius: 8px !important; font-weight: 600 !important; }
-    .nav-hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
-    .nav-hamburger span { display: block; width: 22px; height: 2px; background: var(--text); border-radius: 2px; }
-    @media (max-width: 768px) {
-      .nav-hamburger { display: flex; }
-      .nav-links { display: none; }
-      .nav-links.open { display: flex; flex-direction: column; align-items: flex-start; position: absolute; top: 64px; left: 0; right: 0; background: rgba(15,15,26,0.97); border-bottom: 1px solid var(--card-border); padding: 16px 24px; }
-      .nav-divider { display: none; }
-    }
+    /* Pipeline */
+    .pipeline{display:flex;flex-direction:column;gap:0;margin-bottom:56px;}
+    .pipe-step{display:flex;gap:24px;padding:32px 0;border-bottom:1px solid var(--border);}
+    .pipe-step:last-child{border-bottom:none;}
+    .pipe-num{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#667eea,#764ba2);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;color:white;flex-shrink:0;margin-top:2px;}
+    .pipe-body h2{font-size:18px;font-weight:800;color:var(--white);margin-bottom:6px;}
+    .pipe-body h2 span{font-size:11px;font-weight:600;padding:2px 8px;border-radius:4px;margin-left:8px;vertical-align:middle;}
+    .claude-badge{background:rgba(167,139,250,0.15);color:var(--purple);}
+    .brave-badge{background:rgba(249,115,22,0.15);color:#f97316;}
+    .pipe-body p{font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:12px;}
+    .pipe-detail{background:var(--dark2);border:1px solid var(--border);border-radius:8px;padding:16px;font-size:13px;color:var(--muted);}
+    .pipe-detail strong{color:var(--text);}
 
-    /* PAGE */
-    .page-hero { padding: 64px 24px 48px; text-align: center; background: radial-gradient(ellipse at 50% 0%, rgba(102,126,234,0.12) 0%, transparent 60%); }
-    .page-hero h1 { font-family: 'Sora', sans-serif; font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 800; margin-bottom: 14px; }
-    .page-hero p { color: var(--text-muted); font-size: 1rem; max-width: 540px; margin: 0 auto; }
+    /* Scores */
+    .scores-section{margin-bottom:56px;}
+    .scores-section h2{font-size:22px;font-weight:800;color:var(--white);margin-bottom:8px;}
+    .scores-section p{font-size:15px;color:var(--muted);margin-bottom:24px;}
+    .score-cards{display:flex;gap:16px;flex-wrap:wrap;}
+    .score-card{flex:1;min-width:220px;background:var(--dark2);border:1px solid var(--border);border-radius:12px;padding:24px;}
+    .score-card h3{font-size:15px;font-weight:700;margin-bottom:10px;}
+    .score-card p{font-size:13px;color:var(--muted);line-height:1.6;}
+    .score-scale{margin-top:14px;display:flex;flex-direction:column;gap:6px;}
+    .scale-row{display:flex;gap:8px;align-items:center;font-size:12px;}
+    .scale-range{font-weight:700;min-width:40px;color:var(--text);}
+    .scale-desc{color:var(--muted);}
+    .scale-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
 
-    .content { max-width: 760px; margin: 0 auto; padding: 60px 24px; }
-    .step-block { display: flex; gap: 24px; margin-bottom: 48px; align-items: flex-start; }
-    .step-num-lg { flex-shrink: 0; width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--primary-end)); color: #fff; font-family: 'Sora', sans-serif; font-weight: 700; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; }
-    .step-content h3 { font-family: 'Sora', sans-serif; font-size: 1.15rem; font-weight: 700; margin-bottom: 10px; }
-    .step-content p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.75; }
-    .step-content .note { background: rgba(204,136,0,0.12); border: 1px solid rgba(204,136,0,0.25); color: #cc8800; border-radius: 8px; padding: 8px 12px; font-size: 0.82rem; margin-top: 10px; line-height: 1.5; }
-    .divider { border: none; border-top: 1px solid var(--card-border); margin: 12px 0 48px; }
+    /* Verdicts */
+    .verdicts-section{margin-bottom:56px;}
+    .verdicts-section h2{font-size:22px;font-weight:800;color:var(--white);margin-bottom:8px;}
+    .verdicts-section p{font-size:15px;color:var(--muted);margin-bottom:24px;}
+    .verdicts{display:flex;flex-direction:column;gap:8px;}
+    .verdict{display:flex;align-items:flex-start;gap:12px;padding:14px 16px;background:var(--dark2);border:1px solid var(--border);border-radius:8px;}
+    .v-lbl{font-size:12px;font-weight:700;padding:3px 10px;border-radius:4px;white-space:nowrap;flex-shrink:0;}
+    .v-desc{font-size:13px;color:var(--muted);line-height:1.5;}
+    .v-supported{background:rgba(29,158,117,0.2);color:#4ade80;}
+    .v-partial{background:rgba(245,158,11,0.2);color:#fbbf24;}
+    .v-unverified{background:rgba(148,163,184,0.2);color:#94a3b8;}
+    .v-contested{background:rgba(251,146,60,0.2);color:#fb923c;}
+    .v-false{background:rgba(239,68,68,0.2);color:#f87171;}
 
-    .output-demo { background: var(--card); border: 1px solid var(--card-border); border-radius: var(--radius); padding: 24px; margin-top: 20px; text-align: center; }
-    .output-demo img { max-width: 100%; border-radius: 8px; }
+    /* Consistency */
+    .consistency-section{background:var(--dark2);border:1px solid var(--border);border-radius:12px;padding:28px;margin-bottom:56px;}
+    .consistency-section h2{font-size:18px;font-weight:800;color:var(--white);margin-bottom:12px;}
+    .consistency-section p{font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:10px;}
+    .consistency-section p:last-child{margin-bottom:0;}
 
-    .cta-section { text-align: center; padding: 60px 24px 80px; background: var(--bg2); }
-    .cta-section h2 { font-family: 'Sora', sans-serif; font-size: 1.6rem; font-weight: 700; margin-bottom: 12px; }
-    .cta-section p { color: var(--text-muted); margin-bottom: 28px; }
-    .btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-    .btn-primary { display: inline-block; padding: 13px 28px; background: linear-gradient(135deg, var(--primary), var(--primary-end)); color: #fff; text-decoration: none; font-weight: 700; font-size: 0.95rem; border-radius: 10px; transition: opacity 0.2s; }
-    .btn-primary:hover { opacity: 0.88; }
-    .btn-secondary { display: inline-block; padding: 13px 28px; background: var(--card); border: 1px solid var(--card-border); color: var(--text); text-decoration: none; font-weight: 600; font-size: 0.95rem; border-radius: 10px; transition: background 0.2s; }
-    .btn-secondary:hover { background: rgba(255,255,255,0.08); }
+    /* CTA */
+    .cta-section{background:linear-gradient(135deg,#1a2a4a,#0D1525);border:1px solid var(--border);border-radius:16px;padding:48px 32px;text-align:center;margin-bottom:48px;}
+    .cta-section h2{font-size:24px;font-weight:800;color:var(--white);margin-bottom:12px;}
+    .cta-section p{color:var(--muted);margin-bottom:24px;}
+    .btn-primary{background:linear-gradient(135deg,#667eea,#764ba2);color:white;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:700;font-size:15px;}
+    .btn-secondary{background:transparent;color:var(--purple);padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:600;font-size:14px;border:1px solid rgba(167,139,250,0.4);}
 
-    footer { border-top: 1px solid var(--card-border); padding: 28px 24px; background: var(--bg2); }
-    .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; align-items: center; }
-    .footer-inner a { color: var(--text-muted); text-decoration: none; font-size: 0.83rem; transition: color 0.2s; }
-    .footer-inner a:hover { color: var(--text); }
-    .footer-inner p { color: var(--text-muted); font-size: 0.83rem; }
-    .footer-disclaimer { max-width: 1100px; margin: 12px auto 0; color: var(--text-muted); font-size: 0.74rem; line-height: 1.6; padding: 0 24px; }
+    footer{border-top:1px solid var(--border);padding:32px 24px;text-align:center;font-size:12px;color:var(--muted);}
+    footer a{color:var(--muted);text-decoration:none;margin:0 8px;}
+    .footer-nav{display:flex;justify-content:center;gap:32px;flex-wrap:wrap;margin-bottom:20px;}
+    .footer-section strong{display:block;color:var(--text);font-size:12px;margin-bottom:8px;}
+    .footer-section a{display:block;margin:3px 0;}
   </style>
 </head>
 <body>
 
 <nav>
-  <div class="nav-inner">
-    <a class="nav-logo" href="truthprism.html">
-      <img src="assets/icon128.png" alt="TruthPrism"/>
-      TruthPrism
-    </a>
-    <button class="nav-hamburger" onclick="this.nextElementSibling.classList.toggle('open')" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="how-it-works.html" class="active">How It Works</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="get-started.html">Get Started</a></li>
-      <li class="nav-divider"></li>
-      <li><a href="nd-index.html" class="nav-nd-link">● News-Distiller</a></li>
-      <li><a href="https://app.truthprism.app" target="_blank" class="nav-cta">Open App →</a></li>
-    </ul>
+  <a href="index.html" class="nav-logo">
+    <img src="assets/icon128.png" alt="PKL Media Lab"/>AI News Tools
+  </a>
+  <div class="nav-links">
+    <a href="truthprism.html">TruthPrism</a>
+    <a href="how-it-works.html" class="active">How It Works</a>
+    <a href="get-started.html">Get Started</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="nd-index.html" style="color:#4a6a8a;">News-Distiller →</a>
+  </div>
+  <div class="nav-right">
+    <a href="https://app.truthprism.app/help">Help</a>
+    <a href="https://app.truthprism.app" class="cta">Open App →</a>
   </div>
 </nav>
 
-<div class="page-hero">
+<div class="hero">
   <h1>How TruthPrism Works</h1>
-  <p>From raw article to verified verdict — in seconds. Here's what happens under the hood.</p>
+  <p>Three steps, 20–40 seconds. Powered by Claude AI for reasoning and Brave Search for real-time web verification.</p>
 </div>
 
 <div class="content">
 
-  <div class="step-block">
-    <div class="step-num-lg">1</div>
-    <div class="step-content">
-      <h3>You share any article or claim</h3>
-      <p>Paste a URL into the TruthPrism web app, or share directly from your iPhone using the iOS share sheet. TruthPrism works with virtually any news article, blog post, or text you can copy.</p>
-      <div class="note">⚠️ <strong>Paywalled or login-required sites</strong> (e.g. Substack, NYT, WSJ) may not load correctly via URL. For those, copy the article text and paste it into the <strong>Check Custom Text</strong> field instead — this always works.</div>
+  <!-- Pipeline -->
+  <div class="pipeline">
+    <div class="pipe-step">
+      <div class="pipe-num">1</div>
+      <div class="pipe-body">
+        <h2>Summarize <span class="claude-badge">Claude AI</span></h2>
+        <p>Claude reads your article and produces a concise executive summary capturing the main argument and key assertions. It then extracts 3–6 of the most consequential factual claims — calibrated to the article's complexity.</p>
+        <div class="pipe-detail">
+          <strong>Simple articles</strong> (news reports, opinion pieces) → 3–4 claims<br>
+          <strong>Complex articles</strong> (investigative, analytical) → 5–6 claims<br><br>
+          Claims are selected for being <strong>factually verifiable</strong> — specific enough to be checked against real-world evidence, not just interpretive or analytical.
+        </div>
+      </div>
     </div>
-  </div>
-  <hr class="divider"/>
 
-  <div class="step-block">
-    <div class="step-num-lg">2</div>
-    <div class="step-content">
-      <h3>AI reads and extracts the key claims</h3>
-      <p>TruthPrism's AI (powered by Claude from Anthropic) reads the full article and identifies the specific factual claims being made — separating opinion from assertion, and flagging statements that can be fact-checked against known information.</p>
+    <div class="pipe-step">
+      <div class="pipe-num">2</div>
+      <div class="pipe-body">
+        <h2>Verify Claims <span class="brave-badge">Brave Search</span></h2>
+        <p>All claims are verified simultaneously using real-time Brave Search — an independent web index that's not Google or Bing. For each claim, Claude generates a targeted 5–8 word search query, retrieves current web results, and evaluates the evidence.</p>
+        <div class="pipe-detail">
+          <strong>Why Brave Search?</strong> Unlike Anthropic's built-in search tool, Brave Search is an independent index with its own crawler — reducing SEO spam and providing fresher, less biased results. It's purpose-built for AI applications.<br><br>
+          <strong>Parallel verification</strong> — all claims are searched simultaneously, which is why Step 2 takes only 15–20 seconds even for 5–6 claims.
+        </div>
+      </div>
     </div>
-  </div>
-  <hr class="divider"/>
 
-  <div class="step-block">
-    <div class="step-num-lg">3</div>
-    <div class="step-content">
-      <h3>Claims are analyzed for accuracy and context</h3>
-      <p>Each claim is evaluated for factual accuracy and the overall article is assessed for contextual completeness — whether it provides the full picture or omits important information that would change how a reader understands the story.</p>
-    </div>
-  </div>
-  <hr class="divider"/>
-
-  <div class="step-block">
-    <div class="step-num-lg">4</div>
-    <div class="step-content">
-      <h3>You get a clear, structured verdict</h3>
-      <p>TruthPrism returns a <strong>Factual Score</strong> and a <strong>Context Score</strong> — each rated out of 10 — along with a plain-language summary of its findings. Tap <strong>Click Here for Details</strong> to expand a full in-depth report covering specific claims, contextual gaps, and sourcing. Both the summary and the detailed report can be saved for future reference. No jargon. No black box — just clarity.</p>
-      <div class="output-demo">
-        <img src="assets/TruthPrism_Example.png" alt="TruthPrism sample analysis output showing Factual Score 1/10 and Context Score 1/10 for the claim 'The earth is flat'"/>
+    <div class="pipe-step">
+      <div class="pipe-num">3</div>
+      <div class="pipe-body">
+        <h2>Evaluate Context <span class="claude-badge">Claude AI</span></h2>
+        <p>Beyond factual accuracy, Claude evaluates how the article frames its information. This produces the Context Score and the Context & Framing section — the part of TruthPrism that goes beyond simple fact-checking.</p>
+        <div class="pipe-detail">
+          <strong>What Context evaluation looks for:</strong><br>
+          • Charged terms used as established fact rather than attributed opinion<br>
+          • Sweeping motivational claims about people's intentions without sourcing<br>
+          • Missing counterarguments or alternative perspectives<br>
+          • One-sided framing that's inappropriate for the article's format<br><br>
+          <strong>Note:</strong> Opinion pieces are scored differently — one-sided framing is expected and appropriate for the format.
+        </div>
       </div>
     </div>
   </div>
 
-</div>
-
-<div class="cta-section">
-  <h2>Ready to try it?</h2>
-  <p>Start fact-checking in seconds — your first checks are free.</p>
-  <div class="btns">
-    <a href="https://app.truthprism.app" target="_blank" class="btn-primary">Open TruthPrism</a>
-    <a href="get-started.html" class="btn-secondary">Get Started Guide</a>
+  <!-- Scores -->
+  <div class="scores-section">
+    <h2>The Two Scores</h2>
+    <p>An article can score well on one and poorly on the other — they measure different things.</p>
+    <div class="score-cards">
+      <div class="score-card">
+        <h3 style="color:#60a5fa;">Factual Score</h3>
+        <p>Rates the accuracy of verifiable factual claims — dates, statistics, quotes, attributions, and assertions checked against real-time web sources.</p>
+        <div class="score-scale">
+          <div class="scale-row"><span class="scale-dot" style="background:#22c55e;"></span><span class="scale-range">8–10</span><span class="scale-desc">Claims well-supported by credible sources</span></div>
+          <div class="scale-row"><span class="scale-dot" style="background:#f59e0b;"></span><span class="scale-range">5–7</span><span class="scale-desc">Mixed — some accurate, some questionable</span></div>
+          <div class="scale-row"><span class="scale-dot" style="background:#ef4444;"></span><span class="scale-range">1–4</span><span class="scale-desc">Significant false or unverified claims</span></div>
+        </div>
+      </div>
+      <div class="score-card">
+        <h3 style="color:#a78bfa;">Context Score</h3>
+        <p>Rates whether the article gives you the full picture — fair framing, appropriate attribution of charged language, and acknowledgment of counterarguments.</p>
+        <div class="score-scale">
+          <div class="scale-row"><span class="scale-dot" style="background:#22c55e;"></span><span class="scale-range">8–10</span><span class="scale-desc">Balanced, fair framing, no significant omissions</span></div>
+          <div class="scale-row"><span class="scale-dot" style="background:#f59e0b;"></span><span class="scale-range">5–7</span><span class="scale-desc">Notable framing issues affecting interpretation</span></div>
+          <div class="scale-row"><span class="scale-dot" style="background:#ef4444;"></span><span class="scale-range">1–4</span><span class="scale-desc">Highly misleading framing or major omissions</span></div>
+        </div>
+      </div>
+    </div>
   </div>
+
+  <!-- Verdicts -->
+  <div class="verdicts-section">
+    <h2>Claim Verdicts</h2>
+    <p>Each verified claim receives one of five verdicts based on real-time evidence from Brave Search.</p>
+    <div class="verdicts">
+      <div class="verdict"><span class="v-lbl v-supported">Supported</span><span class="v-desc">Multiple credible sources confirm the claim. High confidence the assertion is accurate.</span></div>
+      <div class="verdict"><span class="v-lbl v-partial">Partially Supported</span><span class="v-desc">Claim is roughly accurate but with important caveats, missing context, or minor inaccuracies.</span></div>
+      <div class="verdict"><span class="v-lbl v-unverified">Unverified</span><span class="v-desc">Search results don't address the claim directly. Treated as neutral — absence of evidence is not evidence of falsity.</span></div>
+      <div class="verdict"><span class="v-lbl v-contested">Contested</span><span class="v-desc">Sources actively disagree with the claim or present significant counter-evidence.</span></div>
+      <div class="verdict"><span class="v-lbl v-false">False</span><span class="v-desc">Credible sources directly contradict the claim with clear evidence.</span></div>
+    </div>
+  </div>
+
+  <!-- Consistency -->
+  <div class="consistency-section">
+    <h2>A Note on Consistency</h2>
+    <p>TruthPrism's results are highly consistent across runs on the same article. In 10-run testing on identical articles, scores were identical across every run — a significant improvement over earlier versions that used Anthropic's built-in search tool.</p>
+    <p>This consistency comes from Brave Search's deterministic results and Claude's structured evaluation prompts. Minor variation may still occur in source citations (Brave finds slightly different pages each run) but verdicts and scores are stable.</p>
+    <p>TruthPrism uses AI which can make mistakes. Results should be used as a starting point for further research — not as a definitive verdict.</p>
+  </div>
+
+  <div class="cta-section">
+    <h2>See it for yourself</h2>
+    <p>Open the app and paste any article. Your first check takes about 30 seconds.</p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+      <a href="https://app.truthprism.app" class="btn-primary">Open the App →</a>
+      <a href="get-started.html" class="btn-secondary">Get Started Guide</a>
+    </div>
+  </div>
+
 </div>
 
 <footer>
-  <div class="footer-inner">
-    <a href="truthprism.html">TruthPrism</a>
-    <a href="how-it-works.html">How It Works</a>
-    <a href="about.html">About</a>
-    <a href="get-started.html">Get Started</a>
-    <a href="https://app.truthprism.app/checkout" target="_blank">Pricing</a>
-    <a href="nd-index.html" style="color:#38ef7d;">● News-Distiller</a>
-    <a href="https://app.truthprism.app/privacy" target="_blank">Privacy Policy</a>
-    <p>© 2026 TruthPrism. All rights reserved.</p>
+  <div class="footer-nav">
+    <div class="footer-section"><strong>TruthPrism</strong><a href="truthprism.html">Home</a><a href="how-it-works.html">How It Works</a><a href="get-started.html">Get Started</a><a href="pricing.html">Pricing</a><a href="https://app.truthprism.app">Open App</a></div>
+    <div class="footer-section"><strong>News-Distiller</strong><a href="nd-index.html">Home</a><a href="nd-how-it-works.html">How It Works</a><a href="nd-get-started.html">Get Started</a><a href="https://app.news-distiller.com">Open App</a></div>
+    <div class="footer-section"><strong>Legal</strong><a href="privacy.html">Privacy Policy</a><a href="https://app.truthprism.app/help">Help</a></div>
   </div>
-  <div class="footer-disclaimer">
-    TruthPrism is an AI-powered tool designed to assist with fact-checking and media analysis. AI analysis may contain errors or omissions. Results should be used as a starting point for further research, not as a definitive determination of truth. Always verify important claims through multiple independent sources.
-  </div>
+  <p>© 2026 Paul Laikind, PhD &nbsp;·&nbsp; PKL Media Lab</p>
+  <p style="margin-top:8px;">Powered by Claude AI &amp; Brave Search. AI analysis may contain errors — always verify important claims independently.</p>
 </footer>
 
 </body>
