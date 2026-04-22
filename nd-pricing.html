@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Distiller Packs — News-Distiller Pricing</title>
+  <meta name="description" content="News-Distiller Distiller Packs — one-time purchase, no subscription. 50, 100, 250, or 500 distillations starting at $2.99."/>
+  <link rel="icon" href="assets/favicon.ico"/>
+  <style>
+    :root{--dark:#0D1525;--dark2:#162030;--border:#2a3a50;--gold:#f0c040;--blue:#60a5fa;--green:#1D9E75;--text:#e0e8f0;--muted:#6688aa;--white:#ffffff;}
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--dark);color:var(--text);line-height:1.7;}
+    nav{background:rgba(13,21,37,0.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);padding:0 24px;position:sticky;top:0;z-index:100;display:flex;align-items:center;height:56px;}
+    .nav-logo{font-weight:800;font-size:15px;color:var(--white);text-decoration:none;margin-right:28px;display:flex;align-items:center;gap:8px;}
+    .nav-logo img{width:22px;height:22px;border-radius:4px;}
+    .nav-links{display:flex;gap:18px;flex:1;}
+    .nav-links a{font-size:13px;color:var(--muted);text-decoration:none;}
+    .nav-links a:hover{color:var(--text);}
+    .nav-links a.active{color:var(--gold);font-weight:600;}
+    .nav-right{display:flex;gap:8px;align-items:center;}
+    .nav-right a{font-size:12px;color:var(--muted);text-decoration:none;padding:5px 12px;border:1px solid var(--border);border-radius:20px;}
+    .nav-right a.cta{background:linear-gradient(135deg,#b8860b,#f0c040);color:#0D1525;border:none;font-weight:700;}
+    .hero{text-align:center;padding:56px 24px 48px;max-width:680px;margin:0 auto;}
+    .hero h1{font-size:clamp(24px,4vw,38px);font-weight:800;color:var(--white);margin-bottom:12px;}
+    .hero p{font-size:16px;color:var(--muted);}
+    .content{max-width:900px;margin:0 auto;padding:0 24px 64px;}
+    .tiers{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:40px;}
+    .tier{background:var(--dark2);border:1px solid var(--border);border-radius:12px;padding:28px 22px;text-align:center;position:relative;}
+    .tier.popular{border-color:var(--gold);}
+    .popular-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--gold);color:#0D1525;font-size:11px;font-weight:700;padding:3px 14px;border-radius:20px;white-space:nowrap;}
+    .tier-name{font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:12px;}
+    .tier-price{font-size:40px;font-weight:800;color:var(--white);line-height:1;}
+    .tier-price span{font-size:18px;font-weight:400;color:var(--muted);}
+    .tier-checks{font-size:15px;font-weight:700;color:var(--gold);margin:10px 0 4px;}
+    .tier-per{font-size:12px;color:var(--muted);margin-bottom:20px;}
+    .tier-features{list-style:none;text-align:left;margin-bottom:24px;font-size:13px;color:var(--muted);}
+    .tier-features li{padding:4px 0;}
+    .tier-features li::before{content:"✓ ";color:var(--green);font-weight:700;}
+    .buy-btn{display:block;width:100%;padding:11px;border:none;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;background:linear-gradient(135deg,#b8860b,#f0c040);color:#0D1525;text-decoration:none;text-align:center;transition:opacity 0.2s;}
+    .buy-btn:hover{opacity:0.9;}
+    .faq{margin-bottom:48px;}
+    .faq h2{font-size:22px;font-weight:800;color:var(--white);margin-bottom:24px;}
+    .faq-item{background:var(--dark2);border:1px solid var(--border);border-radius:8px;padding:20px;margin-bottom:12px;}
+    .faq-item h3{font-size:14px;font-weight:700;color:var(--white);margin-bottom:8px;}
+    .faq-item p{font-size:13px;color:var(--muted);line-height:1.7;}
+    .cta-section{background:linear-gradient(135deg,#1a2a4a,#0D1525);border:1px solid var(--border);border-radius:16px;padding:48px 32px;text-align:center;margin-bottom:48px;}
+    .cta-section h2{font-size:24px;font-weight:800;color:var(--white);margin-bottom:12px;}
+    .cta-section p{color:var(--muted);margin-bottom:24px;}
+    .btn-primary{background:linear-gradient(135deg,#b8860b,#f0c040);color:#0D1525;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:700;font-size:15px;}
+    .btn-secondary{background:transparent;color:var(--gold);padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:600;font-size:14px;border:1px solid rgba(240,192,64,0.4);}
+    footer{border-top:1px solid var(--border);padding:32px 24px;text-align:center;font-size:12px;color:var(--muted);}
+    footer a{color:var(--muted);text-decoration:none;margin:0 8px;}
+    .footer-nav{display:flex;justify-content:center;gap:32px;flex-wrap:wrap;margin-bottom:20px;}
+    .footer-section strong{display:block;color:var(--text);font-size:12px;margin-bottom:8px;}
+    .footer-section a{display:block;margin:3px 0;}
+  </style>
+</head>
+<body>
+
+<!-- PKL Media Lab banner -->
+<div style="background:#0a1020;border-bottom:1px solid #1a2a40;padding:6px 24px;display:flex;align-items:center;justify-content:space-between;">
+  <a href="index.html" style="text-decoration:none;display:flex;align-items:center;gap:8px;">
+    <span style="font-size:11px;font-weight:700;color:#f0c040;letter-spacing:1px;text-transform:uppercase;">PKL Media Lab</span>
+    <span style="font-size:10px;color:#3a5070;">by Paul Laikind, PhD</span>
+  </a>
+  <span style="font-size:10px;color:#3a5070;">AI-powered tools for smarter news reading</span>
+</div>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="assets/icon128.png" alt="PKL Media Lab"/>AI News Tools
+  </a>
+  <div class="nav-links">
+    <a href="nd-index.html">News-Distiller</a>
+    <a href="nd-how-it-works.html">How It Works</a>
+    <a href="nd-get-started.html">Get Started</a>
+    <a href="nd-pricing.html" class="active">Pricing</a>
+    <a href="truthprism.html" style="color:#4a6a8a;">TruthPrism →</a>
+  </div>
+  <div class="nav-right">
+    <a href="https://app.news-distiller.com/help">Help</a>
+    <a href="https://app.news-distiller.com/checkout" class="cta">Get a Distiller Pack →</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <h1>Distiller Packs</h1>
+  <p>One-time purchase — no subscription, no expiry. Use your distillations at your own pace. One code works across web app, iOS, and Chrome extension.</p>
+</div>
+
+<div class="content">
+  <div class="tiers">
+    <div class="tier">
+      <div class="tier-name">Starter</div>
+      <div class="tier-price">$2<span>.99</span></div>
+      <div class="tier-checks">50 distillations</div>
+      <div class="tier-per">$0.06 per distillation</div>
+      <ul class="tier-features">
+        <li>Executive Summary</li>
+        <li>Full detailed report</li>
+        <li>Political lean analysis</li>
+        <li>Never expires</li>
+      </ul>
+      <a href="https://app.news-distiller.com/checkout" class="buy-btn">Buy Starter</a>
+    </div>
+    <div class="tier popular">
+      <div class="popular-badge">Most Popular</div>
+      <div class="tier-name">Standard</div>
+      <div class="tier-price">$4<span>.99</span></div>
+      <div class="tier-checks">100 distillations</div>
+      <div class="tier-per">$0.05 per distillation</div>
+      <ul class="tier-features">
+        <li>Executive Summary</li>
+        <li>Full detailed report</li>
+        <li>Political lean analysis</li>
+        <li>Never expires</li>
+      </ul>
+      <a href="https://app.news-distiller.com/checkout" class="buy-btn">Buy Standard</a>
+    </div>
+    <div class="tier">
+      <div class="tier-name">Plus</div>
+      <div class="tier-price">$9<span>.99</span></div>
+      <div class="tier-checks">250 distillations</div>
+      <div class="tier-per">$0.04 per distillation</div>
+      <ul class="tier-features">
+        <li>Executive Summary</li>
+        <li>Full detailed report</li>
+        <li>Political lean analysis</li>
+        <li>Never expires</li>
+      </ul>
+      <a href="https://app.news-distiller.com/checkout" class="buy-btn">Buy Plus</a>
+    </div>
+    <div class="tier">
+      <div class="tier-name">Pro</div>
+      <div class="tier-price">$19<span>.99</span></div>
+      <div class="tier-checks">500 distillations</div>
+      <div class="tier-per">$0.04 per distillation</div>
+      <ul class="tier-features">
+        <li>Executive Summary</li>
+        <li>Full detailed report</li>
+        <li>Political lean analysis</li>
+        <li>Never expires</li>
+      </ul>
+      <a href="https://app.news-distiller.com/checkout" class="buy-btn">Buy Pro</a>
+    </div>
+  </div>
+
+  <div class="faq">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-item">
+      <h3>Do distillations expire?</h3>
+      <p>No — your distillations never expire. Use them at whatever pace suits you, whether that's one article a day or ten in a week.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Does one code work across all platforms?</h3>
+      <p>Yes — your Distiller code and its balance works across the web app, iOS Share Sheet shortcut, and Chrome extension. They all draw from the same pool.</p>
+    </div>
+    <div class="faq-item">
+      <h3>How quickly do I get my code after purchase?</h3>
+      <p>Your Distiller code is emailed to you within seconds of completing payment. Check your spam folder if it doesn't arrive within a minute or two.</p>
+    </div>
+    <div class="faq-item">
+      <h3>What counts as one distillation?</h3>
+      <p>Each article analysis uses one distillation — regardless of article length or report type. Distillations are only consumed on successful completion.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Can I buy more when I run out?</h3>
+      <p>Yes — just purchase another Distiller Pack. You can use the same email address and the new code will start fresh.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Can I use a TruthPrism Prism Pack code?</h3>
+      <p>Yes — existing TruthPrism Prism Pack codes also work in News-Distiller, drawing from the same check balance.</p>
+    </div>
+    <div class="faq-item">
+      <h3>What payment methods are accepted?</h3>
+      <p>All major credit and debit cards via Stripe. Payment is handled entirely by Stripe — we never see your card details.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Is there a refund policy?</h3>
+      <p>If you have an issue with your purchase, contact <a href="mailto:support@truthprism.app" style="color:var(--gold);">support@truthprism.app</a> and we'll make it right.</p>
+    </div>
+  </div>
+
+  <div class="cta-section">
+    <h2>Ready to get started?</h2>
+    <p>The Starter pack is a great way to try News-Distiller — 50 distillations, no expiry, $2.99.</p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+      <a href="https://app.news-distiller.com/checkout" class="btn-primary">Get a Distiller Pack →</a>
+      <a href="nd-get-started.html" class="btn-secondary">Setup Guide</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-nav">
+    <div class="footer-section"><strong>TruthPrism</strong><a href="truthprism.html">Home</a><a href="how-it-works.html">How It Works</a><a href="get-started.html">Get Started</a><a href="pricing.html">Pricing</a><a href="https://app.truthprism.app">Open App</a></div>
+    <div class="footer-section"><strong>News-Distiller</strong><a href="nd-index.html">Home</a><a href="nd-how-it-works.html">How It Works</a><a href="nd-get-started.html">Get Started</a><a href="nd-pricing.html">Pricing</a><a href="https://app.news-distiller.com">Open App</a></div>
+    <div class="footer-section"><strong>Legal</strong><a href="privacy.html">Privacy Policy</a><a href="https://app.news-distiller.com/help">Help</a></div>
+  </div>
+  <p>© 2026 Paul Laikind, PhD &nbsp;·&nbsp; PKL Media Lab</p>
+  <p style="margin-top:8px;">Secure checkout via Stripe. AI analysis may contain errors — always verify important claims independently.</p>
+</footer>
+
+</body>
+</html>
