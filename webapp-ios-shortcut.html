@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>iOS Safari Shortcut — Web App Setup — PKL Media Lab</title>
+  <meta name="description" content="Set up an iOS Safari Share Sheet shortcut to send articles directly to the TruthPrism or News-Distiller web app from your iPhone or iPad."/>
+  <link rel="icon" href="assets/favicon.svg"/>
+  <style>
+    :root{--dark:#0D1525;--dark2:#162030;--border:#2a3a50;--purple:#a78bfa;--blue:#60a5fa;--green:#1D9E75;--teal:#11998e;--green-end:#38ef7d;--text:#e0e8f0;--muted:#6688aa;--white:#fff;}
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--dark);color:var(--text);line-height:1.7;}
+    nav{background:rgba(13,21,37,0.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);padding:0 24px;position:sticky;top:0;z-index:100;display:flex;align-items:center;height:56px;}
+    .nav-logo{font-weight:800;font-size:15px;color:var(--white);text-decoration:none;margin-right:28px;display:flex;align-items:center;gap:8px;}
+    .nav-logo img{width:22px;height:22px;border-radius:4px;}
+    .nav-links{display:flex;gap:18px;flex:1;flex-wrap:wrap;}
+    .nav-links a{font-size:13px;color:var(--muted);text-decoration:none;}
+    .nav-links a:hover{color:var(--text);}
+    .hero{text-align:center;padding:56px 24px 32px;max-width:720px;margin:0 auto;}
+    .hero h1{font-size:clamp(26px,4.5vw,38px);font-weight:800;color:var(--white);line-height:1.25;margin-bottom:12px;}
+    .hero p{font-size:15px;color:var(--muted);}
+    .content{max-width:780px;margin:0 auto;padding:8px 24px 64px;}
+    .card{background:var(--dark2);border:1px solid var(--border);border-radius:12px;padding:28px;margin-bottom:24px;}
+    .card-tp{border-left:3px solid #667eea;}
+    .card-nd{border-left:3px solid var(--green-end);}
+    .card h2{font-size:18px;font-weight:800;color:var(--white);margin-bottom:6px;display:flex;align-items:center;gap:10px;}
+    .card .subtitle{font-size:13px;color:var(--muted);margin-bottom:18px;}
+    .shortcut-btn-tp{display:inline-block;background:linear-gradient(135deg,#667eea,#764ba2);color:white;padding:11px 22px;border-radius:9px;text-decoration:none;font-weight:700;font-size:14px;margin:8px 0;}
+    .shortcut-btn-nd{display:inline-block;background:linear-gradient(135deg,#11998e,#38ef7d);color:white;padding:11px 22px;border-radius:9px;text-decoration:none;font-weight:700;font-size:14px;margin:8px 0;}
+    .tip{background:rgba(96,165,250,0.08);border-left:3px solid rgba(96,165,250,0.5);border-radius:0 6px 6px 0;padding:10px 14px;font-size:13px;color:var(--muted);margin:12px 0;}
+    .warn{background:rgba(245,158,11,0.1);border-left:3px solid rgba(245,158,11,0.5);border-radius:0 6px 6px 0;padding:10px 14px;font-size:13px;color:var(--muted);margin:12px 0;}
+    .divider{border:none;border-top:1px solid var(--border);margin:22px 0;}
+    .step-list{list-style:none;display:flex;flex-direction:column;gap:0;}
+    .step-list li{display:flex;gap:14px;padding:12px 0;border-bottom:1px solid var(--border);}
+    .step-list li:last-child{border-bottom:none;}
+    .step-dot{width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#667eea,#764ba2);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:white;flex-shrink:0;margin-top:2px;}
+    .step-dot.nd{background:linear-gradient(135deg,#11998e,#38ef7d);}
+    .step-text h4{font-size:14px;font-weight:700;color:var(--white);margin-bottom:4px;}
+    .step-text p{font-size:13px;color:var(--muted);line-height:1.7;}
+    code{background:rgba(255,255,255,0.08);padding:2px 6px;border-radius:4px;font-family:monospace;font-size:13px;color:var(--text);}
+    details summary{font-size:13px;color:var(--purple);cursor:pointer;font-weight:600;list-style:none;}
+    details summary::before{content:'▸ ';color:var(--purple);}
+    details[open] summary::before{content:'▾ ';}
+    .intro{background:rgba(167,139,250,0.05);border:1px solid rgba(167,139,250,0.2);border-radius:10px;padding:18px 22px;font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:24px;}
+    footer{border-top:1px solid var(--border);padding:32px 24px;text-align:center;font-size:12px;color:var(--muted);}
+    footer a{color:var(--muted);text-decoration:none;margin:0 8px;}
+    .footer-nav{display:flex;justify-content:center;gap:32px;flex-wrap:wrap;margin-bottom:20px;}
+    .footer-section strong{display:block;color:var(--text);font-size:12px;margin-bottom:8px;}
+    .footer-section a{display:block;margin:3px 0;}
+  </style>
+</head>
+<body>
+
+<!-- PKL Media Lab banner -->
+<div style="background:#0a1020;border-bottom:1px solid #1a2a40;padding:6px 24px;display:flex;align-items:center;justify-content:space-between;">
+  <a href="index.html" style="text-decoration:none;display:flex;align-items:center;gap:8px;">
+    <span style="font-size:11px;font-weight:700;color:#a78bfa;letter-spacing:1px;text-transform:uppercase;">PKL Media Lab</span>
+    <span style="font-size:10px;color:#3a5070;">by Paul Laikind, PhD</span>
+  </a>
+  <span style="font-size:10px;color:#3a5070;">AI-powered tools for smarter news reading</span>
+</div>
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="assets/icon128.png" alt="PKL Media Lab"/>AI News Tools
+  </a>
+  <div class="nav-links">
+    <a href="truthprism.html">TruthPrism</a>
+    <a href="nd-index.html">News-Distiller</a>
+    <a href="get-started.html">Get Started</a>
+    <a href="about.html">About</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <h1>iOS Safari Shortcut for the Web App</h1>
+  <p>Send articles to the TruthPrism or News-Distiller <strong>web app</strong> with one tap from Safari's Share Sheet on iPhone or iPad.</p>
+</div>
+
+<div class="content">
+
+  <div class="intro">
+    <strong>What this does:</strong> sets up an iOS Shortcut that opens the web app with the article URL pre-loaded. This is for the <strong>web apps</strong> (<code>app.truthprism.app</code> and <code>app.news-distiller.com</code>), not the iOS Safari apps. Setup takes 3 minutes per app.
+  </div>
+
+  <!-- TruthPrism shortcut -->
+  <div class="card card-tp">
+    <h2>🔍 TruthPrism — Web App Shortcut</h2>
+    <div class="subtitle">Fact-check any article from Safari with one tap.</div>
+
+    <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:8px;">Option A — One-tap install</div>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:8px;">Tap this on your iPhone or iPad in Safari:</p>
+    <a href="https://www.icloud.com/shortcuts/47723c4f932a45ce968db0ce54e75642" class="shortcut-btn-tp">📲 Add TruthPrism Shortcut</a>
+    <div class="tip">💡 Must be tapped in Safari on iPhone or iPad — won't work from a desktop browser. Tap <strong>"Add Shortcut"</strong> when prompted.</div>
+
+    <div class="divider"></div>
+
+    <details>
+      <summary>Option B — Build it yourself (4 steps)</summary>
+      <ul class="step-list" style="margin-top:16px;">
+        <li>
+          <div class="step-dot">1</div>
+          <div class="step-text">
+            <h4>Open Shortcuts and create a new shortcut</h4>
+            <p>Open the <strong>Shortcuts</strong> app → tap <strong>+</strong> in the top right → tap the name and rename it <em>TruthPrism</em>.</p>
+          </div>
+        </li>
+        <li>
+          <div class="step-dot">2</div>
+          <div class="step-text">
+            <h4>Add "Receive Input from Share Sheet"</h4>
+            <p>Tap <strong>Add Action</strong> → search for <strong>"Receive"</strong> → select <strong>Receive Input from Share Sheet</strong> → set input type to <strong>URLs</strong>.</p>
+          </div>
+        </li>
+        <li>
+          <div class="step-dot">3</div>
+          <div class="step-text">
+            <h4>Add "Get URLs from Shortcut Input"</h4>
+            <p>Tap <strong>+</strong> → search for <strong>"Get URLs"</strong> → select <strong>Get URLs from Shortcut Input</strong>.</p>
+          </div>
+        </li>
+        <li>
+          <div class="step-dot">4</div>
+          <div class="step-text">
+            <h4>Add Text + Open URLs actions</h4>
+            <p>Tap <strong>+</strong> → add a <strong>Text</strong> action → type <code>https://app.truthprism.app?url=</code> → tap the variable icon → select <em>URLs</em>.<br/>
+            Then tap <strong>+</strong> → add <strong>Open URLs</strong>.<br/>
+            Finally tap the shortcut name → enable <strong>Show in Share Sheet</strong> → tap <strong>Done</strong>.</p>
+          </div>
+        </li>
+      </ul>
+    </details>
+
+    <div class="divider"></div>
+    <div style="font-size:13px;color:var(--muted);">
+      <strong style="color:var(--text);">How to use:</strong> open any article in Safari → tap <strong>Share</strong> → tap <strong>TruthPrism</strong> → the web app opens and analysis starts automatically.
+    </div>
+    <div class="warn" style="margin-top:10px;">⚠️ Paywalled articles (NYT, WSJ, etc.) may not load via URL. If you see an error, copy the article text and paste it into the web app's Check Custom Text field instead.</div>
+  </div>
+
+  <!-- News-Distiller shortcut -->
+  <div class="card card-nd">
+    <h2>📰 News-Distiller — Web App Shortcut</h2>
+    <div class="subtitle">Distill any article from Safari with one tap.</div>
+
+    <div style="font-size:14px;font-weight:700;color:var(--text);margin-bottom:8px;">Option A — One-tap install</div>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:8px;">Tap this on your iPhone or iPad in Safari:</p>
+    <a href="https://www.icloud.com/shortcuts/2c5dad1d356c4067bb92e6247d499da5" class="shortcut-btn-nd">📲 Add News-Distiller Shortcut</a>
+    <div class="tip">💡 Must be tapped in Safari on iPhone or iPad — won't work from a desktop browser. Tap <strong>"Add Shortcut"</strong> when prompted.</div>
+
+    <div class="divider"></div>
+
+    <details>
+      <summary>Option B — Build it yourself (4 steps)</summary>
+      <ul class="step-list" style="margin-top:16px;">
+        <li>
+          <div class="step-dot nd">1</div>
+          <div class="step-text">
+            <h4>Open Shortcuts and create a new shortcut</h4>
+            <p>Open the <strong>Shortcuts</strong> app → tap <strong>+</strong> in the top right → tap the name and rename it <em>News-Distiller</em>.</p>
+          </div>
+        </li>
+        <li>
+          <div class="step-dot nd">2</div>
+          <div class="step-text">
+            <h4>Add "Receive Input from Share Sheet"</h4>
+            <p>Tap <strong>Add Action</strong> → search for <strong>"Receive"</strong> → select <strong>Receive Input from Share Sheet</strong> → set input type to <strong>URLs</strong>.</p>
+          </div>
+        </li>
+        <li>
+          <div class="step-dot nd">3</div>
+          <div class="step-text">
+            <h4>Add "Get URLs from Shortcut Input"</h4>
+            <p>Tap <strong>+</strong> → search for <strong>"Get URLs"</strong> → select <strong>Get URLs from Shortcut Input</strong>.</p>
+          </div>
+        </li>
+        <li>
+          <div class="step-dot nd">4</div>
+          <div class="step-text">
+            <h4>Add Text + Open URLs actions</h4>
+            <p>Tap <strong>+</strong> → add a <strong>Text</strong> action → type <code>https://app.news-distiller.com?url=</code> → tap the variable icon → select <em>URLs</em>.<br/>
+            Then tap <strong>+</strong> → add <strong>Open URLs</strong>.<br/>
+            Finally tap the shortcut name → enable <strong>Show in Share Sheet</strong> → tap <strong>Done</strong>.</p>
+          </div>
+        </li>
+      </ul>
+    </details>
+
+    <div class="divider"></div>
+    <div style="font-size:13px;color:var(--muted);">
+      <strong style="color:var(--text);">How to use:</strong> open any article in Safari → tap <strong>Share</strong> → tap <strong>News-Distiller</strong> → the web app opens and distillation starts automatically.
+    </div>
+    <div class="warn" style="margin-top:10px;">⚠️ Paywalled articles may not load via URL. Copy and paste the article text directly into the web app instead.</div>
+  </div>
+
+  <div class="card">
+    <h2 style="font-size:16px;">📲 Tip — Add the Web App to Your Home Screen</h2>
+    <p style="font-size:13px;color:var(--muted);">For fastest access, you can also add either web app to your home screen so it opens like a native app:</p>
+    <p style="font-size:13px;color:var(--muted);margin-top:10px;">Open <strong>Safari</strong> → go to <code>app.truthprism.app</code> or <code>app.news-distiller.com</code> → tap the <strong>Share button</strong> → tap <strong>"Add to Home Screen"</strong> → tap <strong>Add</strong>.</p>
+    <div class="tip">💡 Must be done from Safari — Chrome on iPhone doesn't support adding to home screen.</div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-nav">
+    <div class="footer-section"><strong>TruthPrism</strong><a href="truthprism.html">Home</a><a href="how-it-works.html">How It Works</a><a href="get-started.html">Get Started</a><a href="pricing.html">Pricing</a><a href="https://chromewebstore.google.com/detail/truthprism/mifmgcimcfidnbadhkcgcafcclbhlkkd" target="_blank">Install Chrome Extension</a></div>
+    <div class="footer-section"><strong>News-Distiller</strong><a href="nd-index.html">Home</a><a href="nd-how-it-works.html">How It Works</a><a href="nd-get-started.html">Get Started</a><a href="https://chromewebstore.google.com/detail/news-distiller/ggefdpljfhdbnffjieacckfoimfjkbig" target="_blank">Install Chrome Extension</a></div>
+    <div class="footer-section"><strong>More</strong><a href="about.html">About PKL Media Lab</a><a href="friends-and-family.html">Friends &amp; Family</a><a href="privacy.html">Privacy Policy</a></div>
+  </div>
+  <p>© 2026 Paul Laikind, PhD &nbsp;·&nbsp; PKL Media Lab</p>
+</footer>
+
+</body>
+</html>
