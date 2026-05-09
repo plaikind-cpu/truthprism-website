@@ -4,7 +4,7 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Friends &amp; Family — PKL Media Lab</title>
-  <meta name="description" content="iOS Safari versions of TruthPrism and News-Distiller are currently invitation-only for friends and family. Register your interest here."/>
+  <meta name="description" content="A note for friends and family of the developer about no-charge access to TruthPrism and News-Distiller."/>
   <link rel="icon" href="assets/favicon.svg"/>
   <style>
     :root{--dark:#0D1525;--dark2:#162030;--border:#2a3a50;--purple:#a78bfa;--blue:#60a5fa;--green:#1D9E75;--teal:#11998e;--green-end:#38ef7d;--text:#e0e8f0;--muted:#6688aa;--white:#fff;}
@@ -18,50 +18,26 @@
     .nav-links a:hover{color:var(--text);}
     .nav-links a.active{color:var(--purple);font-weight:600;}
     .hero{text-align:center;padding:56px 24px 24px;max-width:720px;margin:0 auto;}
-    .hero h1{font-size:clamp(26px,4.5vw,40px);font-weight:800;color:var(--white);line-height:1.2;margin-bottom:14px;}
+    .hero h1{font-size:clamp(26px,4.5vw,38px);font-weight:800;color:var(--white);line-height:1.25;margin-bottom:14px;}
     .hero .badge{display:inline-block;background:rgba(167,139,250,0.15);border:1px solid rgba(167,139,250,0.4);color:var(--purple);font-size:11px;font-weight:700;padding:4px 14px;border-radius:20px;margin-bottom:18px;letter-spacing:0.8px;}
-    .hero p{font-size:16px;color:var(--muted);}
+    .hero p{font-size:15px;color:var(--muted);}
     .content{max-width:780px;margin:0 auto;padding:24px 24px 64px;}
-    .card{background:var(--dark2);border:1px solid var(--border);border-radius:12px;padding:28px;margin-bottom:24px;}
+    .card{background:var(--dark2);border:1px solid var(--border);border-radius:12px;padding:28px;margin-bottom:22px;}
     .card h2{font-size:18px;font-weight:800;color:var(--white);margin-bottom:14px;display:flex;align-items:center;gap:10px;}
-    .card h2 .icon{font-size:24px;}
+    .card h2 .icon{font-size:22px;}
     .card p{font-size:14px;color:var(--muted);line-height:1.75;margin-bottom:12px;}
     .card p:last-child{margin-bottom:0;}
-    .card ul{padding-left:22px;color:var(--muted);font-size:14px;margin:8px 0 12px;}
-    .card li{margin-bottom:6px;}
-    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px;}
-    @media(max-width:680px){.grid-2{grid-template-columns:1fr;}}
-    .app-mini{background:var(--dark2);border:1px solid var(--border);border-radius:12px;padding:22px;}
-    .app-mini h3{font-size:15px;font-weight:700;color:var(--white);margin-bottom:8px;}
-    .app-mini p{font-size:13px;color:var(--muted);line-height:1.7;}
-    .app-mini.tp{border-top:3px solid #667eea;}
-    .app-mini.nd{border-top:3px solid var(--green-end);}
-
-    /* Form styles */
-    .form-section{background:linear-gradient(135deg,rgba(102,126,234,0.05),rgba(56,239,125,0.05));border:1px solid rgba(167,139,250,0.25);}
-    .form-row{margin-bottom:16px;}
-    .form-row label{display:block;font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px;}
-    .form-row label .req{color:#fbbf24;font-size:11px;font-weight:500;margin-left:4px;}
-    .form-row input[type=text],.form-row input[type=email],.form-row textarea{
-      width:100%;background:rgba(15,15,26,0.6);border:1px solid var(--border);
-      color:var(--text);font-size:14px;padding:10px 12px;border-radius:8px;
-      font-family:inherit;line-height:1.6;
-    }
-    .form-row input:focus,.form-row textarea:focus{outline:none;border-color:var(--purple);}
-    .form-row textarea{min-height:90px;resize:vertical;}
-    .checkbox-group{display:flex;gap:18px;flex-wrap:wrap;margin-top:6px;}
-    .checkbox-group label{font-weight:500;font-size:14px;display:flex;align-items:center;gap:8px;cursor:pointer;}
-    .checkbox-group input[type=checkbox]{width:16px;height:16px;accent-color:var(--purple);}
-    .submit-btn{
-      background:linear-gradient(135deg,#667eea,#764ba2);color:white;
-      padding:12px 28px;border:none;border-radius:8px;font-weight:700;font-size:15px;
-      cursor:pointer;font-family:inherit;
-    }
-    .submit-btn:hover{opacity:0.9;}
-    .submit-btn:disabled{opacity:0.5;cursor:not-allowed;}
-    .form-note{font-size:12px;color:var(--muted);margin-top:14px;line-height:1.7;}
-    .privacy-note{font-size:12px;color:var(--muted);background:rgba(96,165,250,0.06);border:1px solid rgba(96,165,250,0.2);border-radius:8px;padding:10px 14px;margin-top:14px;}
-
+    .contact-card{background:linear-gradient(135deg,rgba(102,126,234,0.06),rgba(56,239,125,0.06));border:1px solid rgba(167,139,250,0.3);}
+    .email-link{display:inline-block;background:linear-gradient(135deg,#667eea,#764ba2);color:white;padding:12px 24px;border-radius:9px;text-decoration:none;font-weight:700;font-size:15px;margin-top:8px;}
+    .email-link:hover{opacity:0.9;}
+    .install-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:12px;}
+    @media(max-width:600px){.install-row{grid-template-columns:1fr;}}
+    .install-tile{background:rgba(15,15,26,0.4);border:1px solid var(--border);border-radius:10px;padding:16px;}
+    .install-tile h4{font-size:13px;font-weight:700;color:var(--text);margin-bottom:10px;}
+    .install-tile a{display:block;font-size:13px;text-decoration:none;margin:5px 0;color:var(--muted);}
+    .install-tile a:hover{color:var(--text);}
+    .install-tile a.tp{color:#a8b8ff;}
+    .install-tile a.nd{color:#38ef7d;}
     footer{border-top:1px solid var(--border);padding:32px 24px;text-align:center;font-size:12px;color:var(--muted);}
     footer a{color:var(--muted);text-decoration:none;margin:0 8px;}
     .footer-nav{display:flex;justify-content:center;gap:32px;flex-wrap:wrap;margin-bottom:20px;}
@@ -92,99 +68,51 @@
 </nav>
 
 <div class="hero">
-  <div class="badge">📱 INVITATION ONLY</div>
+  <div class="badge">📬 A NOTE FOR F&amp;F</div>
   <h1>Friends &amp; Family</h1>
-  <p>Native iPhone &amp; iPad versions of TruthPrism and News-Distiller exist, but they're currently distributed by direct invitation rather than the App Store.</p>
+  <p>Both apps are free to download on Chrome and iOS, and include a built-in demo. Friends and family of the developer can also get a free Pack — please ask Paul directly.</p>
 </div>
 
 <div class="content">
 
-  <div class="card">
-    <h2><span class="icon">📖</span>About the iOS Apps</h2>
-    <p>The Chrome extensions are the public, paid platform for both News-Distiller and TruthPrism. The iOS Safari versions exist for the same reasons most builders make iOS counterparts: many readers do most of their news reading on a phone, and a native Share Sheet integration is hard to beat for that use case.</p>
-    <p>For now, the iOS apps are available only by personal invitation. The same founding offer applies — first 250 users get free distillations and fact-checks. Whether they become publicly available on the App Store depends in part on how much interest there is. That's where the form below comes in.</p>
-  </div>
-
-  <div class="grid-2">
-    <div class="app-mini tp">
-      <h3>TruthPrism for iOS</h3>
-      <p>Fact-check articles directly from Safari's Share Sheet on iPhone or iPad. Same Factual Score, Context Score, and sourced verdicts as the Chrome extension.</p>
-    </div>
-    <div class="app-mini nd">
-      <h3>News-Distiller for iOS</h3>
-      <p>Distill articles to executive summaries and full reports from any app's Share Sheet on iPhone or iPad. Same political-lean analysis as the Chrome extension.</p>
-    </div>
-  </div>
-
-  <div class="card form-section">
-    <h2><span class="icon">✉️</span>Register Your Interest</h2>
-    <p>If you've heard about these apps, tried the Chrome extensions, or just think a native iOS version would be useful, let me know. Your input helps decide whether to pursue an App Store release.</p>
-
-    <form action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST" style="margin-top:18px;">
-      <div class="form-row">
-        <label for="ff-name">Name <span class="req">required</span></label>
-        <input type="text" id="ff-name" name="name" required autocomplete="name"/>
-      </div>
-
-      <div class="form-row">
-        <label for="ff-email">Email <span class="req">required</span></label>
-        <input type="email" id="ff-email" name="email" required autocomplete="email"/>
-      </div>
-
-      <div class="form-row">
-        <label>Which app(s) interest you?</label>
-        <div class="checkbox-group">
-          <label><input type="checkbox" name="interest_truthprism" value="yes"/> TruthPrism</label>
-          <label><input type="checkbox" name="interest_news_distiller" value="yes"/> News-Distiller</label>
-          <label><input type="checkbox" name="interest_both" value="yes"/> Both</label>
-        </div>
-      </div>
-
-      <div class="form-row">
-        <label>How did you hear about these?</label>
-        <div class="checkbox-group">
-          <label><input type="checkbox" name="source_chrome_extension" value="yes"/> Used Chrome extension</label>
-          <label><input type="checkbox" name="source_personal_referral" value="yes"/> Personal referral</label>
-          <label><input type="checkbox" name="source_other" value="yes"/> Other</label>
-        </div>
-      </div>
-
-      <div class="form-row">
-        <label for="ff-comments">Anything you'd like to share? <span style="color:var(--muted);font-weight:500;font-size:11px;">(optional)</span></label>
-        <textarea id="ff-comments" name="comments" placeholder="What you're hoping to do with the app, what you've tried so far, etc."></textarea>
-      </div>
-
-      <!-- Honeypot for spam filtering -->
-      <div style="position:absolute;left:-9999px;" aria-hidden="true">
-        <label>Don't fill this in <input type="text" name="_gotcha"/></label>
-      </div>
-
-      <input type="hidden" name="_subject" value="PKL Media Lab — F&amp;F Interest"/>
-
-      <button type="submit" class="submit-btn">Send Interest Note</button>
-
-      <p class="form-note">Replies usually within a few days. There's no automatic enrollment — every invitation is sent personally.</p>
-      <div class="privacy-note">🔒 Your information is used only to respond to you about iOS app access. No mailing list, no third parties.</div>
-    </form>
-  </div>
-
-  <div class="card">
-    <h2><span class="icon">🧩</span>In the Meantime</h2>
-    <p>The Chrome extensions are the fastest way to use both tools today, and the founding offer (5 free distillations / 2 free fact-checks for the first 250 users) applies there:</p>
+  <div class="card contact-card">
+    <h2><span class="icon">✉️</span>Ask Paul Directly</h2>
+    <p>If you're a friend or family member and would like a free Pack for either app, just send Paul a quick note. No form, no list — a personal email is the simplest way.</p>
     <p style="margin-top:14px;">
-      <a href="https://chromewebstore.google.com/detail/news-distiller/ggefdpljfhdbnffjieacckfoimfjkbig" target="_blank" style="color:#38ef7d;font-weight:600;">🧩 Install News-Distiller for Chrome →</a>
-      <br/>
-      <a href="https://chromewebstore.google.com/detail/truthprism/mifmgcimcfidnbadhkcgcafcclbhlkkd" target="_blank" style="color:var(--purple);font-weight:600;">🧩 Install TruthPrism for Chrome →</a>
+      <a href="mailto:paul@pklmedialab.com?subject=Friends%20%26%20Family%20Pack%20Request" class="email-link">📧 Email paul@pklmedialab.com</a>
     </p>
-    <p style="margin-top:14px;">On iPhone or iPad, you can also use either web app and add a Safari Share Sheet shortcut to send articles to it with one tap. <a href="webapp-ios-shortcut.html" style="color:var(--blue);">Set up the iOS Safari shortcut →</a></p>
+    <p style="font-size:12px;color:var(--muted);margin-top:14px;">Mention which app(s) you'd like — <strong>TruthPrism</strong>, <strong>News-Distiller</strong>, or both — and which platform you're using.</p>
+  </div>
+
+  <div class="card">
+    <h2><span class="icon">🧩</span>Install First, Then Ask</h2>
+    <p>The apps are free to download. Install whichever app and platform you'd like, try the built-in demo to see how it works, and email when you're ready for a Pack code.</p>
+    <div class="install-row">
+      <div class="install-tile">
+        <h4>TruthPrism</h4>
+        <a href="https://chromewebstore.google.com/detail/truthprism/mifmgcimcfidnbadhkcgcafcclbhlkkd" target="_blank" class="tp">🧩 Install on Chrome →</a>
+        <a href="https://apps.apple.com/us/app/truthprism/id6765967255" target="_blank" class="tp">📱 Install on iOS →</a>
+      </div>
+      <div class="install-tile">
+        <h4>News-Distiller</h4>
+        <a href="https://chromewebstore.google.com/detail/news-distiller/ggefdpljfhdbnffjieacckfoimfjkbig" target="_blank" class="nd">🧩 Install on Chrome →</a>
+        <a href="https://apps.apple.com/us/app/news-distiller/id6765789560" target="_blank" class="nd">📱 Install on iOS →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2><span class="icon">💡</span>How the Apps Work</h2>
+    <p>Each app has its own access codes — TruthPrism's <strong>Prism Packs</strong> work in TruthPrism (extension and web app), and News-Distiller's <strong>Distiller Packs</strong> work in News-Distiller. They don't cross over.</p>
+    <p>Both apps include a permanent demo mode that lets you see how the analysis works without using a paid check. The first 250 users on each platform also receive complimentary uses as a founding-user offer.</p>
   </div>
 
 </div>
 
 <footer>
   <div class="footer-nav">
-    <div class="footer-section"><strong>TruthPrism</strong><a href="truthprism.html">Home</a><a href="how-it-works.html">How It Works</a><a href="get-started.html">Get Started</a><a href="pricing.html">Pricing</a><a href="https://chromewebstore.google.com/detail/truthprism/mifmgcimcfidnbadhkcgcafcclbhlkkd" target="_blank">Install Chrome Extension</a></div>
-    <div class="footer-section"><strong>News-Distiller</strong><a href="nd-index.html">Home</a><a href="nd-how-it-works.html">How It Works</a><a href="nd-get-started.html">Get Started</a><a href="https://chromewebstore.google.com/detail/news-distiller/ggefdpljfhdbnffjieacckfoimfjkbig" target="_blank">Install Chrome Extension</a></div>
+    <div class="footer-section"><strong>TruthPrism</strong><a href="truthprism.html">Home</a><a href="how-it-works.html">How It Works</a><a href="get-started.html">Get Started</a><a href="https://chromewebstore.google.com/detail/truthprism/mifmgcimcfidnbadhkcgcafcclbhlkkd" target="_blank">Install on Chrome</a><a href="https://apps.apple.com/us/app/truthprism/id6765967255" target="_blank">Install on iOS</a></div>
+    <div class="footer-section"><strong>News-Distiller</strong><a href="nd-index.html">Home</a><a href="nd-how-it-works.html">How It Works</a><a href="nd-get-started.html">Get Started</a><a href="https://chromewebstore.google.com/detail/news-distiller/ggefdpljfhdbnffjieacckfoimfjkbig" target="_blank">Install on Chrome</a><a href="https://apps.apple.com/us/app/news-distiller/id6765789560" target="_blank">Install on iOS</a></div>
     <div class="footer-section"><strong>More</strong><a href="about.html">About PKL Media Lab</a><a href="friends-and-family.html">Friends &amp; Family</a><a href="privacy.html">Privacy Policy</a></div>
   </div>
   <p>© 2026 Paul Laikind, PhD &nbsp;·&nbsp; PKL Media Lab</p>
