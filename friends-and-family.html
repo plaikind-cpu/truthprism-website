@@ -38,6 +38,28 @@
     .install-tile a:hover{color:var(--text);}
     .install-tile a.tp{color:#a8b8ff;}
     .install-tile a.nd{color:#38ef7d;}
+
+    /* Form styles */
+    .ff-form .form-row{margin-bottom:16px;}
+    .ff-form label{display:block;font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px;}
+    .ff-form label .req{color:#fbbf24;font-size:11px;font-weight:500;margin-left:4px;}
+    .ff-form input[type=text],.ff-form input[type=email],.ff-form textarea{
+      width:100%;background:rgba(15,15,26,0.6);border:1px solid var(--border);
+      color:var(--text);font-size:14px;padding:10px 12px;border-radius:8px;
+      font-family:inherit;line-height:1.6;
+    }
+    .ff-form input:focus,.ff-form textarea:focus{outline:none;border-color:var(--purple);}
+    .ff-form textarea{min-height:90px;resize:vertical;}
+    .checkbox-group{display:flex;gap:18px;flex-wrap:wrap;margin-top:6px;}
+    .checkbox-group label{font-weight:500;font-size:14px;display:flex;align-items:center;gap:8px;cursor:pointer;margin-bottom:0;}
+    .checkbox-group input[type=checkbox]{width:16px;height:16px;accent-color:var(--purple);}
+    .submit-btn{
+      background:linear-gradient(135deg,#667eea,#764ba2);color:white;
+      padding:12px 28px;border:none;border-radius:8px;font-weight:700;font-size:15px;
+      cursor:pointer;font-family:inherit;
+    }
+    .submit-btn:hover{opacity:0.9;}
+    .form-note{font-size:12px;color:var(--muted);margin-top:14px;line-height:1.7;}
     footer{border-top:1px solid var(--border);padding:32px 24px;text-align:center;font-size:12px;color:var(--muted);}
     footer a{color:var(--muted);text-decoration:none;margin:0 8px;}
     .footer-nav{display:flex;justify-content:center;gap:32px;flex-wrap:wrap;margin-bottom:20px;}
@@ -82,6 +104,55 @@
       <a href="mailto:paul@pklmedialab.com?subject=Friends%20%26%20Family%20Pack%20Request" class="email-link">📧 Email paul@pklmedialab.com</a>
     </p>
     <p style="font-size:12px;color:var(--muted);margin-top:14px;">Mention which app(s) you'd like — <strong>TruthPrism</strong>, <strong>News-Distiller</strong>, or both — and which platform you're using.</p>
+  </div>
+
+  <div class="card">
+    <h2><span class="icon">📝</span>Or Use This Form</h2>
+    <p style="margin-bottom:18px;">Prefer not to open your mail client? Fill in the form below and Paul will reply with a Pack code.</p>
+
+    <form action="https://formspree.io/f/mrejopeo" method="POST" class="ff-form">
+      <div class="form-row">
+        <label for="ff-name">Your name <span class="req">required</span></label>
+        <input type="text" id="ff-name" name="name" required autocomplete="name"/>
+      </div>
+
+      <div class="form-row">
+        <label for="ff-email">Your email <span class="req">required</span></label>
+        <input type="email" id="ff-email" name="email" required autocomplete="email"/>
+      </div>
+
+      <div class="form-row">
+        <label>Which app(s)?</label>
+        <div class="checkbox-group">
+          <label><input type="checkbox" name="apps[]" value="TruthPrism"/> TruthPrism</label>
+          <label><input type="checkbox" name="apps[]" value="News-Distiller"/> News-Distiller</label>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <label>Which platform(s)?</label>
+        <div class="checkbox-group">
+          <label><input type="checkbox" name="platforms[]" value="Chrome"/> Chrome</label>
+          <label><input type="checkbox" name="platforms[]" value="iOS"/> iOS (iPhone / iPad)</label>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <label for="ff-message">Anything else? <span style="color:var(--muted);font-weight:500;font-size:11px;">(optional)</span></label>
+        <textarea id="ff-message" name="message" placeholder="How you know Paul, what you're hoping to do with the app, etc."></textarea>
+      </div>
+
+      <!-- Honeypot for spam filtering -->
+      <div style="position:absolute;left:-9999px;" aria-hidden="true">
+        <label>Don't fill this in <input type="text" name="_gotcha"/></label>
+      </div>
+
+      <input type="hidden" name="_subject" value="F&amp;F Free Pack Request — pklmedialab.com"/>
+
+      <button type="submit" class="submit-btn">Send Request</button>
+
+      <p class="form-note">Paul replies personally within a day or two.</p>
+    </form>
   </div>
 
   <div class="card">

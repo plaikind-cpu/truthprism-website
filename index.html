@@ -179,6 +179,54 @@
     .about-inner p { color: var(--text-muted); font-size: 0.92rem; line-height: 1.8; }
     .about-inner p + p { margin-top: 12px; }
 
+    /* ── INTEREST FORM ── */
+    .interest-section {
+      padding: 64px 24px 80px;
+      background:
+        radial-gradient(ellipse at 50% 30%, rgba(167,139,250,0.10) 0%, transparent 60%),
+        var(--bg2);
+      border-top: 1px solid var(--card-border);
+    }
+    .interest-inner { max-width: 620px; margin: 0 auto; }
+    .interest-inner h2 { font-family: 'Sora', sans-serif; font-size: 1.5rem; font-weight: 700; margin-bottom: 10px; text-align: center; }
+    .interest-intro { color: var(--text-muted); font-size: 0.92rem; line-height: 1.75; text-align: center; margin-bottom: 32px; max-width: 540px; margin-left: auto; margin-right: auto; }
+    .interest-form { background: rgba(15,15,26,0.5); border: 1px solid var(--card-border); border-radius: 14px; padding: 28px; }
+    .form-row { margin-bottom: 16px; }
+    .form-row label { display: block; font-size: 0.85rem; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+    .form-row label .req { color: #fbbf24; font-size: 0.7rem; font-weight: 500; margin-left: 4px; }
+    .form-row input[type=text],
+    .form-row input[type=email],
+    .form-row textarea {
+      width: 100%;
+      background: rgba(15,15,26,0.7);
+      border: 1px solid var(--card-border);
+      color: var(--text);
+      font-size: 0.92rem;
+      padding: 10px 14px;
+      border-radius: 9px;
+      font-family: inherit;
+      line-height: 1.6;
+    }
+    .form-row input:focus, .form-row textarea:focus { outline: none; border-color: rgba(167,139,250,0.5); }
+    .form-row textarea { min-height: 90px; resize: vertical; }
+    .interest-form .checkbox-group { display: flex; gap: 18px; flex-wrap: wrap; margin-top: 6px; }
+    .interest-form .checkbox-group label { font-weight: 500; font-size: 0.88rem; display: flex; align-items: center; gap: 8px; cursor: pointer; margin-bottom: 0; color: var(--text-muted); }
+    .interest-form .checkbox-group input[type=checkbox] { width: 16px; height: 16px; accent-color: #a78bfa; }
+    .submit-btn {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: white;
+      padding: 12px 28px;
+      border: none;
+      border-radius: 9px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      font-family: inherit;
+      width: 100%;
+    }
+    .submit-btn:hover { opacity: 0.92; }
+    .form-note { font-size: 0.78rem; color: var(--text-muted); margin-top: 14px; text-align: center; line-height: 1.7; }
+
     /* ── FOOTER ── */
     footer { border-top: 1px solid var(--card-border); padding: 32px 24px; background: var(--bg2); }
     .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; align-items: center; }
@@ -334,6 +382,52 @@
       &nbsp;&nbsp;·&nbsp;&nbsp;
       <a href="nd-index.html" style="color:#38ef7d;text-decoration:none;font-weight:600;">Read more about News-Distiller →</a>
     </p>
+  </div>
+</section>
+
+<!-- INTEREST FORM -->
+<section class="interest-section">
+  <div class="interest-inner">
+    <h2>Stay in Touch</h2>
+    <p class="interest-intro">
+      Have feedback, a use case to share, or want to be notified about new features?
+      Drop a quick note below and Paul will read every message.
+    </p>
+    <form action="https://formspree.io/f/mrejopeo" method="POST" class="interest-form">
+      <div class="form-row">
+        <label for="int-name">Your name <span class="req">required</span></label>
+        <input type="text" id="int-name" name="name" required autocomplete="name"/>
+      </div>
+
+      <div class="form-row">
+        <label for="int-email">Your email <span class="req">required</span></label>
+        <input type="email" id="int-email" name="email" required autocomplete="email"/>
+      </div>
+
+      <div class="form-row">
+        <label>Which app(s) interest you?</label>
+        <div class="checkbox-group">
+          <label><input type="checkbox" name="apps[]" value="TruthPrism"/> TruthPrism</label>
+          <label><input type="checkbox" name="apps[]" value="News-Distiller"/> News-Distiller</label>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <label for="int-message">Your message <span style="color:var(--text-muted);font-weight:500;font-size:0.7rem;">(optional)</span></label>
+        <textarea id="int-message" name="message" placeholder="Feedback, feature ideas, questions, or just to say hello."></textarea>
+      </div>
+
+      <!-- Honeypot for spam filtering -->
+      <div style="position:absolute;left:-9999px;" aria-hidden="true">
+        <label>Don't fill this in <input type="text" name="_gotcha"/></label>
+      </div>
+
+      <input type="hidden" name="_subject" value="General Interest — pklmedialab.com"/>
+
+      <button type="submit" class="submit-btn">Send Message</button>
+
+      <p class="form-note">No mailing list. No third parties. Paul reads every message personally.</p>
+    </form>
   </div>
 </section>
 
