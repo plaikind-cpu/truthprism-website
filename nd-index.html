@@ -235,7 +235,7 @@
     /* ── SAMPLE SUMMARY (post-hero preview) ── */
     .sample-section { padding: 30px 24px 60px; background: var(--bg); }
     .sample-card {
-      max-width: 760px; margin: 0 auto;
+      max-width: 1040px; margin: 0 auto;
       background: var(--card); border: 1px solid var(--card-border);
       border-radius: 16px; padding: 28px 32px;
       box-shadow: 0 8px 32px rgba(0,0,0,0.25);
@@ -272,6 +272,35 @@
     }
     .sample-foot { font-size: 0.78rem; color: var(--text-muted); text-align: center; margin-top: 18px; }
     .sample-foot a { color: #38ef7d; text-decoration: none; font-weight: 600; }
+
+    /* Screenshot variant of sample card */
+    .sample-screenshot-link {
+      display: block; position: relative;
+      margin: 18px -8px 14px;
+      border-radius: 10px; overflow: hidden;
+      border: 1px solid var(--card-border);
+      background: #0a0a14;
+      cursor: zoom-in;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .sample-screenshot-link:hover {
+      border-color: rgba(56,239,125,0.4);
+      transform: translateY(-1px);
+    }
+    .sample-screenshot { width: 100%; height: auto; display: block; }
+    .sample-screenshot-zoom {
+      position: absolute; top: 12px; right: 12px;
+      background: rgba(15,15,26,0.85); backdrop-filter: blur(6px);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: var(--text); font-size: 0.72rem; font-weight: 600;
+      padding: 6px 12px; border-radius: 20px;
+      opacity: 0; transition: opacity 0.2s;
+    }
+    .sample-screenshot-link:hover .sample-screenshot-zoom { opacity: 1; }
+    .sample-screenshot-caption {
+      font-size: 0.86rem; color: var(--text-muted); line-height: 1.7;
+      text-align: center; margin: 14px auto 0; max-width: 660px;
+    }
 
     /* ── HOW IT WORKS (TP-parity steps) ── */
     .how-section { padding: 70px 24px; background: var(--bg2); }
@@ -460,18 +489,18 @@
     </div>
     <div class="sample-title">"For Mother's Day, here are your favorite memories"</div>
     <div class="sample-source">NPR · Distilled in ~25 seconds</div>
-    <div class="sample-body">
-      <p>NPR collected nearly 500 reader submissions sharing favorite memories of their mothers for Mother's Day. The stories span diverse backgrounds and experiences, from mothers dealing with dementia to life-changing lessons about civil rights, food traditions, and values that shaped their children's moral compass. Many submissions highlight how maternal wisdom and love continue to influence adult children long after childhood.</p>
-    </div>
-    <div class="sample-lean">
-      <div class="lean-row">
-        <span class="lean-pill" style="background:rgba(56,239,125,0.10);border-color:rgba(56,239,125,0.30);color:#38ef7d;">Center</span>
-        <span style="font-size:0.78rem;color:var(--text-muted);">Political Lean</span>
-      </div>
-      <span class="conf-pill">High Confidence</span>
-    </div>
+
+    <a href="assets/nd-sample-output.jpg" target="_blank" class="sample-screenshot-link" aria-label="Open full-size sample distillation">
+      <img src="assets/nd-sample-output.jpg" alt="News-Distiller sample output: side panel summary on the right and Full Report on the left, showing Executive Summary, Detailed Breakdown with Context/Background, Key Findings, and Implications, and a Political Lean assessment of Center with High Confidence." class="sample-screenshot"/>
+      <span class="sample-screenshot-zoom">🔍 Click to enlarge</span>
+    </a>
+
+    <p class="sample-screenshot-caption">
+      The Full Report (left) opens in your browser; the side panel (right) gives you the Executive Summary while you keep reading. Every distillation produces both — plus a 5-tier Political Lean assessment with confidence rating.
+    </p>
+
     <p class="sample-foot">
-      News-Distiller produces an Executive Summary, a structured Detailed Breakdown, and a Political Lean Assessment. <a href="nd-how-it-works.html">See how it works →</a>
+      <a href="nd-how-it-works.html">See how it works →</a>
     </p>
   </div>
 </section>
