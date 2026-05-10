@@ -323,6 +323,24 @@
     }
     .submit-btn:hover { opacity: 0.92; }
     .form-note { font-size: 0.78rem; color: var(--text-muted); margin-top: 14px; text-align: center; line-height: 1.7; }
+    .form-thanks {
+      background: rgba(15,15,26,0.5); border: 1px solid rgba(56,239,125,0.30);
+      border-radius: 14px; padding: 40px 28px; text-align: center;
+      animation: fadeIn 0.4s ease-out;
+    }
+    .form-thanks .thanks-icon { font-size: 2.4rem; margin-bottom: 14px; line-height: 1; }
+    .form-thanks h3 { font-family: 'Sora', sans-serif; font-size: 1.3rem; font-weight: 700; margin-bottom: 12px; color: var(--text); }
+    .form-thanks p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; max-width: 480px; margin: 0 auto 10px; }
+    .form-thanks .thanks-actions { margin-top: 18px; font-size: 0.92rem; }
+    .form-thanks .thanks-actions a { text-decoration: none; font-weight: 600; }
+    .form-thanks .thanks-actions a:hover { text-decoration: underline; }
+    .form-error {
+      background: rgba(245,158,11,0.08); border: 1px solid rgba(245,158,11,0.35);
+      border-radius: 10px; padding: 14px 18px; margin-top: 16px;
+      font-size: 0.9rem; color: var(--text-muted); line-height: 1.7;
+    }
+    .form-error a { font-weight: 600; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
     /* ── FOOTER ── */
     footer { border-top: 1px solid var(--card-border); padding: 32px 24px; background: var(--bg2); }
@@ -526,7 +544,7 @@
       Have feedback, a use case to share, or want to be notified about new features?
       Drop a quick note below and Paul will read every message.
     </p>
-    <form action="https://formspree.io/f/mrejopeo" method="POST" class="interest-form">
+    <form id="interest-form" action="https://formspree.io/f/mrejopeo" method="POST" class="interest-form">
       <div class="form-row">
         <label for="int-name">Your name <span class="req">required</span></label>
         <input type="text" id="int-name" name="name" required autocomplete="name"/>
@@ -561,8 +579,58 @@
 
       <p class="form-note">No mailing list. No third parties. Paul reads every message personally.</p>
     </form>
+
+    <!-- Thank-you state (hidden until form submits successfully) -->
+    <div id="interest-thanks" class="form-thanks" hidden role="status" aria-live="polite">
+      <div class="thanks-icon">✅</div>
+      <h3>Thanks — your message is on its way</h3>
+      <p>Paul will read it personally and reply within a day or two. In the meantime, feel free to keep exploring the site.</p>
+      <p class="thanks-actions">
+        <a href="truthprism.html" style="color:var(--purple);">TruthPrism →</a>
+        &nbsp;·&nbsp;
+        <a href="nd-index.html" style="color:#38ef7d;">News-Distiller →</a>
+      </p>
+    </div>
+
+    <!-- Error state (hidden until needed) -->
+    <div id="interest-error" class="form-error" hidden role="alert">
+      <p>⚠️ Something went wrong sending your message. You can email Paul directly at <a href="mailto:paul@pklmedialab.com" style="color:var(--purple);">paul@pklmedialab.com</a>, or try the form again.</p>
+    </div>
   </div>
 </section>
+
+<script>
+  (function() {
+    var form = document.getElementById('interest-form');
+    if (!form) return;
+    var thanks = document.getElementById('interest-thanks');
+    var errBox = document.getElementById('interest-error');
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      errBox.hidden = true;
+      var btn = form.querySelector('button[type=submit]');
+      var btnLabel = btn ? btn.textContent : '';
+      if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
+      var data = new FormData(form);
+      fetch(form.action, {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      }).then(function(r) {
+        if (r.ok) {
+          form.hidden = true;
+          thanks.hidden = false;
+          thanks.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else {
+          throw new Error('Submission failed');
+        }
+      }).catch(function() {
+        errBox.hidden = false;
+        if (btn) { btn.disabled = false; btn.textContent = btnLabel; }
+      });
+    });
+  })();
+</script>
 
 <!-- FOOTER -->
 <footer>
