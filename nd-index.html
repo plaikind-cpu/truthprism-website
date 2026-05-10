@@ -232,6 +232,146 @@
     .cta-banner h2 { font-family: 'Sora', sans-serif; font-size: 1.9rem; font-weight: 700; margin-bottom: 16px; }
     .cta-banner p { color: var(--text-muted); margin-bottom: 32px; max-width: 480px; margin-left: auto; margin-right: auto; }
 
+    /* ── SAMPLE SUMMARY (post-hero preview) ── */
+    .sample-section { padding: 30px 24px 60px; background: var(--bg); }
+    .sample-card {
+      max-width: 760px; margin: 0 auto;
+      background: var(--card); border: 1px solid var(--card-border);
+      border-radius: 16px; padding: 28px 32px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+    }
+    .sample-label {
+      display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      color: #38ef7d; margin-bottom: 14px;
+    }
+    .sample-label .sample-badge {
+      font-size: 0.65rem; background: rgba(56,239,125,0.15);
+      border: 1px solid rgba(56,239,125,0.35); color: #38ef7d;
+      padding: 2px 8px; border-radius: 12px; letter-spacing: 0.05em;
+    }
+    .sample-title { font-family: 'Sora', sans-serif; font-size: 1.05rem; font-weight: 700; margin-bottom: 6px; color: var(--text); }
+    .sample-source { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 16px; }
+    .sample-body { color: var(--text-muted); font-size: 0.92rem; line-height: 1.75; }
+    .sample-body p + p { margin-top: 10px; }
+    .sample-lean {
+      margin-top: 20px; padding-top: 18px;
+      border-top: 1px solid var(--card-border);
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;
+    }
+    .sample-lean .lean-row { display: flex; align-items: center; gap: 10px; }
+    .sample-lean .lean-pill {
+      background: rgba(160,170,200,0.10); border: 1px solid rgba(160,170,200,0.25);
+      color: #a0aac8; font-size: 0.76rem; font-weight: 700; letter-spacing: 0.05em;
+      padding: 4px 12px; border-radius: 20px; text-transform: uppercase;
+    }
+    .sample-lean .conf-pill {
+      background: rgba(56,239,125,0.10); border: 1px solid rgba(56,239,125,0.30);
+      color: #38ef7d; font-size: 0.7rem; font-weight: 700;
+      padding: 3px 10px; border-radius: 20px;
+    }
+    .sample-foot { font-size: 0.78rem; color: var(--text-muted); text-align: center; margin-top: 18px; }
+    .sample-foot a { color: #38ef7d; text-decoration: none; font-weight: 600; }
+
+    /* ── HOW IT WORKS (TP-parity steps) ── */
+    .how-section { padding: 70px 24px; background: var(--bg2); }
+    .how-section .container { max-width: 800px; }
+    .how-sub { color: var(--text-muted); font-size: 0.95rem; text-align: center; margin: -32px auto 40px; max-width: 580px; }
+    .how-steps { display: flex; flex-direction: column; gap: 0; }
+    .how-step { display: flex; gap: 22px; padding: 24px 0; border-bottom: 1px solid var(--card-border); }
+    .how-step:last-child { border-bottom: none; }
+    .how-step .step-num-circle {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--nd-primary), var(--nd-primary-end));
+      color: #fff; display: flex; align-items: center; justify-content: center;
+      font-weight: 800; flex-shrink: 0; margin-top: 2px;
+    }
+    .how-step h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 6px; }
+    .how-step h3 .badge { display: inline-block; font-size: 0.7rem; font-weight: 600; padding: 2px 8px; border-radius: 4px; margin-left: 8px; vertical-align: middle; background: rgba(56,239,125,0.15); color: #38ef7d; }
+    .how-step p { color: var(--text-muted); font-size: 0.92rem; line-height: 1.7; }
+
+    /* ── LEAN TIERS ── */
+    .tiers-section { padding: 60px 24px; background: var(--bg); }
+    .tiers-section .container { max-width: 800px; }
+    .tiers-sub { color: var(--text-muted); font-size: 0.95rem; text-align: center; margin: -32px auto 32px; max-width: 580px; }
+    .lean-spectrum {
+      display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-bottom: 20px;
+    }
+    @media (max-width: 600px) {
+      .lean-spectrum { grid-template-columns: 1fr; }
+    }
+    .lean-tier {
+      background: var(--card); border: 1px solid var(--card-border);
+      border-top-width: 3px; border-top-style: solid;
+      border-radius: 10px; padding: 16px 14px;
+      text-align: center;
+    }
+    .lean-tier h4 { font-size: 0.85rem; font-weight: 700; margin-bottom: 6px; }
+    .lean-tier p { font-size: 0.72rem; color: var(--text-muted); line-height: 1.55; }
+    .lean-tier.tl { border-top-color: #4f78d8; }
+    .lean-tier.tl h4 { color: #87a3e8; }
+    .lean-tier.tcl { border-top-color: #6a90c9; }
+    .lean-tier.tcl h4 { color: #93afd6; }
+    .lean-tier.tc { border-top-color: #38ef7d; background: rgba(56,239,125,0.06); }
+    .lean-tier.tc h4 { color: #38ef7d; }
+    .lean-tier.tcr { border-top-color: #d68a6a; }
+    .lean-tier.tcr h4 { color: #e0a98c; }
+    .lean-tier.tr { border-top-color: #d85c4f; }
+    .lean-tier.tr h4 { color: #e88a87; }
+    .lean-default-note {
+      background: rgba(56,239,125,0.06); border: 1px solid rgba(56,239,125,0.20);
+      border-radius: 10px; padding: 14px 18px; font-size: 0.85rem; color: var(--text-muted);
+      line-height: 1.7; max-width: 700px; margin: 0 auto;
+    }
+    .lean-default-note strong { color: #38ef7d; }
+
+    /* ── WHAT YOU GET (output cards) ── */
+    .output-section { padding: 70px 24px; background: var(--bg2); }
+    .output-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px; margin-top: 36px;
+    }
+    .output-card {
+      background: var(--card); border: 1px solid var(--card-border);
+      border-radius: 12px; padding: 22px 20px;
+    }
+    .output-card .out-icon { font-size: 1.4rem; margin-bottom: 10px; }
+    .output-card h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 6px; }
+    .output-card p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; }
+
+    /* ── FEATURE BLOCK (Chrome / Web App / iOS sections) ── */
+    .feat-block-section { padding: 30px 24px; }
+    .feat-block-section .container { max-width: 800px; }
+    .feat-block-title { font-family: 'Sora', sans-serif; font-size: 1.4rem; font-weight: 700; margin-bottom: 8px; }
+    .feat-block-sub { color: var(--text-muted); font-size: 0.92rem; margin-bottom: 20px; line-height: 1.65; }
+    .feat-card {
+      background: var(--card); border: 1px solid var(--card-border);
+      border-radius: 14px; padding: 26px 28px;
+    }
+    .feat-card.iosbg { background: rgba(167,139,250,0.05); border-color: rgba(167,139,250,0.20); }
+    .feat-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 10px; }
+    .feat-card p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.7; margin-bottom: 12px; }
+    .feat-btn {
+      display: inline-block; padding: 11px 22px;
+      background: linear-gradient(135deg, var(--nd-primary), var(--nd-primary-end));
+      color: #fff; text-decoration: none; font-weight: 700; font-size: 0.9rem;
+      border-radius: 9px; margin: 6px 0;
+    }
+    .feat-btn-purple {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+    }
+    .feat-tip {
+      background: rgba(17,153,142,0.10); border-left: 3px solid rgba(17,153,142,0.45);
+      border-radius: 0 6px 6px 0; padding: 10px 14px; font-size: 0.84rem;
+      color: var(--text-muted); margin: 12px 0; line-height: 1.65;
+    }
+    .feat-warn {
+      background: rgba(245,158,11,0.10); border-left: 3px solid rgba(245,158,11,0.55);
+      border-radius: 0 6px 6px 0; padding: 12px 16px; font-size: 0.86rem;
+      color: var(--text-muted); margin: 12px 0; line-height: 1.7;
+    }
+    .feat-warn strong { color: var(--text); }
+
     /* ── FOOTER ── */
     footer {
       border-top: 1px solid var(--card-border);
@@ -294,7 +434,7 @@
 
 <!-- HERO -->
 <section class="hero">
-  <div style="display:inline-block;background:rgba(56,239,125,0.15);border:1px solid rgba(56,239,125,0.4);color:#38ef7d;font-size:12px;font-weight:700;padding:4px 14px;border-radius:20px;margin-bottom:16px;letter-spacing:0.05em;">🎉 Founding offer — 5 free distillations on Chrome (first 250 users)</div>
+  <div style="display:inline-block;background:rgba(56,239,125,0.15);border:1px solid rgba(56,239,125,0.4);color:#38ef7d;font-size:12px;font-weight:700;padding:4px 14px;border-radius:20px;margin-bottom:16px;letter-spacing:0.05em;">🎉 Founding offer — first 250 users get 5 free distillations</div>
   <br/>
   <div class="hero-eyebrow">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
@@ -302,135 +442,200 @@
   </div>
   <h1>Cut Through the Noise.<br/>Get the Essence.</h1>
   <p class="hero-sub">
-    News-Distiller uses AI to read any news article and return a concise, structured summary — plus political lean analysis and a full in-depth report. Available as a Chrome extension, with a web app backup.
+    News-Distiller uses AI to read any news article and return a concise, structured summary — plus political lean analysis with a high bar for attribution. Available as a <strong>Chrome extension</strong> and an <strong>iOS Safari app</strong>, with a web app backup.
   </p>
   <div class="hero-ctas">
     <a href="nd-get-started.html" class="btn-primary">Get Started →</a>
     <a href="nd-how-it-works.html" class="btn-secondary">How It Works</a>
   </div>
-  <p class="hero-note">TruthPrism access codes work in News-Distiller &middot; <a href="https://chromewebstore.google.com/detail/news-distiller/ggefdpljfhdbnffjieacckfoimfjkbig" style="color:#38ef7d;">Chrome extension now live →</a></p>
+  <p class="hero-note">Free to download · Built-in demo · Each install includes 5 free distillations</p>
 </section>
 
-<!-- FEATURES -->
-<section class="features">
+<!-- SAMPLE SUMMARY (post-hero preview) -->
+<section class="sample-section">
+  <div class="sample-card">
+    <div class="sample-label">
+      <span>📰 Sample Distillation</span>
+      <span class="sample-badge">Real Output</span>
+    </div>
+    <div class="sample-title">"For Mother's Day, here are your favorite memories"</div>
+    <div class="sample-source">NPR · Distilled in ~25 seconds</div>
+    <div class="sample-body">
+      <p>NPR collected nearly 500 reader submissions sharing favorite memories of their mothers for Mother's Day. The stories span diverse backgrounds and experiences, from mothers dealing with dementia to life-changing lessons about civil rights, food traditions, and values that shaped their children's moral compass. Many submissions highlight how maternal wisdom and love continue to influence adult children long after childhood.</p>
+    </div>
+    <div class="sample-lean">
+      <div class="lean-row">
+        <span class="lean-pill" style="background:rgba(56,239,125,0.10);border-color:rgba(56,239,125,0.30);color:#38ef7d;">Center</span>
+        <span style="font-size:0.78rem;color:var(--text-muted);">Political Lean</span>
+      </div>
+      <span class="conf-pill">High Confidence</span>
+    </div>
+    <p class="sample-foot">
+      News-Distiller produces an Executive Summary, a structured Detailed Breakdown, and a Political Lean Assessment. <a href="nd-how-it-works.html">See how it works →</a>
+    </p>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-section">
   <div class="container">
-    <h2 class="section-title">What News-Distiller Does</h2>
-    <div class="features-grid">
-      <div class="feature-card">
-        <div class="feature-icon" style="--c:#38ef7d">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
+    <h2 class="section-title">How It Works</h2>
+    <p class="how-sub">Three steps, 20–40 seconds. Powered by Claude AI.</p>
+    <div class="how-steps">
+      <div class="how-step">
+        <div class="step-num-circle">1</div>
+        <div>
+          <h3>Read &amp; Summarize <span class="badge">Claude AI</span></h3>
+          <p>Claude reads the full article and produces a concise executive summary capturing the main argument and key assertions — calibrated to article complexity.</p>
         </div>
-        <h3>Instant Article Summaries</h3>
-        <p>Paste any article URL or text and get a concise, well-structured summary in seconds — no more wading through lengthy pieces to find the key points.</p>
       </div>
-      <div class="feature-card">
-        <div class="feature-icon" style="--c:#667eea">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+      <div class="how-step">
+        <div class="step-num-circle">2</div>
+        <div>
+          <h3>Structure the Detailed Breakdown <span class="badge">Claude AI</span></h3>
+          <p>The article is decomposed into named sections — Context / Background, Key Findings, and Implications — so you can see what's established, what's new, and what it means.</p>
         </div>
-        <h3>Political Lean Analysis</h3>
-        <p>News-Distiller assesses the political framing of articles — with a high bar for attribution. Center is the default; lean is only flagged when directly evidenced.</p>
       </div>
-      <div class="feature-card">
-        <div class="feature-icon" style="--c:#ff9f43">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+      <div class="how-step">
+        <div class="step-num-circle">3</div>
+        <div>
+          <h3>Assess Political Lean <span class="badge">Claude AI</span></h3>
+          <p>Claude evaluates the article's framing, language choices, and source selection to assess political lean — with a high bar for attribution. Center is the default unless evidence requires otherwise.</p>
         </div>
-        <h3>Executive + Full Report</h3>
-        <p>Get a quick Executive Summary for a fast read, or toggle to the Full Report for in-depth coverage of every claim, source, and contextual detail.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon" style="--c:#ee5a24">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-        </div>
-        <h3>Chrome Extension</h3>
-        <p>Distill any article without leaving your browser. The News-Distiller Chrome extension adds a side panel — one click and your summary is ready.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon" style="--c:#a29bfe">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
-        </div>
-        <h3>Web App Backup</h3>
-        <p>Prefer not to install an extension? Open <strong>app.news-distiller.com</strong> in any browser and paste an article URL or text. Same results, same access code.</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon" style="--c:#00b894">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-        </div>
-        <h3>Live Streaming Output</h3>
-        <p>See the summary generate in real time — no waiting for the full response before you start reading. Results stream word-by-word as they're produced.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- HOW IT WORKS TEASER -->
-<section class="how-teaser">
+<!-- LEAN TIERS -->
+<section class="tiers-section">
   <div class="container">
-    <h2 class="section-title">From article to insight in three steps.</h2>
-    <div class="steps-row">
-      <div class="step-box">
-        <div class="step-num">1</div>
-        <h4>Share or paste any article</h4>
-        <p>One click in Chrome, or paste a URL into the web app</p>
+    <h2 class="section-title">Political Lean Tiers</h2>
+    <p class="tiers-sub">Each article gets one of five lean ratings, plus a confidence indicator (High or Low) reflecting how strongly the evidence supports the assessment.</p>
+    <div class="lean-spectrum">
+      <div class="lean-tier tl">
+        <h4>Left</h4>
+        <p>Clear progressive framing, source selection, and language choices.</p>
       </div>
-      <div class="step-arrow">→</div>
-      <div class="step-box">
-        <div class="step-num">2</div>
-        <h4>AI reads and distills</h4>
-        <p>Claude AI extracts the key facts, framing, and context</p>
+      <div class="lean-tier tcl">
+        <h4>Center-Left</h4>
+        <p>Mild progressive lean detectable in tone or framing.</p>
       </div>
-      <div class="step-arrow">→</div>
-      <div class="step-box">
-        <div class="step-num">3</div>
-        <h4>Get your summary</h4>
-        <p>Executive or full report — save it, share it, or read on</p>
+      <div class="lean-tier tc">
+        <h4>Center</h4>
+        <p>Balanced reporting without partisan framing — the default.</p>
+      </div>
+      <div class="lean-tier tcr">
+        <h4>Center-Right</h4>
+        <p>Mild conservative lean detectable in tone or framing.</p>
+      </div>
+      <div class="lean-tier tr">
+        <h4>Right</h4>
+        <p>Clear conservative framing, source selection, and language choices.</p>
       </div>
     </div>
-    <div style="text-align:center;margin-top:40px;">
-      <a href="nd-how-it-works.html" class="btn-secondary">See How It Works →</a>
+    <div class="lean-default-note">
+      <strong>Center is the default.</strong> News-Distiller only flags a non-Center lean when there is direct, observable evidence in the article — specific phrasing, framing, source choices, or omissions. This high evidentiary bar prevents over-attribution of bias and keeps the political lean indicator meaningful.
     </div>
   </div>
 </section>
 
-<!-- PLATFORMS -->
-<section class="platforms">
+<!-- WHAT YOU GET -->
+<section class="output-section">
   <div class="container">
-    <h2 class="section-title">Where to Use News-Distiller</h2>
-    <div class="platform-cards">
-      <div class="platform-card">
-        <div class="plat-icon">🧩</div>
-        <h3>Chrome Extension <span style="font-size:0.65rem;font-weight:700;background:rgba(56,239,125,0.15);border:1px solid rgba(56,239,125,0.35);color:#38ef7d;padding:2px 8px;border-radius:20px;vertical-align:middle;letter-spacing:0.05em;">PRIMARY</span></h3>
-        <p>The recommended way to use News-Distiller. The side panel reads the current page — including paywalled sites you subscribe to — and streams your summary without leaving the article. First 250 users get 5 free distillations.</p>
-        <br/>
-        <a href="https://chromewebstore.google.com/detail/news-distiller/ggefdpljfhdbnffjieacckfoimfjkbig" target="_blank" class="btn-primary" style="display:inline-block;margin-top:8px;">🧩 Install News-Distiller for Chrome</a>
+    <h2 class="section-title">What You Get</h2>
+    <p class="how-sub">Every distillation includes a full structured report you can save or share.</p>
+    <div class="output-grid">
+      <div class="output-card">
+        <div class="out-icon">📋</div>
+        <h4>Executive Summary</h4>
+        <p>The article's main argument and key assertions in a single concise paragraph.</p>
       </div>
-      <div class="platform-card">
-        <div class="plat-icon">🌐</div>
-        <h3>Web App <span style="font-size:0.65rem;font-weight:700;background:rgba(160,170,200,0.12);border:1px solid rgba(160,170,200,0.3);color:#a0aac8;padding:2px 8px;border-radius:20px;vertical-align:middle;letter-spacing:0.05em;">BACKUP</span></h3>
-        <p>Use News-Distiller in any browser when the Chrome extension isn't a fit. Paste a URL or article text and get the same summary. On iPhone or iPad, an optional Safari shortcut lets you send articles to the web app from any Share menu.</p>
-        <br/>
-        <a href="https://app.news-distiller.com" target="_blank" style="color:#38ef7d;text-decoration:none;font-weight:600;font-size:0.88rem;">Open app.news-distiller.com →</a>
-        <br/>
-        <a href="webapp-ios-shortcut.html" style="color:#a0aac8;text-decoration:none;font-weight:500;font-size:0.82rem;">Set up iOS Safari shortcut →</a>
+      <div class="output-card">
+        <div class="out-icon">📊</div>
+        <h4>Detailed Breakdown</h4>
+        <p>Context / Background, Key Findings, and Implications — a full structured report with bullet detail.</p>
       </div>
-      <div class="platform-card">
-        <div class="plat-icon">📱</div>
-        <h3>iOS Safari App</h3>
-        <p>A native iPhone &amp; iPad version of News-Distiller exists, but is currently invitation-only for friends and family of the developer.</p>
-        <br/>
-        <a href="friends-and-family.html" style="color:#a78bfa;text-decoration:none;font-weight:600;font-size:0.88rem;">Friends &amp; Family info →</a>
+      <div class="output-card">
+        <div class="out-icon">🧭</div>
+        <h4>Political Lean</h4>
+        <p>A 5-tier rating (Left / Center-Left / Center / Center-Right / Right) with a High or Low confidence indicator.</p>
+      </div>
+      <div class="output-card">
+        <div class="out-icon">📝</div>
+        <h4>Lean Rationale</h4>
+        <p>Bullet-by-bullet evidence for the lean rating, plus a final framing summary in plain language.</p>
+      </div>
+      <div class="output-card">
+        <div class="out-icon">⚡</div>
+        <h4>Live Streaming</h4>
+        <p>Results stream as they're produced — start reading the summary while the breakdown is still being generated.</p>
+      </div>
+      <div class="output-card">
+        <div class="out-icon">💾</div>
+        <h4>Save &amp; Export</h4>
+        <p>Download the full report as a PDF or text file for your records or to share with others.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CTA BANNER -->
+<!-- CHROME EXTENSION -->
+<section class="feat-block-section" style="padding-top:60px;">
+  <div class="container">
+    <h2 class="feat-block-title">🧩 Chrome Extension — Recommended for Desktop</h2>
+    <p class="feat-block-sub">The most convenient and powerful way to use News-Distiller — reads the page directly from your browser, including paywalled articles you subscribe to.</p>
+    <div class="feat-card">
+      <h3>Now live on the Chrome Web Store</h3>
+      <p>One click on any article and distillation begins — no copy-paste, no switching tabs. Works on NYT, WSJ, and any paywalled site you subscribe to, because the extension reads what's already on your screen.</p>
+      <a href="https://chromewebstore.google.com/detail/news-distiller/ggefdpljfhdbnffjieacckfoimfjkbig" target="_blank" class="feat-btn">🧩 Install News-Distiller for Chrome</a>
+      <div class="feat-tip">💡 Works on <strong>Chrome and Edge</strong> on any desktop or laptop. Click the News-Distiller icon in your toolbar while on any news article to begin.</div>
+      <p style="font-size:0.86rem;color:var(--text-muted);margin-top:14px;">Each install includes <strong>5 free distillations</strong> plus the permanent built-in demo. <span style="color:#38ef7d;">🎉 Founding offer — the first 250 Chrome users get those 5 free distillations.</span></p>
+      <p style="font-size:0.86rem;color:var(--text-muted);margin-top:10px;">When your free distillations run out, purchase a <strong>Distiller Pack for Chrome</strong> to continue. Your code is saved in the extension and used until its distillations are exhausted, then you'll enter a new code.</p>
+      <a href="https://app.news-distiller.com/checkout" target="_blank" class="feat-btn feat-btn-purple" style="margin-top:8px;">Get a Distiller Pack for Chrome →</a>
+    </div>
+  </div>
+</section>
+
+<!-- WEB APP -->
+<section class="feat-block-section">
+  <div class="container">
+    <h2 class="feat-block-title">🌐 Web App — Backup Option</h2>
+    <p class="feat-block-sub">If the Chrome extension isn't ideal for your situation, the web app provides the same distillation on any browser.</p>
+    <div class="feat-card">
+      <h3>Use News-Distiller on the web</h3>
+      <p>Open <a href="https://app.news-distiller.com" target="_blank" style="color:#38ef7d;">app.news-distiller.com</a> in any browser, paste an article URL or text, and get the same structured distillation as the extension. Your <strong>Distiller Pack for Chrome</strong> code also works in the web app — they share the same balance.</p>
+      <div class="feat-warn">
+        ⚠️ <strong>Paywalled articles will not load via URL</strong> in the web app (NYT, WSJ, Washington Post, etc.). For those, copy the article text and paste it into the Paste Article Text field. The Chrome extension reads paywalled pages directly because it operates on the page already loaded in your browser.
+      </div>
+      <p style="font-size:0.86rem;color:var(--text-muted);">On iPhone or iPad, you can add a Safari Share Sheet shortcut to send articles to the web app with one tap. <a href="webapp-ios-shortcut.html" style="color:#38ef7d;">Set up the iOS shortcut →</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- iOS -->
+<section class="feat-block-section" style="padding-bottom:60px;">
+  <div class="container">
+    <h2 class="feat-block-title">📱 News-Distiller for iPhone &amp; iPad</h2>
+    <p class="feat-block-sub">Native iOS Safari app — distill articles directly from Safari's Share Sheet on any iPhone or iPad.</p>
+    <div class="feat-card iosbg">
+      <h3>Now on the App Store</h3>
+      <p>Free to download. Each install includes <strong>5 free distillations</strong> plus a permanent built-in demo so you can see how the app works at any time.</p>
+      <p style="font-size:0.88rem;color:#a78bfa;">🎉 Founding offer — the first 250 iOS users get those 5 free distillations.</p>
+      <a href="https://apps.apple.com/us/app/news-distiller/id6765789560" target="_blank" class="feat-btn feat-btn-purple">📲 Download News-Distiller for iOS</a>
+      <div class="feat-tip" style="background:rgba(167,139,250,0.10);border-left-color:rgba(167,139,250,0.45);">💡 On iPhone or iPad, open any article in Safari → tap <strong>Share</strong> → tap <strong>News-Distiller</strong> → distillation starts automatically.</div>
+      <p style="font-size:0.82rem;color:var(--text-muted);margin-top:14px;line-height:1.7;">📬 <strong>Distiller Packs for iOS are not currently available for purchase.</strong> Friends and family of the developer are eligible to receive a free Distiller Pack for iOS — <a href="friends-and-family.html" style="color:#a78bfa;">more info →</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
 <section class="cta-banner">
-  <div class="container">
+  <div class="container" style="max-width:700px;">
     <h2>Ready to read smarter?</h2>
-    <p>News-Distiller is live on the web and in the Chrome Web Store. Use your existing TruthPrism access code, or get started in seconds.</p>
+    <p>Install the Chrome extension to start distilling with one click — no copy-paste, works on paywalled sites you subscribe to.</p>
     <div class="hero-ctas">
       <a href="https://chromewebstore.google.com/detail/news-distiller/ggefdpljfhdbnffjieacckfoimfjkbig" target="_blank" class="btn-primary">🧩 Install Chrome Extension</a>
-      <a href="https://app.news-distiller.com" target="_blank" class="btn-secondary">Open Web App</a>
       <a href="nd-get-started.html" class="btn-secondary">Get Started Guide</a>
     </div>
   </div>
@@ -449,25 +654,30 @@
     <div class="footer-links">
       <div class="footer-col">
         <h4>News-Distiller</h4>
+        <a href="nd-index.html">Home</a>
         <a href="nd-how-it-works.html">How It Works</a>
         <a href="nd-get-started.html">Get Started</a>
-        <a href="https://chromewebstore.google.com/detail/news-distiller/ggefdpljfhdbnffjieacckfoimfjkbig" target="_blank">Install Chrome Extension</a>
+        <a href="https://chromewebstore.google.com/detail/news-distiller/ggefdpljfhdbnffjieacckfoimfjkbig" target="_blank">Install on Chrome</a>
+        <a href="https://apps.apple.com/us/app/news-distiller/id6765789560" target="_blank">Install on iOS</a>
       </div>
       <div class="footer-col">
-        <h4>TruthPrism Suite</h4>
-        <a href="truthprism.html">TruthPrism</a>
-        <a href="how-it-works.html">How TruthPrism Works</a>
-        <a href="about.html">About</a>
+        <h4>TruthPrism</h4>
+        <a href="truthprism.html">Home</a>
+        <a href="how-it-works.html">How It Works</a>
+        <a href="get-started.html">Get Started</a>
+        <a href="https://chromewebstore.google.com/detail/truthprism/mifmgcimcfidnbadhkcgcafcclbhlkkd" target="_blank">Install on Chrome</a>
+        <a href="https://apps.apple.com/us/app/truthprism/id6765967255" target="_blank">Install on iOS</a>
       </div>
       <div class="footer-col">
         <h4>More</h4>
+        <a href="about.html">About PKL Media Lab</a>
         <a href="friends-and-family.html">Friends &amp; Family</a>
         <a href="https://pklmedialab.com/privacy.html" target="_blank">Privacy Policy</a>
       </div>
     </div>
   </div>
   <div class="footer-bottom">
-    <p>© 2026 News-Distiller. All rights reserved.</p>
+    <p>© 2026 Paul Laikind, PhD &nbsp;·&nbsp; PKL Media Lab</p>
   </div>
   <div class="footer-disclaimer">
     News-Distiller uses Claude AI to summarize and analyze articles. Results may contain errors — verify important claims independently.
