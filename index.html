@@ -172,6 +172,103 @@
     }
     .pill-icon { font-size: 1rem; }
 
+    /* ── iOS SECTION ── */
+    .ios-section {
+      padding: 70px 24px 80px;
+      background:
+        radial-gradient(ellipse at 50% 30%, rgba(167,139,250,0.10) 0%, transparent 60%),
+        var(--bg);
+      border-top: 1px solid var(--card-border);
+    }
+    .ios-inner { max-width: 880px; margin: 0 auto; }
+    .ios-card-wrap {
+      background: var(--bg2);
+      border: 1px solid rgba(167,139,250,0.25);
+      border-radius: 18px;
+      padding: 32px 36px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+    }
+    .ios-header {
+      display: flex; align-items: flex-start; gap: 18px; flex-wrap: wrap;
+      margin-bottom: 18px;
+    }
+    .ios-header-icon {
+      font-size: 2rem; line-height: 1;
+      width: 56px; height: 56px;
+      background: rgba(167,139,250,0.12);
+      border: 1px solid rgba(167,139,250,0.3);
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .ios-header-text { flex: 1; min-width: 200px; }
+    .ios-header-text h2 {
+      font-family: 'Sora', sans-serif; font-size: 1.4rem; font-weight: 700;
+      margin: 0 0 4px 0;
+    }
+    .ios-header-text p {
+      font-size: 0.92rem; color: var(--text-muted); line-height: 1.65;
+    }
+    .ios-header-badge {
+      align-self: flex-start;
+      background: rgba(167,139,250,0.15); border: 1px solid rgba(167,139,250,0.4);
+      color: #c4b5fd; font-size: 0.7rem; font-weight: 700;
+      padding: 4px 12px; border-radius: 20px;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      flex-shrink: 0;
+    }
+    .ios-info-line {
+      font-size: 0.92rem; color: var(--text-muted); line-height: 1.75;
+      margin-bottom: 8px;
+    }
+    .ios-info-line strong { color: var(--text); }
+    .ios-info-line .lead-em { color: #c4b5fd; }
+    .ios-app-row {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+      margin-top: 22px;
+    }
+    @media (max-width: 600px) { .ios-app-row { grid-template-columns: 1fr; } }
+    .ios-app-tile {
+      background: rgba(15,15,26,0.6);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 18px 20px;
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .ios-app-tile.tp { border-top: 3px solid #667eea; }
+    .ios-app-tile.nd { border-top: 3px solid #38ef7d; }
+    .ios-app-tile h4 {
+      font-family: 'Sora', sans-serif; font-size: 1rem; font-weight: 700;
+      margin: 0;
+    }
+    .ios-app-tile p {
+      font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; margin: 0;
+    }
+    .ios-app-tile a {
+      display: inline-block; padding: 10px 18px;
+      color: #fff; text-decoration: none;
+      font-weight: 700; font-size: 0.86rem;
+      border-radius: 8px; align-self: flex-start;
+      transition: opacity 0.2s;
+    }
+    .ios-app-tile a:hover { opacity: 0.88; }
+    .ios-app-tile.tp a {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+    }
+    .ios-app-tile.nd a {
+      background: linear-gradient(135deg, #11998e, #38ef7d);
+    }
+    .ios-foot {
+      margin-top: 22px;
+      padding-top: 18px;
+      border-top: 1px solid var(--card-border);
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+    .ios-foot strong { color: var(--text); }
+    .ios-foot a { color: #c4b5fd; text-decoration: none; font-weight: 600; }
+
     /* ── ABOUT STRIP ── */
     .about-strip { padding: 60px 24px 70px; }
     .about-inner { max-width: 700px; margin: 0 auto; text-align: center; }
@@ -368,6 +465,42 @@
       <div class="pill"><span class="pill-icon">⚡</span> One-click launch on Chrome</div>
       <div class="pill"><span class="pill-icon">💾</span> Save reports as PDF or text</div>
       <div class="pill"><span class="pill-icon">📡</span> Live streaming output</div>
+    </div>
+  </div>
+</section>
+
+<!-- iOS SECTION -->
+<section class="ios-section">
+  <div class="ios-inner">
+    <div class="ios-card-wrap">
+      <div class="ios-header">
+        <div class="ios-header-icon">📱</div>
+        <div class="ios-header-text">
+          <h2>Now on the App Store</h2>
+          <p>Both apps are also available as native iOS Safari apps for iPhone &amp; iPad. Free to download from the App Store, with the same built-in demo and a small batch of free uses on first install.</p>
+        </div>
+        <span class="ios-header-badge">App Store</span>
+      </div>
+
+      <p class="ios-info-line">✅ <strong>Free to download.</strong> Each install includes a permanent built-in demo so you can see how the app works at any time.</p>
+      <p class="ios-info-line"><span class="lead-em">🎉 Founding offer</span> — the first 250 iOS users of each app get free uses on install: <strong>2 free fact-checks</strong> with TruthPrism and <strong>5 free distillations</strong> with News-Distiller.</p>
+
+      <div class="ios-app-row">
+        <div class="ios-app-tile tp">
+          <h4>TruthPrism for iOS</h4>
+          <p>Fact-check articles directly from Safari's Share Sheet on iPhone or iPad.</p>
+          <a href="https://apps.apple.com/us/app/truthprism/id6765967255" target="_blank">📲 Download for iOS</a>
+        </div>
+        <div class="ios-app-tile nd">
+          <h4>News-Distiller for iOS</h4>
+          <p>Distill articles to executive summaries and full reports from Safari's Share Sheet.</p>
+          <a href="https://apps.apple.com/us/app/news-distiller/id6765789560" target="_blank">📲 Download for iOS</a>
+        </div>
+      </div>
+
+      <p class="ios-foot">
+        📬 <strong>Prism Packs and Distiller Packs for iOS are not currently available for purchase.</strong> Friends and family of the developer are eligible to receive free Packs for iOS — <a href="friends-and-family.html">more info →</a>
+      </p>
     </div>
   </div>
 </section>
